@@ -1,5 +1,5 @@
-python-engineio==3.13.2
-python-socketio==4.6.0
+#python-engineio==3.13.2
+#python-socketio==4.6.0
 flask==2.1.3
 flask_login
 flask_migrate
@@ -32,3 +32,12 @@ rq
 email_validator
 ipywidgets
 pandas_profiling
+
+#ngoc them thu vien
+torch
+chardet
+hub
+scikit-learn
+flask_dropzone
+flask_whooshee
+flask-socketio
