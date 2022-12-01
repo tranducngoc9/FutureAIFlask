@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/dd2b9e5ba42b4a5fbdf82dd138b3cb25/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: dd2b9e5ba42b4a5fbdf82dd138b3cb25
+run_name: CatBoost Regressor
+run_uuid: dd2b9e5ba42b4a5fbdf82dd138b3cb25
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669538991588
+status: 1
+tags: []
+user_id: luonghongquan

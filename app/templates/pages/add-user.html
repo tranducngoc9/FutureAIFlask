@@ -1,0 +1,401 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Thông tin người dùng') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    .form-control:disabled,
+    .form-control[readonly] {
+        background: transparent !important;
+    }
+
+    .avta-top {
+        margin-bottom: 30px;
+    }
+
+    .avta-top img {
+        cursor: pointer;
+    }
+
+    .srcoll-avata-info-right {
+        overflow-Y: scroll;
+        overflow-x:hidden;
+        height: 390px;
+        background: #202940;
+        padding: 10px 10px;
+        border-radius: 10px;
+    }
+
+    .srcoll-avata-info-right::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: #1a2035;
+    }
+
+    .srcoll-avata-info-right::-webkit-scrollbar {
+        width: 10px;
+        background-color: #1a2035;
+        height: 10px;
+    }
+
+    .srcoll-avata-info-right::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background-color: #c2c2c2;
+    }
+
+    .fa-phone{
+        text-align: left;
+        margin-left: -20px;
+        margin-right: 30px;
+    }
+
+    .imgAvata{
+        float: left;
+        width: 60px;
+        height: 60px;
+        margin-right:10px
+    }
+
+    .imageThumb {
+        max-height: 80px;
+        max-width: 80px;
+        border: 2px solid;
+        padding: 1px;
+        cursor: pointer;
+    }
+
+    .pip {
+        display: inline-block;
+        margin-top: 15px;
+        margin-right: 15px;
+    }
+
+    .remove {
+        display: block;
+        background: #444;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        top: -77px;
+        position: relative;
+        margin-bottom: 60px;
+        width: 19px;
+        left: 58px;
+    }
+
+    .remove:hover {
+        background: white;
+        color: black;
+    }
+</style>
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Thông tin người dùng') }}</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-with-nav">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mã nhân viên') }}</label>
+                                            <input type="text" class="form-control" name="email"
+                                                placeholder="{{ _('Mã nhân viên') }}" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Họ và tên') }}</label>
+                                            <input type="text" class="form-control" name="name" placeholder="{{ _('Họ và tên') }}"
+                                                value="">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tài khoản') }}</label>
+                                            <input type="text" class="form-control" name="name" placeholder="{{ _('Tài khoản') }}"
+                                                value="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Phân quyền') }}</label>
+                                            <select name="" id="" class="form-control">
+                                                <option value="">{{ _('Quản lý') }}</option>
+                                                <option value="">{{ _('Nhân viên') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Email') }}</label>
+                                            <input type="email" class="form-control" name="email" placeholder="Name"
+                                                value="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Ngày sinh nhật') }}</label>
+                                            <input type="text" class="form-control" id="datepicker" name="datepicker"
+                                                value="" placeholder="{{ _('Ngày sinh nhật') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Giới tính') }}</label>
+                                            <select class="form-control" id="gender">
+                                                <option>{{ _('Nam') }}</option>
+                                                <option>{{ _('Nữ') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Số điện thoại') }}</label>
+                                            <input type="text" class="form-control" value="" {{ _('Nam') }}e="phone"
+                                                placeholder="{{ _('Số điện thoại') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Chức vụ công ty') }}</label>
+                                            <input type="text" class="form-control" value=""
+                                                name="position" placeholder="{{ _('Chức vụ công ty') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tên công ty') }}</label>
+                                            <input type="text" class="form-control" value="" name="companyname"
+                                                placeholder="{{ _('Tên công ty') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tên Chi nhánh') }}</label>
+                                            <input type="text" class="form-control"
+                                                value="" name="companybrach"
+                                                placeholder="{{ _('Tên Chi nhánh') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-1">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Giới thiệu bản thân') }}</label>
+                                            <textarea class="form-control" name="about" placeholder="{{ _('Giới thiệu bản thân') }}"
+                                                rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-1">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Ảnh đại diện') }}</label>
+                                            <input type="file" id="avataName" name="avataName[]" class="form-control" multiple />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="image_preview"></div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success">{{ _('Lưu thông tin') }}</button>
+                                    <button type="reset" class="btn btn-danger">{{ _('Hủy Bỏ') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Add Row
+        $('#add-row').DataTable({
+            "pageLength": 10,
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $(
+                            '<select class="form-control"><option value=""></option></select>'
+                        )
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d +
+                            '</option>')
+                    });
+                });
+            }
+        });
+
+        // $('#add-row tbody').on( 'click', 'tr', function () {
+        //        $(this).toggleClass('selected');
+        //    } );
+
+        //    $('#selectRowModal').click( function () {
+        //        alert( $('#add-row').DataTable().rows('.selected').data().length +' row(s) selected' );
+        //    } );
+
+
+        var action =
+            '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+        $('#addRowButton').click(function () {
+            $('#add-row').dataTable().fnAddData([
+                $("#addName").val(),
+                $("#addPosition").val(),
+                $("#addOffice").val(),
+                action
+            ]);
+            $('#addRowModal').modal('hide');
+
+        });
+    });
+</script>
+
+<script>
+    //== Class definition
+    var SweetAlert2Demo = function () {
+        //== Demos
+        var initDemos = function () {
+            $('#alert_demo_8').dblclick(function (e) {
+                swal({
+                    title: '{{ _('Bạn có chắc không?') }}',
+                    type: 'warning',
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: '{{ _('HỦY BỎ') }}',
+                            className: 'btn btn-danger'
+                        },
+                        confirm: {
+                            text: '{{ _('ĐỒNG Ý XÓA') }}',
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("{{ _('Xóa thông tin thành công') }}", {
+                            icon: "success",
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        });
+                    } else {
+                        swal("{{ _('Bạn đã hủy tác vụ xóa') }}", {
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        });
+                    }
+                });
+            })
+
+        };
+
+        return {
+            //== Init
+            init: function () {
+                initDemos();
+            },
+        };
+    }();
+
+    //== Class Initialization
+    jQuery(document).ready(function () {
+        SweetAlert2Demo.init();
+    });
+</script>
+<!-- Điều hướng tab -->
+<script>
+    var hash = document.location.hash;
+    if (hash) {
+        // $('.nav-link').removeClass('active show');
+        $('.nav-link[href="'+hash+'"]').click();
+    } 
+</script>
+
+<script>
+    $(document).ready(function() 
+    { 
+     $('form').ajaxForm(function() 
+     {
+      alert("Uploaded SuccessFully");
+     }); 
+    });
+    
+    function preview_image() 
+    {
+     var total_file=document.getElementById("uploadAvata").files.length;
+     for(var i=0;i<total_file;i++)
+     {
+      $('#image_preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'class='imgAvata'>");
+     }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        if (window.File && window.FileList && window.FileReader) {
+            $("#avataName").on("change", function (e) {
+                var files = e.target.files,
+                    filesLength = files.length;
+                for (var i = 0; i < filesLength; i++) {
+                    var f = files[i]
+                    var fileReader = new FileReader();
+                    fileReader.onload = (function (e) {
+                        var file = e.target;
+                        $("<span class=\"pip\">" +
+                            "<img class=\"imageThumb\" src=\"" + e.target.result +
+                            "\" title=\"" + file.name + "\"/>" +
+                            "<br/><span class=\"remove\">x</span>" +
+                            "</span>").insertAfter("#avataName");
+                        $(".remove").click(function () {
+                            $(this).parent(".pip").remove();
+                        });
+                    });
+                    fileReader.readAsDataURL(f);
+                }
+            });
+        } else {
+            alert("{{ _('Trình duyệt của bạn không hỗ trợ tính năng này , vui lòng thay đổi trình duyệt !') }}")
+        }
+    });
+</script>
+{% endblock javascripts %}

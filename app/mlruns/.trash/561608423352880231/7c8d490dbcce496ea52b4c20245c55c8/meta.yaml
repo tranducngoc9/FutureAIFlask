@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/7c8d490dbcce496ea52b4c20245c55c8/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: 7c8d490dbcce496ea52b4c20245c55c8
+run_name: Session Initialized 7afd
+run_uuid: 7c8d490dbcce496ea52b4c20245c55c8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669560910068
+status: 1
+tags: []
+user_id: luonghongquan

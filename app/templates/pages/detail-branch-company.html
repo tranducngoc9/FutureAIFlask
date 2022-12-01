@@ -1,0 +1,117 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Thông tin chi nhánh') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+        .form-control:disabled,
+        .form-control[readonly] {
+            background: transparent !important;
+        }
+    </style>
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Thông tin chi nhánh') }}</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-with-nav">
+                <div class="card-header">
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#chinhanh"
+                                    role="tab" aria-selected="false">{{ _('Thông tin chi tiết chi nhánh') }}</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="chinhanh" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="" method="post">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tên chi nhánh') }}</label>
+                                            <input id="nameBrach" type="text" class="form-control" name="name" placeholder="{{ _('Tên chi nhánh') }}"
+                                                value="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group form-group-default">
+                                                <label>{{ _('Địa chỉ công ty') }}</label>
+                                                <input id="addressCompany" type="text" class="form-control" name="name" placeholder="{{ _('Địa chỉ') }} chi nhánh"
+                                                value="12 khuất duy tiến , Hà Nội" disabled>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row mt-3">
+                                        <div class="col-md-12">
+                                                <div class="form-group form-group-default">
+                                                    <label>{{ _('Tên côn ty') }}</label>
+                                                    <input id="nameCompany" type="text" class="form-control" name="name" placeholder="{{ _('Tên côn ty') }}"
+                                                        value="MQ solutions">
+                                                </div>
+                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Thời gian bắt đầu') }}</label>
+                                            <input id="checkin" type="text" class="form-control" name="name" placeholder="{{ _('Thời gian bắt đầu') }}"
+                                                value="8h00">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Thời gian kết thúc') }}</label>
+                                            <input id="checkout" type="text" class="form-control" name="name" placeholder="{{ _('Thời gian kết thúc') }}"
+                                                value="17h00">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                            <div class="form-group form-group-default">
+                                                <label>{{ _('Logo công ty') }}</label>
+                                                <input id="imgavata" type="file" class="form-control" name="name" placeholder="{{ _('Logo công ty') }}">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success">{{ _('Lưu thông tin') }}</button>
+                                    <button type="reset" class="btn btn-danger">{{ _('Hủy Bỏ') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile card-secondary">
+                <div class="card-header" style="background-image: url('/static/assets/img/blogpost.jpg')">
+                    <div class="profile-picture">
+                        <div class="avatar avatar-xl">
+                            <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="user-profile text-center">
+                        <div class="name">MQ Solutions</div>
+                        <div class="desc">Chi nhánh : 12 khuất duy tiến , Hà Nội</div>
+                        <div class="desc">{{ _('Thời gian bắt đầu') }} : 8h00</div>
+                        <div class="desc">{{ _('Thời gian kết thúc') }} : 17h00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/229056627517224337/5acad047cb3646c1a67c6e21e09fd747/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '229056627517224337'
+lifecycle_stage: active
+run_id: 5acad047cb3646c1a67c6e21e09fd747
+run_name: Gradient Boosting Regressor
+run_uuid: 5acad047cb3646c1a67c6e21e09fd747
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669530969757
+status: 1
+tags: []
+user_id: luonghongquan

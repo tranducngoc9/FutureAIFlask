@@ -1,0 +1,231 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý thời gian') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+
+    .fa-check {
+        color: green
+    }
+
+</style>
+<div class="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <div class="col-sm-8 col-md-8">
+                        <h4 class="card-title">{{ _('Quản lý thời gian') }}</h4>
+                        </div>
+                        <div class="col-sm-2 col-md-2">
+                        <span class="h4" style="float: right;">{{ _('Chọn ngày') }}:</span>
+                        </div>
+                        <input class="form-control ml-auto fix-right-mqn" id="selected_date" width="100%">
+                        </input>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4">
+                                <div class="card card-stats card-warning card-round">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="icon-big text-center">
+                                                    <i class="icon-hourglass"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 col-stats">
+                                                <div class="numbers">
+                                                    <p class="card-category">{{ _('Số lượng đi muộn') }}</p>
+                                                    <h4 class="card-title" id="in_late_count"></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="card card-stats card-danger card-round">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="icon-big text-center">
+                                                    <i class="icon-hourglass"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 col-stats">
+                                                <div class="numbers">
+                                                    <p class="card-category">{{ _('Số lượng về sớm') }}</p>
+                                                    <h4 class="card-title" id="out_early_count"></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="card card-stats card-secondary card-round">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="icon-big text-center">
+                                                    <i class="icon-notebook"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 col-stats">
+                                                <div class="numbers">
+                                                    <p class="card-category">{{ _('Vắng mặt') }}</p>
+                                                    <h4 class="card-title" id="escape_count"></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="datatable"
+                                class="display table table-striped table-hover table-head-bg-primary">
+                                <thead>
+                                    <tr>
+                                        <th>{{ _('Mã nhân viên') }}</th>
+                                        <th>{{ _('Họ và tên') }}</th>
+                                        <th>{{ _('Chức vụ') }}</th>
+                                        <th>{{ _('Thời gian bắt đầu') }}</th>
+                                        <th>{{ _('Thời gian kết thúc') }}</th>
+                                        <th>{{ _('Tổng thời gian') }}</th>
+                                        <th>{{ _('Đi muộn') }}</th>
+                                        <th>{{ _('Về sớm') }}</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+<script>
+    $(document).ready(function () {
+        table = $('#datatable').DataTable({
+            "pageLength": 10,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "/time_data",
+                "data": function ( d ) {
+                    if ($('#selected_date').val()) {
+                        d.selected_date = $('#selected_date').val();
+                        //alert(d.selected_date)
+                    }
+                    
+                }
+            },
+            "columns":[{"data":"1"},{"data":"2"},{"data":"3"},{"data":"4"},{"data":"5"},{"data":"6"},{"data":"7"}],
+            "columnDefs": [{
+                "targets": [ 0 ],
+                "render": function ( data, type, row ) {
+                        return '<td> <a href="/detail-timeline.html?id=' + row[0] + '"> ' + row[1] + ' </a> </td>' ;
+                    }
+            },{
+                "targets": [ 7 ],
+                "render": function ( data, type, row ) {
+                        if (row[8] == 1)
+                            return '<i class="fa fa-check"></i>' ;
+                        else
+                            return ''
+                    }
+            },{
+                "targets": [ 6 ],
+                "render": function ( data, type, row ) {
+                        if (row[7] == 1)
+                            return '<i class="fa fa-check"></i>' ;
+                        else
+                            return ''
+                    }
+            }],
+            "language": {
+                "decimal":        "",
+                "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                "loadingRecords": "{{ _('Đang tải ...') }}",
+                "processing":     "{{ _('Đang xử lý ...') }}",
+                "search":         "{{ _('Tìm kiếm:') }}",
+                "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                "paginate": {
+                    "first":      "<<",
+                    "last":       ">>",
+                    "next":       ">",
+                    "previous":   "<"
+                },
+                "aria": {
+                    "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                    "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                }
+            }
+
+        });
+        $("#selected_date").on("dp.change", function (e) {
+            table.ajax.reload();
+
+            $.ajax({
+                type: "POST",
+                url: "/time_dashboard",
+                dataType: "json",
+                contextType: "application/json",
+                data: {selected_date : $('#selected_date').val()},
+                cache: false,
+                success: function(json)
+                { 
+                    $("#in_late_count").text(json.in_late_count);
+                    $("#out_early_count").text(json.out_early_count);
+                    $("#escape_count").text(json.escape_count);
+                },
+                error: function(error) {
+                    
+                }
+            });
+        });
+
+        var d = new Date();
+        var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+        $('#selected_date').val(strDate);
+        $('#selected_date').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+        $('#datatable').on('click', '.table_item_view', function (e) {
+            var id = $(this).data('id');
+            window.location.href = "detail-timeline.html?id=" + id; 
+        });
+
+
+
+
+    });
+</script>
+
+{% endblock javascripts %}

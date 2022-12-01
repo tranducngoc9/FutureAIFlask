@@ -1,0 +1,16 @@
+{% for i in range(faces|length) %}
+<div class="display_box" align="left" data-id="{{ users[i].id }}" data-name="{{ users[i].full_name }}">
+<div class="avatar"> <img src="{{ faces[i].file_name or '/static/assets/img/profile.jpg' }}" alt="..." class="avatar-img avatar-xs rounded"> </div>
+{{ users[i].full_name }}
+</div>
+{% endfor %}
+
+<script>
+    $(".display_box").click(function(){
+        var id = $(this).data('id');
+        var name = $(this).data('name');
+        $("#searchbox").val(name);
+        $("#searchID").val(id);
+        $("#display").hide();
+    });
+</script>

@@ -1,0 +1,1523 @@
+# Translations template for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-03-30 14:02+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: templates/includes/footer.html:9
+msgid "Copyright 2022 - ICT Solutions. All Rights Reserved"
+msgstr ""
+
+#: templates/includes/navigation.html:42
+#: templates/pages/update-package.html:210
+#: templates/pages/update-package.html:313
+msgid "Lựa chọn ngôn ngữ"
+msgstr ""
+
+#: templates/includes/navigation.html:74 templates/includes/sidenav.html:50
+#: templates/pages/profile.html:3
+msgid "Trang cá nhân"
+msgstr ""
+
+#: templates/includes/navigation.html:80 templates/includes/sidenav.html:55
+msgid "Đăng xuất"
+msgstr ""
+
+#: templates/includes/sidenav.html:68 templates/pages/index.html:3
+msgid "Trang chủ"
+msgstr ""
+
+#: templates/includes/sidenav.html:74 templates/pages/users.html:3
+#: templates/pages/users.html:21
+msgid "Quản lý người dùng"
+msgstr ""
+
+#: templates/includes/sidenav.html:83 templates/pages/detail-roles.html:92
+#: templates/pages/managercompany.html:3 templates/pages/managercompany.html:41
+msgid "Quản lý công ty"
+msgstr ""
+
+#: templates/includes/sidenav.html:90 templates/includes/sidenav.html:139
+#: templates/pages/manager-camera-company.html:3
+#: templates/pages/manager-camera-company.html:32
+#: templates/pages/managercamera.html:3 templates/pages/managercamera.html:43
+msgid "Quản lý camera"
+msgstr ""
+
+#: templates/includes/sidenav.html:97
+#: templates/pages/manager_version_camera.html:3
+#: templates/pages/manager_version_camera.html:30
+msgid "Quản lý phiên bản"
+msgstr ""
+
+#: templates/includes/sidenav.html:103 templates/pages/role.html:4
+#: templates/pages/role.html:18
+msgid "Quản lý nhóm người dùng"
+msgstr ""
+
+#: templates/includes/sidenav.html:109 templates/pages/managerlog.html:3
+#: templates/pages/managerlog.html:21
+msgid "Quản lý nhật kí"
+msgstr ""
+
+#: templates/includes/sidenav.html:120 templates/pages/detail-timeline.html:3
+#: templates/pages/managertime.html:3 templates/pages/managertime.html:24
+msgid "Quản lý thời gian"
+msgstr ""
+
+#: templates/includes/sidenav.html:126
+msgid "Quản lý lịch sử ra / vào"
+msgstr ""
+
+#: templates/includes/sidenav.html:133 templates/pages/managerbranch.html:25
+msgid "Quản lý địa điểm"
+msgstr ""
+
+#: templates/includes/sidenav.html:145
+msgid "Nâng cấp gói công ty"
+msgstr ""
+
+#: templates/pages/add-user.html:3 templates/pages/add-user.html:97
+#: templates/pages/users.html:47
+msgid "Thông tin người dùng"
+msgstr ""
+
+#: templates/pages/add-user.html:108 templates/pages/add-user.html:110
+#: templates/pages/loginstaff.html:141 templates/pages/loginstaff.html:143
+#: templates/pages/managertime.html:99 templates/pages/profile.html:197
+msgid "Mã nhân viên"
+msgstr ""
+
+#: templates/pages/add-user.html:115 templates/pages/add-user.html:116
+#: templates/pages/detail-roles.html:32 templates/pages/detail-roles.html:33
+#: templates/pages/loginstaff.html:134 templates/pages/loginstaff.html:136
+#: templates/pages/managertime.html:100 templates/pages/profile.html:152
+#: templates/pages/profile.html:232 templates/pages/users.html:128
+msgid "Họ và tên"
+msgstr ""
+
+#: templates/pages/add-user.html:123 templates/pages/add-user.html:124
+#: templates/pages/login.html:69 templates/pages/loginstaff.html:113
+#: templates/pages/loginstaff.html:115 templates/pages/profile.html:146
+#: templates/pages/profile.html:226 templates/pages/users.html:58
+#: templates/pages/users.html:60 templates/pages/users.html:126
+msgid "Tài khoản"
+msgstr ""
+
+#: templates/pages/add-user.html:130 templates/pages/users.html:101
+#: templates/pages/users.html:127
+msgid "Phân quyền"
+msgstr ""
+
+#: templates/pages/add-user.html:132
+msgid "Quản lý"
+msgstr ""
+
+#: templates/pages/add-user.html:133 templates/pages/index.html:233
+msgid "Nhân viên"
+msgstr ""
+
+#: templates/pages/add-user.html:140
+msgid "Email"
+msgstr ""
+
+#: templates/pages/add-user.html:150 templates/pages/add-user.html:152
+#: templates/pages/detail-roles.html:48 templates/pages/detail-roles.html:50
+#: templates/pages/profile.html:174 templates/pages/profile.html:265
+msgid "Ngày sinh nhật"
+msgstr ""
+
+#: templates/pages/add-user.html:157 templates/pages/detail-roles.html:55
+#: templates/pages/profile.html:180 templates/pages/profile.html:271
+msgid "Giới tính"
+msgstr ""
+
+#: templates/pages/add-user.html:159 templates/pages/add-user.html:167
+#: templates/pages/detail-roles.html:57 templates/pages/profile.html:274
+#: templates/pages/profile.html:455
+msgid "Nam"
+msgstr ""
+
+#: templates/pages/add-user.html:160 templates/pages/detail-roles.html:58
+#: templates/pages/profile.html:181 templates/pages/profile.html:275
+#: templates/pages/profile.html:457
+msgid "Nữ"
+msgstr ""
+
+#: templates/pages/add-user.html:166 templates/pages/add-user.html:168
+#: templates/pages/detail-company.html:47
+#: templates/pages/detail-company.html:49 templates/pages/detail-roles.html:64
+#: templates/pages/detail-roles.html:66 templates/pages/detail-roles.html:159
+#: templates/pages/managercompany.html:80
+#: templates/pages/managercompany.html:82
+#: templates/pages/managercompany.html:138 templates/pages/profile.html:167
+#: templates/pages/profile.html:258
+msgid "Số điện thoại"
+msgstr ""
+
+#: templates/pages/add-user.html:175 templates/pages/add-user.html:177
+#: templates/pages/detail-roles.html:73 templates/pages/detail-roles.html:75
+#: templates/pages/loginstaff.html:148 templates/pages/loginstaff.html:150
+msgid "Chức vụ công ty"
+msgstr ""
+
+#: templates/pages/add-user.html:182 templates/pages/add-user.html:184
+#: templates/pages/detail-camera-company.html:36
+#: templates/pages/detail-camera-company.html:37
+#: templates/pages/detail-camera.html:36 templates/pages/detail-camera.html:37
+#: templates/pages/detail-company.html:31
+#: templates/pages/detail-company.html:33 templates/pages/detail-roles.html:80
+#: templates/pages/detail-roles.html:83 templates/pages/managercamera.html:82
+#: templates/pages/managercamera.html:126
+#: templates/pages/managercamera.html:153
+#: templates/pages/managercompany.html:73
+#: templates/pages/managercompany.html:75
+#: templates/pages/managercompany.html:135 templates/pages/profile.html:286
+#: templates/pages/users.html:87
+msgid "Tên công ty"
+msgstr ""
+
+#: templates/pages/add-user.html:189 templates/pages/add-user.html:192
+msgid "Tên Chi nhánh"
+msgstr ""
+
+#: templates/pages/add-user.html:199 templates/pages/add-user.html:200
+#: templates/pages/detail-roles.html:90
+msgid "Giới thiệu bản thân"
+msgstr ""
+
+#: templates/pages/add-user.html:208 templates/pages/detail-roles.html:99
+msgid "Ảnh đại diện"
+msgstr ""
+
+#: templates/pages/add-user.html:215
+#: templates/pages/detail-branch-company.html:79
+#: templates/pages/detail-camera-company.html:82
+#: templates/pages/detail-camera.html:75 templates/pages/detail-company.html:86
+#: templates/pages/detail-roles.html:105 templates/pages/profile.html:358
+msgid "Lưu thông tin"
+msgstr ""
+
+#: templates/pages/add-user.html:216
+#: templates/pages/detail-branch-company.html:80
+#: templates/pages/detail-camera-company.html:83
+#: templates/pages/detail-camera.html:76 templates/pages/detail-roles.html:106
+#: templates/pages/detail-roles.html:137 templates/pages/managerbranch.html:86
+#: templates/pages/profile.html:360 templates/pages/users.html:113
+msgid "Hủy Bỏ"
+msgstr ""
+
+#: templates/pages/add-user.html:296
+#: templates/pages/detail-manager-time.html:373
+#: templates/pages/managerlog.html:132 templates/pages/profile.html:772
+msgid "Bạn có chắc không?"
+msgstr ""
+
+#: templates/pages/add-user.html:301
+#: templates/pages/detail-manager-time.html:378
+#: templates/pages/managerlog.html:137 templates/pages/profile.html:777
+#: templates/pages/profile.html:857
+msgid "HỦY BỎ"
+msgstr ""
+
+#: templates/pages/add-user.html:305
+#: templates/pages/detail-manager-time.html:382
+#: templates/pages/managerlog.html:141 templates/pages/profile.html:781
+msgid "ĐỒNG Ý XÓA"
+msgstr ""
+
+#: templates/pages/add-user.html:311
+#: templates/pages/detail-manager-time.html:388
+#: templates/pages/managerlog.html:147
+msgid "Xóa thông tin thành công"
+msgstr ""
+
+#: templates/pages/add-user.html:320
+#: templates/pages/detail-manager-time.html:397
+#: templates/pages/managerlog.html:156 templates/pages/profile.html:825
+msgid "Bạn đã hủy tác vụ xóa"
+msgstr ""
+
+#: templates/pages/add-user.html:397 templates/pages/profile.html:752
+msgid ""
+"Trình duyệt của bạn không hỗ trợ tính năng này , vui lòng thay đổi trình "
+"duyệt !"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:3
+#: templates/pages/detail-branch-company.html:17
+msgid "Thông tin chi nhánh"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:25
+msgid "Thông tin chi tiết chi nhánh"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:36
+#: templates/pages/detail-branch-company.html:37
+#: templates/pages/managerbranch.html:153
+msgid "Tên chi nhánh"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:43
+#: templates/pages/loginstaff.html:162 templates/pages/loginstaff.html:164
+msgid "Địa chỉ công ty"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:44
+#: templates/pages/detail-company.html:72
+#: templates/pages/detail-company.html:74 templates/pages/managerbranch.html:64
+#: templates/pages/managerbranch.html:66 templates/pages/managerbranch.html:119
+#: templates/pages/managerbranch.html:121
+#: templates/pages/managercompany.html:106
+#: templates/pages/managercompany.html:139
+msgid "Địa chỉ"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:52
+#: templates/pages/detail-branch-company.html:53
+msgid "Tên côn ty"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:59
+#: templates/pages/detail-branch-company.html:60
+#: templates/pages/detail-branch-company.html:101
+#: templates/pages/detail-timeline.html:105
+#: templates/pages/managerbranch.html:71 templates/pages/managerbranch.html:73
+#: templates/pages/managerbranch.html:126
+#: templates/pages/managerbranch.html:128 templates/pages/managertime.html:102
+msgid "Thời gian bắt đầu"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:66
+#: templates/pages/detail-branch-company.html:67
+#: templates/pages/detail-branch-company.html:102
+#: templates/pages/detail-timeline.html:106
+#: templates/pages/managerbranch.html:78 templates/pages/managerbranch.html:80
+#: templates/pages/managerbranch.html:133
+#: templates/pages/managerbranch.html:135 templates/pages/managertime.html:103
+msgid "Thời gian kết thúc"
+msgstr ""
+
+#: templates/pages/detail-branch-company.html:73
+#: templates/pages/detail-branch-company.html:74
+msgid "Logo công ty"
+msgstr ""
+
+#: templates/pages/detail-camera-company.html:3
+#: templates/pages/detail-camera-company.html:17
+msgid "Thông tin camera công ty"
+msgstr ""
+
+#: templates/pages/detail-camera-company.html:25
+#: templates/pages/detail-camera.html:25
+msgid "Thông tin chi tiết camera"
+msgstr ""
+
+#: templates/pages/detail-camera-company.html:43
+#: templates/pages/detail-camera-company.html:44
+#: templates/pages/loginstaff.html:155 templates/pages/loginstaff.html:157
+msgid "Chi nhánh công ty"
+msgstr ""
+
+#: templates/pages/detail-camera-company.html:52
+#: templates/pages/detail-camera-company.html:53
+#: templates/pages/detail-manager-time.html:53
+#: templates/pages/manager-camera-company.html:88
+#: templates/pages/managercamera.html:75 templates/pages/managercamera.html:77
+#: templates/pages/managercamera.html:120
+#: templates/pages/managercamera.html:121
+#: templates/pages/managercamera.html:152
+msgid "Camera ID"
+msgstr ""
+
+#: templates/pages/detail-camera-company.html:59
+#: templates/pages/detail-camera-company.html:60
+#: templates/pages/detail-camera.html:52 templates/pages/detail-camera.html:53
+#: templates/pages/manager-camera-company.html:91
+#: templates/pages/managercamera.html:154
+msgid "Địa chỉ IP"
+msgstr ""
+
+#: templates/pages/detail-camera-company.html:66
+#: templates/pages/detail-camera-company.html:67
+#: templates/pages/detail-camera.html:59 templates/pages/detail-camera.html:60
+msgid "Vị trí lắp đặt"
+msgstr ""
+
+#: templates/pages/detail-camera-company.html:73
+#: templates/pages/detail-camera.html:66
+#: templates/pages/manager-camera-company.html:93
+#: templates/pages/managercamera.html:156
+msgid "Trạng thái"
+msgstr ""
+
+#: templates/pages/detail-camera.html:3 templates/pages/detail-camera.html:17
+msgid "Thông tin camera"
+msgstr ""
+
+#: templates/pages/detail-company.html:3 templates/pages/detail-company.html:11
+#: templates/pages/managercompany.html:62
+msgid "Thông tin công ty"
+msgstr ""
+
+#: templates/pages/detail-company.html:19
+msgid "Thông tin chi tiết công ty"
+msgstr ""
+
+#: templates/pages/detail-company.html:38
+#: templates/pages/detail-company.html:40
+#: templates/pages/managercompany.html:140
+msgid "Key"
+msgstr ""
+
+#: templates/pages/detail-company.html:61
+#: templates/pages/managercompany.html:94
+msgid "Loại tài khoản"
+msgstr ""
+
+#: templates/pages/detail-company.html:63
+#: templates/pages/managercompany.html:96
+msgid "Lựa chọn loại tài khoản"
+msgstr ""
+
+#: templates/pages/detail-company.html:79
+#: templates/pages/managercompany.html:113
+msgid "Hình ảnh đại diện"
+msgstr ""
+
+#: templates/pages/detail-company.html:170 templates/pages/history.html:473
+#: templates/pages/manager-camera-company.html:216
+#: templates/pages/manager_version_camera.html:164
+#: templates/pages/manager_version_camera.html:209
+#: templates/pages/managerbranch.html:268
+#: templates/pages/managerbranch.html:306
+#: templates/pages/managerbranch.html:338
+#: templates/pages/managercamera.html:282
+#: templates/pages/managercamera.html:333
+#: templates/pages/managercamera.html:370
+#: templates/pages/managercamera.html:402
+#: templates/pages/managercompany.html:238
+#: templates/pages/managercompany.html:285 templates/pages/profile.html:611
+#: templates/pages/profile.html:649 templates/pages/profile.html:702
+#: templates/pages/role.html:200 templates/pages/role.html:238
+#: templates/pages/role.html:270 templates/pages/users.html:214
+#: templates/pages/users.html:268
+msgid "Title"
+msgstr ""
+
+#: templates/pages/detail-company.html:170
+#: templates/pages/manager-camera-company.html:216
+#: templates/pages/profile.html:649 templates/pages/profile.html:702
+msgid "Sửa thành công"
+msgstr ""
+
+#: templates/pages/detail-company.html:174
+#: templates/pages/detail-company.html:180 templates/pages/history.html:477
+#: templates/pages/manager-camera-company.html:220
+#: templates/pages/manager-camera-company.html:225
+#: templates/pages/manager_version_camera.html:168
+#: templates/pages/manager_version_camera.html:173
+#: templates/pages/manager_version_camera.html:214
+#: templates/pages/manager_version_camera.html:219
+#: templates/pages/managerbranch.html:273
+#: templates/pages/managerbranch.html:278
+#: templates/pages/managerbranch.html:310
+#: templates/pages/managerbranch.html:315
+#: templates/pages/managerbranch.html:342
+#: templates/pages/managerbranch.html:347
+#: templates/pages/managercamera.html:287
+#: templates/pages/managercamera.html:292
+#: templates/pages/managercamera.html:338
+#: templates/pages/managercamera.html:343
+#: templates/pages/managercamera.html:374
+#: templates/pages/managercamera.html:379
+#: templates/pages/managercamera.html:406
+#: templates/pages/managercamera.html:411
+#: templates/pages/managercompany.html:242
+#: templates/pages/managercompany.html:247
+#: templates/pages/managercompany.html:290
+#: templates/pages/managercompany.html:295 templates/pages/profile.html:615
+#: templates/pages/profile.html:653 templates/pages/profile.html:658
+#: templates/pages/profile.html:706 templates/pages/profile.html:711
+#: templates/pages/profile.html:812 templates/pages/profile.html:818
+#: templates/pages/profile.html:890 templates/pages/profile.html:896
+#: templates/pages/role.html:205 templates/pages/role.html:210
+#: templates/pages/role.html:242 templates/pages/role.html:247
+#: templates/pages/role.html:274 templates/pages/role.html:279
+#: templates/pages/users.html:218 templates/pages/users.html:223
+#: templates/pages/users.html:273 templates/pages/users.html:278
+msgid "ETitle"
+msgstr ""
+
+#: templates/pages/detail-company.html:174
+#: templates/pages/detail-company.html:180
+#: templates/pages/manager-camera-company.html:220
+#: templates/pages/manager-camera-company.html:225
+#: templates/pages/profile.html:653 templates/pages/profile.html:658
+#: templates/pages/profile.html:706 templates/pages/profile.html:711
+msgid "Sửa thất bại"
+msgstr ""
+
+#: templates/pages/detail-manager-time.html:3
+#: templates/pages/detail-manager-time.html:30
+msgid "Thông tin thời gian"
+msgstr ""
+
+#: templates/pages/detail-manager-time.html:38
+msgid "Lịch sử thời gian"
+msgstr ""
+
+#: templates/pages/detail-manager-time.html:51
+msgid "Hình ảnh"
+msgstr ""
+
+#: templates/pages/detail-manager-time.html:52
+#: templates/pages/manager-camera-company.html:92
+#: templates/pages/managercamera.html:155 templates/pages/managerlog.html:37
+#: templates/pages/profile.html:372
+msgid "Thời gian"
+msgstr ""
+
+#: templates/pages/detail-manager-time.html:90
+#: templates/pages/detail-manager-time.html:92
+#: templates/pages/detail-roles.html:122 templates/pages/detail-roles.html:124
+#: templates/pages/profile.html:399 templates/pages/profile.html:401
+msgid "Mật khẩu mới"
+msgstr ""
+
+#: templates/pages/detail-manager-time.html:97
+#: templates/pages/detail-manager-time.html:99
+#: templates/pages/detail-roles.html:129 templates/pages/detail-roles.html:131
+#: templates/pages/loginstaff.html:127 templates/pages/loginstaff.html:129
+#: templates/pages/profile.html:406 templates/pages/profile.html:408
+msgid "Xác nhận mật khẩu"
+msgstr ""
+
+#: templates/pages/detail-manager-time.html:104
+#: templates/pages/detail-roles.html:136 templates/pages/profile.html:414
+msgid "Đổi mật khẩu"
+msgstr ""
+
+#: templates/pages/detail-roles.html:11 templates/pages/detail-roles.html:19
+msgid "Thông tin cá nhân Admin"
+msgstr ""
+
+#: templates/pages/detail-roles.html:21 templates/pages/profile.html:130
+msgid "Thay đổi mật khẩu"
+msgstr ""
+
+#: templates/pages/detail-roles.html:115 templates/pages/detail-roles.html:117
+#: templates/pages/profile.html:392 templates/pages/profile.html:393
+msgid "Mật khẩu hiện tại"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:31 templates/pages/managertime.html:27
+msgid "Chọn ngày"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:51 templates/pages/managertime.html:47
+msgid "Số lượng đi muộn"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:70 templates/pages/managertime.html:66
+msgid "Số lượng về sớm"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:89 templates/pages/managertime.html:85
+msgid "Vắng mặt"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:103
+msgid "Ngày"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:104
+msgid "Tổng lượt ra/vào"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:107
+#: templates/pages/managertime.html:104
+msgid "Tổng thời gian"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:108
+#: templates/pages/managertime.html:105
+msgid "Đi muộn"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:109
+#: templates/pages/managertime.html:106
+msgid "Về sớm"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:170
+#: templates/pages/manager-camera-company.html:146
+#: templates/pages/manager_version_camera.html:126
+#: templates/pages/managerbranch.html:194
+#: templates/pages/managercamera.html:209
+#: templates/pages/managercompany.html:188 templates/pages/managertime.html:168
+#: templates/pages/profile.html:555 templates/pages/role.html:135
+#: templates/pages/users.html:166
+msgid "Không có dữ liệu"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:171
+#: templates/pages/manager-camera-company.html:147
+#: templates/pages/manager_version_camera.html:127
+#: templates/pages/managerbranch.html:195
+#: templates/pages/managercamera.html:210
+#: templates/pages/managercompany.html:189 templates/pages/managertime.html:169
+#: templates/pages/profile.html:556 templates/pages/role.html:136
+#: templates/pages/users.html:167
+msgid "Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:172
+#: templates/pages/manager-camera-company.html:148
+#: templates/pages/manager_version_camera.html:128
+#: templates/pages/managerbranch.html:196
+#: templates/pages/managercamera.html:211
+#: templates/pages/managercompany.html:190 templates/pages/managertime.html:170
+#: templates/pages/profile.html:557 templates/pages/role.html:137
+#: templates/pages/users.html:168
+msgid "Không có dữ liệu hiển thị"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:173
+#: templates/pages/manager-camera-company.html:149
+#: templates/pages/manager_version_camera.html:129
+#: templates/pages/managerbranch.html:197
+#: templates/pages/managercamera.html:212
+#: templates/pages/managercompany.html:191 templates/pages/managertime.html:171
+#: templates/pages/profile.html:558 templates/pages/role.html:138
+#: templates/pages/users.html:169
+msgid "(lọc từ _MAX_ dữ liệu)"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:176
+#: templates/pages/manager-camera-company.html:152
+#: templates/pages/manager_version_camera.html:132
+#: templates/pages/managerbranch.html:200
+#: templates/pages/managercamera.html:215
+#: templates/pages/managercompany.html:194 templates/pages/managertime.html:174
+#: templates/pages/profile.html:561 templates/pages/role.html:141
+#: templates/pages/users.html:172
+msgid "Hiển thị _MENU_ dữ liệu trên 1 trang"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:177 templates/pages/history.html:342
+#: templates/pages/manager-camera-company.html:153
+#: templates/pages/manager_version_camera.html:133
+#: templates/pages/managerbranch.html:201
+#: templates/pages/managercamera.html:216
+#: templates/pages/managercompany.html:195 templates/pages/managertime.html:175
+#: templates/pages/profile.html:562 templates/pages/role.html:142
+#: templates/pages/users.html:173
+msgid "Đang tải ..."
+msgstr ""
+
+#: templates/pages/detail-timeline.html:178
+#: templates/pages/manager-camera-company.html:154
+#: templates/pages/manager_version_camera.html:134
+#: templates/pages/managerbranch.html:202
+#: templates/pages/managercamera.html:217
+#: templates/pages/managercompany.html:196 templates/pages/managertime.html:176
+#: templates/pages/profile.html:563 templates/pages/role.html:143
+#: templates/pages/users.html:174
+msgid "Đang xử lý ..."
+msgstr ""
+
+#: templates/pages/detail-timeline.html:179
+#: templates/pages/manager-camera-company.html:155
+#: templates/pages/manager_version_camera.html:135
+#: templates/pages/managerbranch.html:203
+#: templates/pages/managercamera.html:218
+#: templates/pages/managercompany.html:197 templates/pages/managertime.html:177
+#: templates/pages/profile.html:564 templates/pages/role.html:144
+#: templates/pages/users.html:175
+msgid "Tìm kiếm:"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:180
+#: templates/pages/manager-camera-company.html:156
+#: templates/pages/manager_version_camera.html:136
+#: templates/pages/managerbranch.html:204
+#: templates/pages/managercamera.html:219
+#: templates/pages/managercompany.html:198 templates/pages/managertime.html:178
+#: templates/pages/profile.html:565 templates/pages/role.html:145
+#: templates/pages/users.html:176
+msgid "Không tìm thấy dữ liệu"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:188
+#: templates/pages/manager-camera-company.html:164
+#: templates/pages/manager_version_camera.html:144
+#: templates/pages/managerbranch.html:212
+#: templates/pages/managercamera.html:227
+#: templates/pages/managercompany.html:206 templates/pages/managertime.html:186
+#: templates/pages/profile.html:573 templates/pages/role.html:153
+#: templates/pages/users.html:184
+msgid ": sắp xếp tăng dần"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:189
+#: templates/pages/manager-camera-company.html:165
+#: templates/pages/manager_version_camera.html:145
+#: templates/pages/managerbranch.html:213
+#: templates/pages/managercamera.html:228
+#: templates/pages/managercompany.html:207 templates/pages/managertime.html:187
+#: templates/pages/profile.html:574 templates/pages/role.html:154
+#: templates/pages/users.html:185
+msgid ": sắp xếp giảm dần"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:202 templates/pages/index.html:331
+msgid "Chọn"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:203 templates/pages/index.html:332
+#: templates/pages/manager-camera-company.html:75
+#: templates/pages/managerbranch.html:141 templates/pages/managercamera.html:95
+#: templates/pages/managercamera.html:139 templates/pages/role.html:51
+#: templates/pages/role.html:85
+msgid "Hủy"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:204 templates/pages/index.html:333
+msgid "Từ"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:205 templates/pages/index.html:334
+msgid "Tới"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:206 templates/pages/index.html:335
+msgid "Tùy chọn"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:208 templates/pages/index.html:337
+msgid "CN"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:209 templates/pages/index.html:338
+msgid "T2"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:210 templates/pages/index.html:339
+msgid "T3"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:211 templates/pages/index.html:340
+msgid "T4"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:212 templates/pages/index.html:341
+msgid "T5"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:213 templates/pages/index.html:342
+msgid "T6"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:214 templates/pages/index.html:343
+msgid "T7"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:217 templates/pages/index.html:346
+msgid "Tháng 1"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:218 templates/pages/index.html:347
+msgid "Tháng 2"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:219 templates/pages/index.html:348
+msgid "Tháng 3"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:220 templates/pages/index.html:349
+msgid "Tháng 4"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:221 templates/pages/index.html:350
+msgid "Tháng 5"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:222 templates/pages/index.html:351
+msgid "Tháng 6"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:223 templates/pages/index.html:352
+msgid "Tháng 7"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:224 templates/pages/index.html:353
+msgid "Tháng 8"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:225 templates/pages/index.html:354
+msgid "Tháng 9"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:226 templates/pages/index.html:355
+msgid "Tháng 10"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:227 templates/pages/index.html:356
+msgid "Tháng 11"
+msgstr ""
+
+#: templates/pages/detail-timeline.html:228 templates/pages/index.html:357
+msgid "Tháng 12"
+msgstr ""
+
+#: templates/pages/error-404.html:39
+msgid "Trang không tồn tại"
+msgstr ""
+
+#: templates/pages/error-404.html:44 templates/pages/payment_return.html:41
+#: templates/pages/permission_denied.html:44
+msgid "Quay về Trang chủ"
+msgstr ""
+
+#: templates/pages/history.html:3
+msgid "Quản lý lịch sử vào / ra"
+msgstr ""
+
+#: templates/pages/history.html:180
+msgid "Danh sách lịch sử ra / vào"
+msgstr ""
+
+#: templates/pages/history.html:189 templates/pages/history.html:216
+msgid "Xác nhận người dùng"
+msgstr ""
+
+#: templates/pages/history.html:196 templates/pages/profile.html:356
+#: templates/pages/users.html:25
+msgid "Thêm người dùng"
+msgstr ""
+
+#: templates/pages/history.html:203
+msgid "Tất cả"
+msgstr ""
+
+#: templates/pages/history.html:205
+msgid "Đã nhận diện"
+msgstr ""
+
+#: templates/pages/history.html:207
+msgid "Không nhận diện"
+msgstr ""
+
+#: templates/pages/history.html:227
+msgid "Mã nhân viên / Tên nhân viên"
+msgstr ""
+
+#: templates/pages/history.html:229
+msgid "Nhập mã hoặc tên nhân viên"
+msgstr ""
+
+#: templates/pages/history.html:240
+msgid "Xác nhận"
+msgstr ""
+
+#: templates/pages/history.html:255 templates/pages/history.html:264
+#: templates/pages/history.html:274 templates/pages/history.html:388
+msgid "Xem thêm"
+msgstr ""
+
+#: templates/pages/history.html:448 templates/pages/profile.html:852
+msgid "Bạn có chắc chắn không?"
+msgstr ""
+
+#: templates/pages/history.html:449
+#: templates/pages/manager_version_camera.html:186
+#: templates/pages/managerbranch.html:245
+#: templates/pages/managercamera.html:259
+#: templates/pages/managercamera.html:310
+#: templates/pages/managercompany.html:262 templates/pages/role.html:177
+#: templates/pages/users.html:245
+msgid "Bạn sẽ không thể khôi phục như trước!"
+msgstr ""
+
+#: templates/pages/history.html:450
+#: templates/pages/manager_version_camera.html:187
+#: templates/pages/managerbranch.html:246
+#: templates/pages/managercamera.html:260
+#: templates/pages/managercamera.html:311
+#: templates/pages/managercompany.html:263 templates/pages/profile.html:588
+#: templates/pages/role.html:178 templates/pages/users.html:246
+msgid "Cảnh báo"
+msgstr ""
+
+#: templates/pages/history.html:453
+#: templates/pages/manager_version_camera.html:190
+#: templates/pages/managerbranch.html:249
+#: templates/pages/managercamera.html:263
+#: templates/pages/managercamera.html:314
+#: templates/pages/managercompany.html:266 templates/pages/profile.html:591
+#: templates/pages/role.html:181 templates/pages/users.html:249
+msgid "Có"
+msgstr ""
+
+#: templates/pages/history.html:457
+#: templates/pages/manager_version_camera.html:194
+#: templates/pages/managerbranch.html:253
+#: templates/pages/managercamera.html:267
+#: templates/pages/managercamera.html:318
+#: templates/pages/managercompany.html:270 templates/pages/profile.html:595
+#: templates/pages/role.html:185 templates/pages/users.html:253
+msgid "Không"
+msgstr ""
+
+#: templates/pages/history.html:473
+msgid "Xác nhận thành công"
+msgstr ""
+
+#: templates/pages/history.html:477
+msgid "Xác nhận thất bại"
+msgstr ""
+
+#: templates/pages/index.html:47
+msgid "Thống kế lịch sử ra vào"
+msgstr ""
+
+#: templates/pages/index.html:63
+msgid "Số lượng khách"
+msgstr ""
+
+#: templates/pages/index.html:76
+msgid "Số lượng công ty"
+msgstr ""
+
+#: templates/pages/index.html:97
+msgid "Số nhân viên"
+msgstr ""
+
+#: templates/pages/index.html:105
+msgid "Số người dùng"
+msgstr ""
+
+#: templates/pages/index.html:125
+msgid "Số lượt ra vào"
+msgstr ""
+
+#: templates/pages/index.html:144
+msgid "Số lượng camera"
+msgstr ""
+
+#: templates/pages/index.html:219 templates/pages/managerlog.html:38
+msgid "Người dùng"
+msgstr ""
+
+#: templates/pages/index.html:222
+msgid "Khách"
+msgstr ""
+
+#: templates/pages/index.html:230
+msgid "Lượt ra vào"
+msgstr ""
+
+#: templates/pages/index.html:375 templates/pages/index.html:382
+msgid "Hôm nay"
+msgstr ""
+
+#: templates/pages/index.html:376
+msgid "Hôm qua"
+msgstr ""
+
+#: templates/pages/index.html:377
+msgid "7 ngày trước"
+msgstr ""
+
+#: templates/pages/index.html:378
+msgid "30 ngày trước"
+msgstr ""
+
+#: templates/pages/index.html:379
+msgid "Tháng này"
+msgstr ""
+
+#: templates/pages/index.html:380
+msgid "Tháng trước"
+msgstr ""
+
+#: templates/pages/login.html:5 templates/pages/login.html:90
+#: templates/pages/loginstaff.html:3 templates/pages/loginstaff.html:94
+msgid "Đăng nhập"
+msgstr ""
+
+#: templates/pages/login.html:48 templates/pages/loginstaff.html:57
+msgid "Đăng nhập tài khoản"
+msgstr ""
+
+#: templates/pages/login.html:81 templates/pages/loginstaff.html:120
+#: templates/pages/loginstaff.html:122 templates/pages/users.html:65
+#: templates/pages/users.html:67
+msgid "Mật khẩu"
+msgstr ""
+
+#: templates/pages/loginstaff.html:98
+msgid "Đăng kí tài khoản"
+msgstr ""
+
+#: templates/pages/loginstaff.html:105
+msgid "Vui lòng nhập các thông tin sau !"
+msgstr ""
+
+#: templates/pages/loginstaff.html:177
+msgid "Tạo tài khoản"
+msgstr ""
+
+#: templates/pages/manager-camera-company.html:42
+#: templates/pages/managercamera.html:108
+msgid "Sửa thông tin camera"
+msgstr ""
+
+#: templates/pages/manager-camera-company.html:54
+#: templates/pages/manager-camera-company.html:56
+msgid "Tên Camera"
+msgstr ""
+
+#: templates/pages/manager-camera-company.html:62
+#: templates/pages/manager-camera-company.html:90
+msgid "Địa điểm"
+msgstr ""
+
+#: templates/pages/manager-camera-company.html:64
+msgid "Lựa chọn địa điểm"
+msgstr ""
+
+#: templates/pages/manager-camera-company.html:74
+#: templates/pages/managerbranch.html:140
+#: templates/pages/managercamera.html:138 templates/pages/role.html:84
+msgid "Sửa"
+msgstr ""
+
+#: templates/pages/manager-camera-company.html:89
+msgid "Tên camera viết tắt (Tối đa 16 ký tự)"
+msgstr ""
+
+#: templates/pages/manager-camera-company.html:94
+#: templates/pages/manager_version_camera.html:91
+#: templates/pages/managerbranch.html:157
+#: templates/pages/managercamera.html:158
+#: templates/pages/managercompany.html:141 templates/pages/role.html:100
+#: templates/pages/users.html:131
+msgid "Thao tác"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:34
+msgid "Thêm version"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:40
+#: templates/pages/managerbranch.html:35 templates/pages/managercamera.html:53
+#: templates/pages/managercompany.html:51 templates/pages/users.html:31
+msgid "In"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:51
+msgid "Thông tin version"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:62
+msgid "Version"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:63
+msgid "Tên version"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:68
+msgid "Upload version"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:74
+#: templates/pages/managerbranch.html:29 templates/pages/managerbranch.html:85
+#: templates/pages/managercompany.html:120 templates/pages/role.html:21
+#: templates/pages/role.html:50 templates/pages/users.html:112
+msgid "Thêm"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:75
+msgid "Hủy bỏ"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:88
+#: templates/pages/manager_version_camera.html:89
+#: templates/pages/managercamera.html:157
+msgid "Phiên bản"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:90
+msgid "Thời gian cập nhật"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:164
+#: templates/pages/managerbranch.html:306
+#: templates/pages/managercamera.html:370
+#: templates/pages/managercompany.html:238 templates/pages/profile.html:611
+#: templates/pages/role.html:238 templates/pages/users.html:214
+msgid "Thêm thành công"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:168
+#: templates/pages/manager_version_camera.html:173
+#: templates/pages/managerbranch.html:310
+#: templates/pages/managerbranch.html:315
+#: templates/pages/managercamera.html:374
+#: templates/pages/managercamera.html:379
+#: templates/pages/managercompany.html:242
+#: templates/pages/managercompany.html:247 templates/pages/profile.html:615
+#: templates/pages/role.html:242 templates/pages/role.html:247
+#: templates/pages/users.html:218 templates/pages/users.html:223
+msgid "Thêm thất bại"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:185
+#: templates/pages/managerbranch.html:244
+#: templates/pages/managercamera.html:309
+#: templates/pages/managercompany.html:261 templates/pages/role.html:176
+#: templates/pages/users.html:244
+msgid "Bạn có chắc chắn xóa không?"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:209
+#: templates/pages/managerbranch.html:268
+#: templates/pages/managercamera.html:333
+#: templates/pages/managercompany.html:285 templates/pages/role.html:200
+#: templates/pages/users.html:268
+msgid "Xóa thành công"
+msgstr ""
+
+#: templates/pages/manager_version_camera.html:214
+#: templates/pages/manager_version_camera.html:219
+#: templates/pages/managerbranch.html:273
+#: templates/pages/managerbranch.html:278
+#: templates/pages/managercamera.html:338
+#: templates/pages/managercamera.html:343
+#: templates/pages/managercompany.html:290
+#: templates/pages/managercompany.html:295 templates/pages/profile.html:812
+#: templates/pages/profile.html:818 templates/pages/role.html:205
+#: templates/pages/role.html:210 templates/pages/users.html:273
+#: templates/pages/users.html:278
+msgid "Xóa thất bại"
+msgstr ""
+
+#: templates/pages/managerbranch.html:3
+msgid "Quản lý chi nhánh"
+msgstr ""
+
+#: templates/pages/managerbranch.html:46
+msgid "Thông tin địa điểm"
+msgstr ""
+
+#: templates/pages/managerbranch.html:57 templates/pages/managerbranch.html:59
+#: templates/pages/managerbranch.html:112
+#: templates/pages/managerbranch.html:114 templates/pages/role.html:45
+#: templates/pages/role.html:79
+msgid "Nhập tên"
+msgstr ""
+
+#: templates/pages/managerbranch.html:100
+msgid "Sửa địa điểm"
+msgstr ""
+
+#: templates/pages/managerbranch.html:154
+msgid "Địa chỉ chi nhánh"
+msgstr ""
+
+#: templates/pages/managerbranch.html:155
+msgid "Bắt đầu"
+msgstr ""
+
+#: templates/pages/managerbranch.html:156
+msgid "Kết thúc"
+msgstr ""
+
+#: templates/pages/managerbranch.html:338
+#: templates/pages/managercamera.html:402 templates/pages/role.html:270
+msgid "Sửa thông tin thành công"
+msgstr ""
+
+#: templates/pages/managerbranch.html:342
+#: templates/pages/managerbranch.html:347
+#: templates/pages/managercamera.html:406
+#: templates/pages/managercamera.html:411 templates/pages/role.html:274
+#: templates/pages/role.html:279
+msgid "Sửa thông tin thất bại"
+msgstr ""
+
+#: templates/pages/managercamera.html:47 templates/pages/managercamera.html:64
+msgid "Thêm camera"
+msgstr ""
+
+#: templates/pages/managercamera.html:84 templates/pages/managercamera.html:128
+#: templates/pages/profile.html:288 templates/pages/users.html:90
+msgid "Lựa chọn công ty"
+msgstr ""
+
+#: templates/pages/managercamera.html:258
+msgid "Bạn có chắc chắn cập nhật firmware không?"
+msgstr ""
+
+#: templates/pages/managercamera.html:282
+msgid "Cập nhật thành công"
+msgstr ""
+
+#: templates/pages/managercamera.html:287
+#: templates/pages/managercamera.html:292
+msgid "Cập nhật thất bại"
+msgstr ""
+
+#: templates/pages/managercompany.html:45
+msgid "Thêm công ty"
+msgstr ""
+
+#: templates/pages/managercompany.html:136
+msgid "Gói"
+msgstr ""
+
+#: templates/pages/managerlog.html:39
+msgid "Phân loại"
+msgstr ""
+
+#: templates/pages/managerlog.html:40
+msgid "Lịch sử"
+msgstr ""
+
+#: templates/pages/managertime.html:101 templates/pages/profile.html:191
+#: templates/pages/profile.html:301 templates/pages/profile.html:302
+msgid "Chức vụ"
+msgstr ""
+
+#: templates/pages/payment_return.html:4 templates/pages/payment_return.html:16
+msgid "Kết quả giao dịch"
+msgstr ""
+
+#: templates/pages/payment_return.html:25
+msgid "Cảm ơn đã sử dụng dịch vụ."
+msgstr ""
+
+#: templates/pages/payment_return.html:27
+#: templates/pages/payment_return.html:31
+msgid "Thanh toán không thành công. Liên hệ xxxxxxxxxxx để nhận hỗ trợ."
+msgstr ""
+
+#: templates/pages/permission_denied.html:39
+msgid "Bạn không có quyền truy nhập vào trang này."
+msgstr ""
+
+#: templates/pages/profile.html:117 templates/pages/profile.html:125
+msgid "Thông tin cá nhân"
+msgstr ""
+
+#: templates/pages/profile.html:127
+msgid "Lịch sử check in / check out"
+msgstr ""
+
+#: templates/pages/profile.html:207
+msgid "Mã khách hàng"
+msgstr ""
+
+#: templates/pages/profile.html:221
+msgid ""
+"Người dùng này chưa được nhận diện trong hệ thống. Hãy nhập và lưu thông "
+"tin để xác nhận người dùng"
+msgstr ""
+
+#: templates/pages/profile.html:227
+msgid "Nhập tài khoản"
+msgstr ""
+
+#: templates/pages/profile.html:233
+msgid "Nhập họ và tên"
+msgstr ""
+
+#: templates/pages/profile.html:238
+msgid "Loại người dùng"
+msgstr ""
+
+#: templates/pages/profile.html:240
+msgid "Lựa chọn loại người dùng"
+msgstr ""
+
+#: templates/pages/profile.html:252
+msgid "Nhập email"
+msgstr ""
+
+#: templates/pages/profile.html:259
+msgid "Nhập số điện thoại"
+msgstr ""
+
+#: templates/pages/profile.html:266
+msgid "Chọn ngày sinh"
+msgstr ""
+
+#: templates/pages/profile.html:273
+msgid "Chọn giới tính"
+msgstr ""
+
+#: templates/pages/profile.html:308 templates/pages/profile.html:310
+msgid "Mã người dùng"
+msgstr ""
+
+#: templates/pages/profile.html:317
+msgid "Thêm tệp ảnh khuôn mặt"
+msgstr ""
+
+#: templates/pages/profile.html:330
+msgid "Thêm ảnh khuôn mặt từ camera"
+msgstr ""
+
+#: templates/pages/profile.html:333
+msgid "Mở WebCam"
+msgstr ""
+
+#: templates/pages/profile.html:335
+msgid "Đóng WebCam"
+msgstr ""
+
+#: templates/pages/profile.html:337
+msgid "Chụp ảnh"
+msgstr ""
+
+#: templates/pages/profile.html:371
+msgid "Ảnh"
+msgstr ""
+
+#: templates/pages/profile.html:373
+msgid "Camera"
+msgstr ""
+
+#: templates/pages/profile.html:374
+msgid "Vị trí"
+msgstr ""
+
+#: templates/pages/profile.html:375 templates/pages/profile.html:586
+msgid "Thêm ảnh"
+msgstr ""
+
+#: templates/pages/profile.html:421
+msgid "Mật khẩu mới sẽ được tạo và gửi đến địa chỉ email của người dùng"
+msgstr ""
+
+#: templates/pages/profile.html:424
+msgid "Tạo mật khẩu mới"
+msgstr ""
+
+#: templates/pages/profile.html:462
+msgid " Tuổi"
+msgstr ""
+
+#: templates/pages/profile.html:487
+msgid "Xóa ảnh"
+msgstr ""
+
+#: templates/pages/profile.html:587
+msgid "Bạn có sử dụng ảnh lịch sử này cho việc nhận dạng người dùng?"
+msgstr ""
+
+#: templates/pages/profile.html:801
+msgid "Xóa ảnh thành công"
+msgstr ""
+
+#: templates/pages/profile.html:881
+msgid "Tạo mật khẩu mới thành công"
+msgstr ""
+
+#: templates/pages/profile.html:890 templates/pages/profile.html:896
+msgid "Tạo mật khẩu thất bại"
+msgstr ""
+
+#: templates/pages/role.html:33
+msgid "Thêm vai trò"
+msgstr ""
+
+#: templates/pages/role.html:44 templates/pages/role.html:78
+msgid "Tên nhóm người dùng"
+msgstr ""
+
+#: templates/pages/role.html:66
+msgid "Sửa vai trò người dùng trong hệ thống"
+msgstr ""
+
+#: templates/pages/role.html:99
+msgid "Tên"
+msgstr ""
+
+#: templates/pages/update-package.html:3 templates/pages/update-package.html:48
+msgid "Thông tin gói dịch vụ"
+msgstr ""
+
+#: templates/pages/update-package.html:67
+#: templates/pages/update-package.html:90
+#: templates/pages/update-package.html:115
+msgid "Bao gồm các bản cập nhật miễn phí và các tính năng mới khi chúng có sẵn"
+msgstr ""
+
+#: templates/pages/update-package.html:68
+#: templates/pages/update-package.html:91
+#: templates/pages/update-package.html:116
+msgid "Nhập chi tiết nhân viên và công ty từ Excel, Outlook và .csv"
+msgstr ""
+
+#: templates/pages/update-package.html:69
+#: templates/pages/update-package.html:92
+#: templates/pages/update-package.html:117
+msgid "Điện thoại miễn phí và hỗ trợ trực tuyến"
+msgstr ""
+
+#: templates/pages/update-package.html:70
+#: templates/pages/update-package.html:93
+#: templates/pages/update-package.html:118
+msgid "Mã hóa mạnh bảo vệ dữ liệu doanh nghiệp của bạn"
+msgstr ""
+
+#: templates/pages/update-package.html:71
+#: templates/pages/update-package.html:94
+#: templates/pages/update-package.html:119
+msgid "Sao lưu dữ liệu tự động"
+msgstr ""
+
+#: templates/pages/update-package.html:73
+#: templates/pages/update-package.html:98
+#: templates/pages/update-package.html:122
+msgid "Đã sử dụng"
+msgstr ""
+
+#: templates/pages/update-package.html:98
+#: templates/pages/update-package.html:122
+msgid "Mua gói"
+msgstr ""
+
+#: templates/pages/update-package.html:129
+#: templates/pages/update-package.html:234
+msgid "Thanh toán gói dịch vụ"
+msgstr ""
+
+#: templates/pages/update-package.html:138
+#: templates/pages/update-package.html:243
+msgid "Thông tin thẻ"
+msgstr ""
+
+#: templates/pages/update-package.html:151
+#: templates/pages/update-package.html:255
+msgid "Nội dung thanh toán"
+msgstr ""
+
+#: templates/pages/update-package.html:152
+#: templates/pages/update-package.html:189
+msgid "Gói tiêu chuẩn"
+msgstr ""
+
+#: templates/pages/update-package.html:157
+#: templates/pages/update-package.html:172
+#: templates/pages/update-package.html:173
+#: templates/pages/update-package.html:174
+#: templates/pages/update-package.html:175
+#: templates/pages/update-package.html:261
+#: templates/pages/update-package.html:276
+#: templates/pages/update-package.html:277
+#: templates/pages/update-package.html:278
+#: templates/pages/update-package.html:279
+msgid "Ngân hàng"
+msgstr ""
+
+#: templates/pages/update-package.html:159
+#: templates/pages/update-package.html:263
+msgid "Không chọn"
+msgstr ""
+
+#: templates/pages/update-package.html:160
+#: templates/pages/update-package.html:161
+#: templates/pages/update-package.html:162
+#: templates/pages/update-package.html:163
+#: templates/pages/update-package.html:164
+#: templates/pages/update-package.html:165
+#: templates/pages/update-package.html:166
+#: templates/pages/update-package.html:168
+#: templates/pages/update-package.html:169
+#: templates/pages/update-package.html:170
+#: templates/pages/update-package.html:171
+#: templates/pages/update-package.html:176
+#: templates/pages/update-package.html:177
+#: templates/pages/update-package.html:178
+#: templates/pages/update-package.html:179
+#: templates/pages/update-package.html:180
+#: templates/pages/update-package.html:264
+#: templates/pages/update-package.html:265
+#: templates/pages/update-package.html:266
+#: templates/pages/update-package.html:267
+#: templates/pages/update-package.html:268
+#: templates/pages/update-package.html:269
+#: templates/pages/update-package.html:270
+#: templates/pages/update-package.html:272
+#: templates/pages/update-package.html:273
+#: templates/pages/update-package.html:274
+#: templates/pages/update-package.html:275
+#: templates/pages/update-package.html:280
+#: templates/pages/update-package.html:281
+#: templates/pages/update-package.html:282
+#: templates/pages/update-package.html:283
+#: templates/pages/update-package.html:284
+msgid "Ngan hang"
+msgstr ""
+
+#: templates/pages/update-package.html:167
+#: templates/pages/update-package.html:271
+msgid "Vi dien tu"
+msgstr ""
+
+#: templates/pages/update-package.html:181
+#: templates/pages/update-package.html:285
+msgid "Thanh toan qua"
+msgstr ""
+
+#: templates/pages/update-package.html:188
+#: templates/pages/update-package.html:292
+msgid "Gói dịch vụ"
+msgstr ""
+
+#: templates/pages/update-package.html:198
+#: templates/pages/update-package.html:302
+msgid "Số tiền"
+msgstr ""
+
+#: templates/pages/update-package.html:208
+#: templates/pages/update-package.html:311
+msgid "Ngôn ngữ"
+msgstr ""
+
+#: templates/pages/update-package.html:256
+#: templates/pages/update-package.html:293
+msgid "Gói nâng cao"
+msgstr ""
+
+#: templates/pages/users.html:79 templates/pages/users.html:81
+msgid "Tên nhân viên"
+msgstr ""
+
+#: templates/pages/users.html:103
+msgid "Lựa chọn phân quyền"
+msgstr ""
+
+#: templates/pages/users.html:130
+msgid "Công ty"
+msgstr ""
+

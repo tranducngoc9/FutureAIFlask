@@ -1,0 +1,239 @@
+<style>
+.update-package-mqn{
+	background: white !important;
+	height: 70px;
+	position: relative;
+    top: 8px;
+}
+
+.update-package-mqn h1{
+	font-size: 18px;
+    color: black;
+    font-weight: bold;
+	text-transform: uppercase;
+	position: relative;
+    top: 5px;
+}
+.img-gif{
+	width: 60px;
+    position: relative;
+	top: 2px;
+    left: 8px;
+}
+</style>
+<!-- Sidebar -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="sidebar sidebar-style-2" data-background-color="dark2">
+
+	<div class="sidebar-wrapper scrollbar scrollbar-inner">
+		<div class="sidebar-content">
+			<!-- <div class="user">
+				<div class="avatar-sm float-left mr-2">
+					<img src="{% if current_user.faces | length > 0 %} {{ current_user.faces[0].file_name }} {% else %} /static/assets/img/profile.jpg {% endif %} " alt="..." class="avatar-img rounded-circle">
+				</div>
+				<div class="info">
+					<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+						<span>
+							{{ current_user.user }}
+							<span class="user-level">
+								{{ current_user.email }}
+							</span>
+							<span class="caret"></span>
+						</span>
+					</a>
+					<div class="clearfix"></div>
+
+					<div class="collapse in" id="collapseExample">
+						<ul class="nav">
+							<li>
+								<a href="profile.html">
+									<span class="profile">{{ _('Trang cá nhân') }}</span>
+								</a>
+							</li>
+							<li>
+								<a href={{ url_for('logout') }}>
+									<span class="link-collapse">{{ _('Đăng xuất') }}</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div> -->
+			<div class="hmenu">
+				<ul class="nav nav-primary">
+					{% if current_user.has_roles("superuser") %}
+					<li class="nav-item">
+						<a href="/">
+							<i class="fas fa-home"></i>
+							<p>{{ _('Trang chủ') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="users.html">
+							<i class="fas fa-users"></i>
+							<p>{{ _('Quản lý người dùng') }}</p>
+						</a>
+					</li>
+
+				<!-- 	<li class="nav-item">
+						<a href="search-face.html">
+							<i class="fas fa-smile-wink"></i>
+							<p>{{ _('Tìm kiếm khuôn mặt') }}</p>
+						</a>
+					</li> -->
+					{% endif %}
+					
+					{% if current_user.has_roles("superuser") %}
+					<li class="nav-item">
+						<a href="role.html">
+							<i class="fas fa-users"></i>
+							<p>{{ _('Quản lý nhóm người dùng') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="managercompany.html">
+							<i class="fas fa-hotel"></i>
+							<p>{{ _('Quản lý đơn vị') }}</p>
+						</a>
+					</li>
+				<!-- 	<li class="nav-item">
+						<a href="managercamera.html">
+							<i class="
+									fas fa-camera"></i>
+							<p>{{ _('Quản lý camera') }}</p>
+						</a>
+					</li> -->
+					<!-- <li class="nav-item">
+						<a href="manager_version_camera.html">
+							<i class="
+									fas fa-clone"></i>
+							<p>{{ _('Quản lý phiên bản') }}</p>
+						</a>
+					</li> -->
+					
+					<li class="nav-item">
+						<a href="managerconfig.html">
+							<i class="fas fa-cog"></i>
+							<p>{{ _('Cấu hình hệ thống') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="managerlog.html">
+							<i class="fas fa-desktop"></i>
+							<p>{{ _('Quản lý nhật kí') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="managerrequest.html">
+							<i class="fas fa-desktop"></i>
+							<p>{{ _('Quản lý yêu cầu') }}</p>
+						</a>
+					</li>
+					{% endif %}
+					
+					
+					
+					{% if current_user.has_roles("user") %}
+					<!-- <li class="nav-item">
+						<a href="managertime.html">
+							<i class="fas fa-clock"></i>
+							<p>{{ _('Quản lý thời gian') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="history.html">
+							<i class="fas fa-bookmark"></i>
+							<p>{{ _('Quản lý lịch sử ra / vào') }}</p>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a href="managerbranch.html">
+							<i class="fas fa-map-marker-alt"></i>
+							<p>{{ _('Quản lý địa điểm') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="manager-camera-company.html">
+							<i class="fas fa-camera"></i>
+							<p>{{ _('Quản lý camera') }}</p>
+						</a>
+					</li> -->
+
+					<!-- <li class="nav-item">
+						<a href="update-package.html" class="update-package-mqn">
+							<h1>{{ _('Nâng cấp gói công ty') }}</h1>
+							<p><img src="static/assets/img/new-flashing.gif" alt="" class="img-gif"></p>
+						</a>
+					</li>  -->
+					<li class="nav-item">
+						<a href="manager-dataset.html">
+							<i class="fas fa-database"></i>
+							<p>{{ _('Quản lý dữ liệu') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="manager-project.html">
+							<i class="fas fa-folder"></i>
+							<p>{{ _('Quản lý dự án') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="manager-model.html">
+							<i class="fas fa-cubes"></i>
+							<p>{{ _('Quản lý mô hình') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="manager-training.html">
+							<i class="fas fa-cogs"></i>
+							<p>{{ _('Học máy') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="manager-deep.html">
+							<i class="fas fa-cogs"></i>
+							<p>{{ _('Học sâu') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="manager-abnormal.html">
+							<i class="fas fa-exclamation-circle"></i>
+							<p>{{ _('Phát hiện bất thường') }}</p>
+						</a>
+					</li>
+					<li class="nav-item">
+
+					<!-- ngoc edit -->
+						<a href="ngoc.html">
+							<i class="fas fa-history"></i>
+							<p>{{ _('Chuỗi thời gian') }}</p>
+						</a>
+					</li>
+					{% endif %}
+
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Sidebar -->
+
+
+<!-- Active menu -->
+<script>
+	$(document).ready(function () {
+		$('.hmenu').find('li').click(function (event) {
+			var $par = $(event.target).parents("li");
+			$(".hmenu .active").not($par).removeClass("active");
+			$(this).addClass('active');
+		});
+			$('.hmenu a').parent().removeClass('active');
+			let pathname = window.location.pathname;
+			if(pathname) {
+				$('.hmenu a[href="'+pathname.slice(1)+'"]').parent().addClass('active');
+			}
+	
+	});
+</script>

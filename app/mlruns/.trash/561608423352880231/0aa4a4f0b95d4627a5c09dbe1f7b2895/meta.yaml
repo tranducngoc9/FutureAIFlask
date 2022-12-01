@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/0aa4a4f0b95d4627a5c09dbe1f7b2895/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: 0aa4a4f0b95d4627a5c09dbe1f7b2895
+run_name: Lasso Regression
+run_uuid: 0aa4a4f0b95d4627a5c09dbe1f7b2895
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669537631774
+status: 1
+tags: []
+user_id: luonghongquan

@@ -1,0 +1,72 @@
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/mtcnn.py:187: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/mtcnn.py:193: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+
+2019-12-18 23:57:19.910241: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fee41c5a720 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2019-12-18 23:57:19.910341: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/network.py:43: The name tf.variable_scope is deprecated. Please use tf.compat.v1.variable_scope instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:88: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:79: The name tf.get_variable is deprecated. Please use tf.compat.v1.get_variable instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:171: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:221: div (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Deprecated in favor of operator or tf.math.divide.
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:196: The name tf.nn.xw_plus_b is deprecated. Please use tf.compat.v1.nn.xw_plus_b instead.
+
+[23:57:22] src/nnvm/legacy_json_util.cc:209: Loading symbol saved by previous version v1.0.0. Attempting to upgrade...
+[23:57:22] src/nnvm/legacy_json_util.cc:217: Symbol successfully upgraded!
+ * Restarting with stat
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/mtcnn.py:187: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/mtcnn.py:193: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+
+2019-12-18 23:58:32.133152: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f8c6d39a6f0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2019-12-18 23:58:32.133246: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/network.py:43: The name tf.variable_scope is deprecated. Please use tf.compat.v1.variable_scope instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:88: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:79: The name tf.get_variable is deprecated. Please use tf.compat.v1.get_variable instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:171: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:221: div (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Deprecated in favor of operator or tf.math.divide.
+WARNING:tensorflow:From /usr/local/lib/python3.7/site-packages/mtcnn/layer_factory.py:196: The name tf.nn.xw_plus_b is deprecated. Please use tf.compat.v1.nn.xw_plus_b instead.
+
+[23:58:36] src/nnvm/legacy_json_util.cc:209: Loading symbol saved by previous version v1.0.0. Attempting to upgrade...
+[23:58:36] src/nnvm/legacy_json_util.cc:217: Symbol successfully upgraded!
+ * Debugger is active!
+ * Debugger PIN: 201-948-928
+Traceback (most recent call last):
+  File "/Library/Python/3.7/site-packages/redis/connection.py", line 552, in connect
+    sock = self._connect()
+  File "/Library/Python/3.7/site-packages/redis/connection.py", line 609, in _connect
+    raise err
+  File "/Library/Python/3.7/site-packages/redis/connection.py", line 597, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "worker.py", line 15, in <module>
+    worker.work()
+  File "/Library/Python/3.7/site-packages/rq/worker.py", line 476, in work
+    self.register_birth()
+  File "/Library/Python/3.7/site-packages/rq/worker.py", line 258, in register_birth
+    if self.connection.exists(self.key) and \
+  File "/Library/Python/3.7/site-packages/redis/client.py", line 1554, in exists
+    return self.execute_command('EXISTS', *names)
+  File "/Library/Python/3.7/site-packages/redis/client.py", line 875, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "/Library/Python/3.7/site-packages/redis/connection.py", line 1185, in get_connection
+    connection.connect()
+  File "/Library/Python/3.7/site-packages/redis/connection.py", line 557, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 61 connecting to localhost:6379. Connection refused.

@@ -1,0 +1,290 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý người dùng') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    .fix-right-mqn {
+        margin-right: 10px;
+    }
+</style>
+<div class="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ _('Quản lý người dùng') }}</h4>
+                        <button class="btn btn-primary btn-round ml-auto fix-right-mqn" data-toggle="modal"
+                            data-target="#addRowModal">
+                            <i class="fa fa-plus"></i>
+                            {{ _('Thêm người dùng') }}
+                        </button>
+                       <!--  <button class="btn btn-primary btn-round">
+                            <span class="btn-label">
+                                <i class="fa fa-print"></i>
+                            </span>
+                            {{ _('In') }}
+                        </button> -->
+
+                        <!-- <button class="btn btn-primary btn-round ml-auto" id="selectRowModal">
+                                <i class="fa fa-plus"></i>
+                                Select Row
+                            </button> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Modal -->
+                    <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <h5 class="modal-title">
+                                        <span class="fw-mediumbold">{{ _('Thông tin người dùng') }}</span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="addForm" method="post" id="formValidation" novalidate="novalidate">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>{{ _('Tài khoản') }}</label>
+                                                    <input id="user" type="text" name="user" class="form-control"
+                                                        placeholder="{{ _('Tài khoản') }}" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>{{ _('Mật khẩu') }}</label>
+                                                    <input id="password" type="password" name="password" class="form-control"
+                                                        placeholder="{{ _('Mật khẩu') }}" required>
+                                                </div>
+                                            </div> 
+                                            
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>Email</label>
+                                                    <input id="email" type="text" name="email" class="form-control" placeholder="Email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>{{ _('Tên nhân viên') }}</label>
+                                                    <input id="name" type="text" name="name" class="form-control"
+                                                        placeholder="{{ _('Tên nhân viên') }}" required>
+                                                </div>
+                                            </div>
+                                            {% if not current_user.has_roles("admin") %}
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>{{ _('Tên đơn vị') }}</label>
+                                                    <select name="company" id="company" class="form-control" required>
+                                                        {% if current_user.has_roles("superuser") %}
+                                                        <option value="" selected disabled>{{ _('Lựa chọn đơn vị') }}</option>
+                                                        {% for company in companies %}
+                                                        <option value="{{ company.id }}">{{ company.name }}</option>
+                                                        {% endfor %}
+                                                        {% endif %}   
+                                                    </select>
+                                                </div>
+                                            </div> 
+                                            {% endif %}
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>{{ _('Phân quyền') }}</label>
+                                                    <select name="role" id="role" class="form-control" required>
+                                                        <option value="" selected disabled>{{ _('Lựa chọn phân quyền') }}</option>
+                                                        {% for role in roles %}
+                                                        <option value="{{ role.id }}">{{ role.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="modal-footer no-bd">
+                                                <input type="submit" name="" value="{{ _('Thêm') }}" class="btn btn-success">
+                                                <input type="reset" name="" value="{{ _('Hủy Bỏ') }}" class="btn btn-danger">
+                                        </div>
+                                    </form>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="datatable" class="display table table-striped table-hover table-head-bg-primary">
+                            <thead>
+                                <tr>
+                                    <th>{{ _('Tài khoản') }}</th>
+                                    <th>{{ _('Phân quyền') }}</th>
+                                    <th>{{ _('Họ và tên') }}</th>
+                                    <th>Email</th>
+                                    <th>{{ _('Đơn vị') }}</th>
+                                    <th style="width: 10%">{{ _('Thao tác') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+<script>
+    $(document).ready(function () {
+        // Add Row
+        $('#datatable').DataTable({
+            "pageLength": 10,
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{ url_for('users_data') }}",
+            "columns":[{"data":"1"},{"data":"2"},{"data":"3"},{"data":"4"},{"data":"5"},{"data":null,"defaultContent":"", "searchable":false,"orderable": false}],
+            "columnDefs": [{
+                "targets": [ 5 ],
+                "render": function ( data, type, row ) {
+                        return '<td> <div class="form-button-action"> <button type="button" title="" class="btn btn-link btn-primary btn-lg table_item_edit" data-original-title="Edit Task" data-toggle="modal" data-target="#editRowModal" data-id="' + row[0] +'" data-name="' + row[1] +'"> <a href="profile.html?id=' + row[0] + '"><i class="fa fa-edit"></i></a> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger table_item_remove" data-original-title="Remove" data-id="' + row[0] + '" data-name="' + row[1] +'"> <i class="fa fa-times"></i> </button> </div> </td>' ;
+                    }
+            }],
+                "language": {
+                    "decimal":        "",
+                    "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                    "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                    "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                    "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                    "loadingRecords": "{{ _('Đang tải ...') }}",
+                    "processing":     "{{ _('Đang xử lý ...') }}",
+                    "search":         "{{ _('Tìm kiếm:') }}",
+                    "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                    "paginate": {
+                        "first":      "<<",
+                        "last":       ">>",
+                        "next":       ">",
+                        "previous":   "<"
+                    },
+                    "aria": {
+                        "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                        "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                    }
+                }
+        });
+
+        // $('#datatable tbody').on( 'click', 'tr', function () {
+        //        $(this).toggleClass('selected');
+        //    } );
+
+        //    $('#selectRowModal').click( function () {
+        //        alert( $('#datatable').DataTable().rows('.selected').data().length +' row(s) selected' );
+        //    } );
+
+        $('#formValidation').submit(function(e){     
+
+            e.preventDefault();
+            var $form = $(this);
+
+            // check if the input is valid
+            if(! $form.valid()) return false;
+
+            $.ajax({
+                url: '/add_user',
+                data: $('.addForm').serialize(),
+                type: 'POST',
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Thêm thành công') }}');
+                        $('#datatable').DataTable().clear().draw();
+
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Thêm thất bại') }}');
+                    }
+                        
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Thêm thất bại') }}');
+                }
+            });
+
+
+            $('#addRowModal').modal('hide');
+        });
+
+                    
+        $('#addRowButton').click(function() {
+            
+            $('#addRowModal').modal('hide');
+
+        });
+
+        // Delete a record
+        $('#datatable').on('click', '.table_item_remove', function (e) {
+            e.preventDefault();  
+            data_id = $(this).attr("data-id");
+            row = $(this).closest('tr');
+            swal({
+                title: '{{ _('Bạn có chắc chắn xóa không?') }}',
+                text: "{{ _('Bạn sẽ không thể khôi phục như trước!') }}",
+                type: '{{ _('Cảnh báo') }}',
+                buttons:{
+                    confirm: {
+                        text : '{{ _('Có') }}',
+                        className : 'btn btn-success'
+                    },
+                    cancel: {
+                        text : '{{ _('Không') }}',
+                        visible: true,
+                        className: 'btn btn-danger'
+                    }
+                }
+            }).then((Delete) => {
+                if (Delete) {
+                    $.ajax({
+                        url: '/del_user',
+                        data: {id : data_id},
+                        type: 'POST',
+                        success: function(response) {
+                            console.log(response);
+                            if (response.success == true)
+                            {
+                                showSuccess('{{ _('Title') }}', '{{ _('Xóa thành công') }}');
+                                row.remove();
+                                $('#datatable').DataTable().clear().draw();
+
+                            } else {
+                                showError('{{ _('ETitle') }}', '{{ _('Xóa thất bại') }}');
+                            }
+                                
+                        },
+                        error: function(error) {
+                            showError('{{ _('ETitle') }}', '{{ _('Xóa thất bại') }}');
+                        }
+                    });
+                } else {
+                    swal.close();
+                }
+            });
+            
+        } );
+    });
+</script>
+
+{% endblock javascripts %}

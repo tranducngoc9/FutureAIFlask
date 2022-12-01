@@ -1,0 +1,424 @@
+{% extends "layouts/default.html" %}
+
+{% block title %}{{ _('Thông tin thời gian') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    .form-control:disabled,
+    .form-control[readonly] {
+        background: transparent !important;
+    }
+
+    .avta-top {
+        margin-bottom: 30px;
+    }
+
+    .avta-top img {
+        cursor: pointer;
+    }
+
+    .srcoll-avata-info-right {
+        overflow-y: scroll;
+        height: 390px;
+    }
+</style>
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Thông tin thời gian') }}</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-with-nav">
+                <div class="card-header">
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab"
+                                    href="#loginhistorytab" role="tab" aria-selected="false">{{ _('Lịch sử thời gian') }}</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="loginhistorytab" role="tabpanel"
+                            aria-labelledby="loginhistorytab">
+                            <div class="table-responsive">
+                                <table id="add-row"
+                                    class="display table table-striped table-hover table-head-bg-primary">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ _('Hình ảnh') }}</th>
+                                            <th>{{ _('Thời gian') }}</th>
+                                            <th>{{ _('Camera ID') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="profile-picture">
+                                                    <div class="avatar avatar-lg">
+                                                        <img src="/static/assets/img/jm_denis.jpg" alt="..."
+                                                            class="avatar-img rounded-circle">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>7:40:30 26/11/2019</td>
+                                            <td>23458214</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="profile-picture">
+                                                    <div class="avatar avatar-lg">
+                                                        <img src="/static/assets/img/jm_denis.jpg" alt="..."
+                                                            class="avatar-img rounded-circle">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>17:00:30 26/11/2019</td>
+                                            <td>23458214</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                            <form action="" method="post">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mật khẩu mới') }}</label>
+                                            <input type="password" class="form-control" name="name"
+                                                placeholder="{{ _('Mật khẩu mới') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Xác nhận mật khẩu') }}</label>
+                                            <input type="password" class="form-control" name="name"
+                                                placeholder="{{ _('Xác nhận mật khẩu') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success">{{ _('Đổi mật khẩu') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile card-secondary">
+                <div class="card-header" style="background-image: url('/static/assets/img/blogpost.jpg')">
+                    <div class="profile-picture">
+                        <div class="avatar avatar-xl">
+                            <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="user-profile text-center">
+                        <div class="name">Nguyễn Quang Minh ( Lập trình viên )</div>
+                        <div class="social-media">
+                            <a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-twitter"></i></span>
+                            </a>
+                            <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
+                            </a>
+                            <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
+                            </a>
+                        </div>
+                        <div class="desc">Frontend Developer</div>
+                        <div class="desc">MQ Solutions( 12 khuất duy tiến , Thanh Xuân , Hà Nội)</div>
+                        <div class="desc"><span class="flaticon-whatsapp"> 0345736211</span> / <span
+                                class="flaticon-envelope-1"> quangminh28897@gmail.com</span></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="srcoll-avata-info-right">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div id="alert_demo_8" class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="avta-top">
+                            <div class="profile-picture">
+                                <div class="avatar avatar-xl">
+                                    <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Add Row
+        $('#add-row').DataTable({
+            "pageLength": 10,
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = $(
+                            '<select class="form-control"><option value=""></option></select>'
+                        )
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d +
+                            '</option>')
+                    });
+                });
+            }
+        });
+
+        // $('#add-row tbody').on( 'click', 'tr', function () {
+        //        $(this).toggleClass('selected');
+        //    } );
+
+        //    $('#selectRowModal').click( function () {
+        //        alert( $('#add-row').DataTable().rows('.selected').data().length +' row(s) selected' );
+        //    } );
+
+
+        var action =
+            '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+        $('#addRowButton').click(function () {
+            $('#add-row').dataTable().fnAddData([
+                $("#addName").val(),
+                $("#addPosition").val(),
+                $("#addOffice").val(),
+                action
+            ]);
+            $('#addRowModal').modal('hide');
+
+        });
+    });
+</script>
+
+<script>
+    //== Class definition
+    var SweetAlert2Demo = function () {
+        //== Demos
+        var initDemos = function () {
+            $('#alert_demo_8').click(function (e) {
+                swal({
+                    title: '{{ _('Bạn có chắc không?') }}',
+                    type: 'warning',
+                    buttons: {
+                        cancel: {
+                            visible: true,
+                            text: '{{ _('HỦY BỎ') }}',
+                            className: 'btn btn-danger'
+                        },
+                        confirm: {
+                            text: '{{ _('ĐỒNG Ý XÓA') }}',
+                            className: 'btn btn-success'
+                        }
+                    }
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        swal("{{ _('Xóa thông tin thành công') }}", {
+                            icon: "success",
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        });
+                    } else {
+                        swal("{{ _('Bạn đã hủy tác vụ xóa') }}", {
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            }
+                        });
+                    }
+                });
+            })
+
+        };
+
+        return {
+            //== Init
+            init: function () {
+                initDemos();
+            },
+        };
+    }();
+
+    //== Class Initialization
+    jQuery(document).ready(function () {
+        SweetAlert2Demo.init();
+    });
+</script>
+
+{% endblock javascripts %}

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/148844095889338461/a310b549ce1d4ecb9116d52bcee74532/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '148844095889338461'
+lifecycle_stage: active
+run_id: a310b549ce1d4ecb9116d52bcee74532
+run_name: Passive Aggressive Regressor
+run_uuid: a310b549ce1d4ecb9116d52bcee74532
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669537313770
+status: 1
+tags: []
+user_id: luonghongquan

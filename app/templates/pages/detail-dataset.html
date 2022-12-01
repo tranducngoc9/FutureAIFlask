@@ -1,0 +1,124 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Thông tin công ty') }} {% endblock title %}
+
+{% block stylesheets %}
+
+<style type="text/css">
+/*.dataTables_wrapper {
+    width: 1000px;
+
+}
+*/
+</style>>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="page-title">{{ _('Thông tin chi tiết dữ liệu') }}</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <label>{{ _('Chọn cột dữ liệu ẩn đi') }}</label>
+                            </br>
+                            <div class="select2-input select2-warning">
+                                <select id="column_sel" name="column_sel[]" class="form-control" multiple="multiple">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    {{ table_data | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#column_sel option").remove();
+        {% for c in columns_name %}
+
+            $("#column_sel").get(0).options.add(new Option("{{ c }}"));
+            
+        {% endfor %}
+
+        $('#column_sel').select2({
+            theme: "bootstrap",
+            width: '100%'
+        });
+
+        var table = $('#dataTb').DataTable({
+            "pageLength": 25,
+            "scrollX": true,
+            "language": {
+                "decimal":        "",
+                "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                "loadingRecords": "{{ _('Đang tải ...') }}",
+                "processing":     "{{ _('Đang xử lý ...') }}",
+                "search":         "{{ _('Tìm kiếm:') }}",
+                "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                "paginate": {
+                    "first":      "<<",
+                    "last":       ">>",
+                    "next":       ">",
+                    "previous":   "<"
+                },
+                "aria": {
+                    "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                    "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                }
+            }
+        });
+
+        $('#column_sel').on('select2:select', function (e) {
+            var data = e.params.data;
+            for (i = 0; i < table.columns().header().length; i++)
+            {
+                if ($( table.column(i).header()).text() == data.text)
+                    table.column(i).visible(0)
+            }
+        });
+
+        $('#column_sel').on('select2:unselect', function (e) {
+            var data = e.params.data;
+            for (i = 0; i < table.columns().header().length; i++)
+            {
+                if ($( table.column(i).header()).text() == data.text)
+                    table.column(i).visible(1)
+            }
+        });
+
+        $('a.toggle-vis').on('click', function (e) {
+            e.preventDefault();
+            
+            // Get the column API object
+            var column = table.column($(this).attr('data-column'));
+     
+            // Toggle the visibility
+            column.visible(!column.visible());
+        });
+    } );
+</script>
+{% endblock javascripts %}

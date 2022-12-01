@@ -1,0 +1,435 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Thông tin gói dịch vụ') }} {% endblock title %}
+
+{% block stylesheets %}
+<style>
+    .not-buy {
+        background: black !important;
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    h4,
+    .modal-title {
+        color: black;
+        text-align: left;
+    }
+
+    label {
+        text-align: left;
+    }
+
+    .img-creat-pay-pro-mqn {
+        width: 100%;
+    }
+
+    .disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+
+    }
+
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ _('Thông tin gói dịch vụ') }}</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-md-4 pl-md-0 not-buy">
+                            <div class="card-pricing2 card-success">
+                                <div class="pricing-header">
+                                    <h3 class="fw-bold">Standard</h3>
+                                    <span class="sub-title">Lorem ipsum</span>
+                                </div>
+                                <div class="price-value">
+                                    <div class="value">
+                                        <span class="currency"></span>
+                                        <span class="amount">Free<span></span></span>
+                                        <span class="month"></span>
+                                    </div>
+                                </div>
+                                <ul class="pricing-content">
+                                    <li>{{ _('Bao gồm các bản cập nhật miễn phí và các tính năng mới khi chúng có sẵn') }}</li>
+                                    <li>{{ _('Nhập chi tiết nhân viên và công ty từ Excel, Outlook và .csv') }}</li>
+                                    <li>{{ _('Điện thoại miễn phí và hỗ trợ trực tuyến') }}</li>
+                                    <li class="disable">{{ _('Mã hóa mạnh bảo vệ dữ liệu doanh nghiệp của bạn') }}</li>
+                                    <li class="disable">{{ _('Sao lưu dữ liệu tự động') }}</li>
+                                </ul>
+                                <h1 class="btn btn-success btn-border btn-lg w-75 fw-bold mb-3 disabled">{{ _('Đã sử dụng') }}</h1>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-md-0 pr-md-0">
+                            <div class="card-pricing2 card-primary">
+                                <div class="pricing-header">
+                                    <h3 class="fw-bold">Business</h3>
+                                    <span class="sub-title">Lorem ipsum</span>
+                                </div>
+                                <div class="price-value">
+                                    <div class="value">
+                                        <span class="currency"><span></span></span>
+                                        <span class="amount">10<span>tr</span></span>
+                                        <span class="month">/month</span>
+                                    </div>
+                                </div>
+                                <ul class="pricing-content">
+                                    <li>{{ _('Bao gồm các bản cập nhật miễn phí và các tính năng mới khi chúng có sẵn') }}</li>
+                                    <li>{{ _('Nhập chi tiết nhân viên và công ty từ Excel, Outlook và .csv') }}</li>
+                                    <li>{{ _('Điện thoại miễn phí và hỗ trợ trực tuyến') }}</li>
+                                    <li>{{ _('Mã hóa mạnh bảo vệ dữ liệu doanh nghiệp của bạn') }}</li>
+                                    <li class="disable">{{ _('Sao lưu dữ liệu tự động') }}</li>
+                                </ul>
+                                
+                                <button class="btn btn-primary btn-border btn-lg w-75 fw-bold mb-3  {% if com.plan_id > 1 %} disabled {% endif %}" data-toggle="modal"
+                                    data-target="#myModal">{% if com.plan_id > 1 %}{{ _('Đã sử dụng') }}{% else %}{{ _('Mua gói') }} {% endif %}</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pr-md-0">
+                            <div class="card-pricing2 card-secondary">
+                                <div class="pricing-header">
+                                    <h3 class="fw-bold">Premium</h3>
+                                    <span class="sub-title">Lorem ipsum</span>
+                                </div>
+                                <div class="price-value">
+                                    <div class="value">
+                                        <span class="currency"></span>
+                                        <span class="amount">15<span>tr</span></span>
+                                        <span class="month">/month</span>
+                                    </div>
+                                </div>
+                                <ul class="pricing-content">
+                                    <li>{{ _('Bao gồm các bản cập nhật miễn phí và các tính năng mới khi chúng có sẵn') }}</li>
+                                    <li>{{ _('Nhập chi tiết nhân viên và công ty từ Excel, Outlook và .csv') }}</li>
+                                    <li>{{ _('Điện thoại miễn phí và hỗ trợ trực tuyến') }}</li>
+                                    <li>{{ _('Mã hóa mạnh bảo vệ dữ liệu doanh nghiệp của bạn') }}</li>
+                                    <li>{{ _('Sao lưu dữ liệu tự động') }}</li>
+                                </ul>
+                                <h1 class="btn btn-secondary btn-border btn-lg w-75 fw-bold mb-3  {% if com.plan_id > 2 %} disabled {% endif %}" data-toggle="modal"
+                                    data-target="#myModal2">{% if com.plan_id > 2 %}{{ _('Đã sử dụng') }}{% else %}{{ _('Mua gói') }} {% endif %}</h1>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">{{ _('Thanh toán gói dịch vụ') }}</h4>
+                                                <button type="button" class="close"
+                                                    data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="/static/assets/img/creditcardicons.png" alt=""
+                                                    class="img-creat-pay-pro-mqn">
+                                                <form id="create_form" novalidate="novalidate" method="post"
+                                                    enctype="multipart/form-data">
+                                                    <h4>{{ _('Thông tin thẻ') }}</h4>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 ">
+                                                            <div
+                                                                class="form-group form-group-default form-show-validation" style="display: None;">
+                                                                <label for="order_id">Mã hóa đơn</label>
+                                                                <input class="form-control" id="order_id"
+                                                                    name="order_id" type="text" value="{{ current_user.user }}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 ">
+                                                            <div
+                                                                class="form-group form-group-default form-show-validation" style="display: None;">
+                                                                <label for="order_desc">{{ _('Nội dung thanh toán') }}</label>
+                                                                <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Thanh toan: {{ _('Gói tiêu chuẩn') }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group form-group-default form-show-validation">
+                                                                <label for="bank_code">{{ _('Ngân hàng') }}</label>
+                                                                <select name="bank_code" id="bank_code" class="form-control" value="None">
+                                                                    <option value="">{{ _('Không chọn') }}</option>
+                                                                    <option value="NCB"> {{ _('Ngan hang') }} NCB</option>
+                                                                    <option value="AGRIBANK"> {{ _('Ngan hang') }} Agribank</option>
+                                                                    <option value="SCB"> {{ _('Ngan hang') }} SCB</option>
+                                                                    <option value="SACOMBANK">{{ _('Ngan hang') }} SacomBank</option>
+                                                                    <option value="EXIMBANK"> {{ _('Ngan hang') }} EximBank</option>
+                                                                    <option value="MSBANK"> {{ _('Ngan hang') }} MSBANK</option>
+                                                                    <option value="NAMABANK"> {{ _('Ngan hang') }} NamABank</option>
+                                                                    <option value="VNMART"> {{ _('Vi dien tu') }} VnMart</option>
+                                                                    <option value="VIETINBANK">{{ _('Ngan hang') }} Vietinbank</option>
+                                                                    <option value="VIETCOMBANK"> {{ _('Ngan hang') }} VCB</option>
+                                                                    <option value="HDBANK">{{ _('Ngan hang') }} HDBank</option>
+                                                                    <option value="DONGABANK"> {{ _('Ngan hang') }} Dong A</option>
+                                                                    <option value="TPBANK"> {{ _('Ngân hàng') }} TPBank</option>
+                                                                    <option value="OJB"> {{ _('Ngân hàng') }} OceanBank</option>
+                                                                    <option value="BIDV"> {{ _('Ngân hàng') }} BIDV</option>
+                                                                    <option value="TECHCOMBANK"> {{ _('Ngân hàng') }} Techcombank</option>
+                                                                    <option value="VPBANK"> {{ _('Ngan hang') }} VPBank</option>
+                                                                    <option value="MBBANK"> {{ _('Ngan hang') }} MBBank</option>
+                                                                    <option value="ACB"> {{ _('Ngan hang') }} ACB</option>
+                                                                    <option value="OCB"> {{ _('Ngan hang') }} OCB</option>
+                                                                    <option value="IVB"> {{ _('Ngan hang') }} IVB</option>
+                                                                    <option value=""> {{ _('Thanh toan qua') }} MASTER</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div
+                                                                class="form-group form-group-default form-show-validation">
+                                                                <label for="">{{ _('Gói dịch vụ') }}</label>
+                                                                <input name="order_type" id="order_type" class="form-control disabled" value="{{ _('Gói tiêu chuẩn') }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div
+                                                                class="form-control form-group form-group-default form-show-validation">
+                                                                <div class="">
+                                                                    <label for="amount">{{ _('Số tiền') }}</label>
+                                                                    <input class="form-control disabled" id="amount"
+                                                                        name="amount" type="number" value="10000000" di/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div
+                                                                class="form-control form-group form-group-default form-show-validation">
+                                                                <div class="">
+                                                                    <label for="language">{{ _('Ngôn ngữ') }}</label>
+                                                                    <select name="language" id="language" class="form-control">
+                                                                        <option value="">{{ _('Lựa chọn ngôn ngữ') }}</option>
+                                                                        <option value="vn">Tiếng Việt</option>
+                                                                        <option value="en">English</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right mt-3 mb-3">
+                                                        <input type="submit" name="" id="btnPopup" value="Đăng kí gói"
+                                                            class="btn btn-success">
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="myModal2" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">{{ _('Thanh toán gói dịch vụ') }}</h4>
+                                                <button type="button" class="close"
+                                                    data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="/static/assets/img/creditcardicons.png" alt=""
+                                                    class="img-creat-pay-pro-mqn">
+                                                <form id="create_form2" novalidate="novalidate" method="post"
+                                                    enctype="multipart/form-data">
+                                                    <h4>{{ _('Thông tin thẻ') }}</h4>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 ">
+                                                            <div
+                                                                class="form-group form-group-default form-show-validation" style="display: None;">
+                                                                <label for="order_id">Mã hóa đơn</label>
+                                                                <input class="form-control" name="order_id" type="text" value="{{ current_user.user }}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 ">
+                                                            <div
+                                                                class="form-group form-group-default form-show-validation" style="display: None;">
+                                                                <label for="order_desc">{{ _('Nội dung thanh toán') }}</label>
+                                                                <textarea class="form-control" cols="20" name="order_desc" rows="2">Thanh toan: {{ _('Gói nâng cao') }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group form-group-default form-show-validation">
+                                                                <label for="bank_code">{{ _('Ngân hàng') }}</label>
+                                                                <select name="bank_code" class="form-control">
+                                                                    <option value="">{{ _('Không chọn') }}</option>
+                                                                    <option value="NCB"> {{ _('Ngan hang') }} NCB</option>
+                                                                    <option value="AGRIBANK"> {{ _('Ngan hang') }} Agribank</option>
+                                                                    <option value="SCB"> {{ _('Ngan hang') }} SCB</option>
+                                                                    <option value="SACOMBANK">{{ _('Ngan hang') }} SacomBank</option>
+                                                                    <option value="EXIMBANK"> {{ _('Ngan hang') }} EximBank</option>
+                                                                    <option value="MSBANK"> {{ _('Ngan hang') }} MSBANK</option>
+                                                                    <option value="NAMABANK"> {{ _('Ngan hang') }} NamABank</option>
+                                                                    <option value="VNMART"> {{ _('Vi dien tu') }} VnMart</option>
+                                                                    <option value="VIETINBANK">{{ _('Ngan hang') }} Vietinbank</option>
+                                                                    <option value="VIETCOMBANK"> {{ _('Ngan hang') }} VCB</option>
+                                                                    <option value="HDBANK">{{ _('Ngan hang') }} HDBank</option>
+                                                                    <option value="DONGABANK"> {{ _('Ngan hang') }} Dong A</option>
+                                                                    <option value="TPBANK"> {{ _('Ngân hàng') }} TPBank</option>
+                                                                    <option value="OJB"> {{ _('Ngân hàng') }} OceanBank</option>
+                                                                    <option value="BIDV"> {{ _('Ngân hàng') }} BIDV</option>
+                                                                    <option value="TECHCOMBANK"> {{ _('Ngân hàng') }} Techcombank</option>
+                                                                    <option value="VPBANK"> {{ _('Ngan hang') }} VPBank</option>
+                                                                    <option value="MBBANK"> {{ _('Ngan hang') }} MBBank</option>
+                                                                    <option value="ACB"> {{ _('Ngan hang') }} ACB</option>
+                                                                    <option value="OCB"> {{ _('Ngan hang') }} OCB</option>
+                                                                    <option value="IVB"> {{ _('Ngan hang') }} IVB</option>
+                                                                    <option value=""> {{ _('Thanh toan qua') }} MASTER</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div
+                                                                class="form-group form-group-default form-show-validation">
+                                                                <label for="language">{{ _('Gói dịch vụ') }}</label>
+                                                                <input name="order_type" class="form-control disabled" value="{{ _('Gói nâng cao') }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div
+                                                                class="form-control form-group form-group-default form-show-validation">
+                                                                <div class="">
+                                                                    <label for="amount">{{ _('Số tiền') }}</label>
+                                                                    <input class="form-control disabled" name="amount" type="number" value="15000000"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <div
+                                                                class="form-control form-group form-group-default form-show-validation">
+                                                                <div class="">
+                                                                    <label for="language">{{ _('Ngôn ngữ') }}</label>
+                                                                    <select name="language" class="form-control">
+                                                                        <option value="">{{ _('Lựa chọn ngôn ngữ') }}</option>
+                                                                        <option value="vn">Tiếng Việt</option>
+                                                                        <option value="en">English</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right mt-3 mb-3">
+                                                        <input type="submit" name="" id="btnPopup2" value="Đăng kí gói"
+                                                            class="btn btn-success">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script>
+    $('#cardNumber')
+        .blur(function () {
+            var value = $(this).val();
+            value = value.match(/.{1,4}/g).join(" ");
+            $(this).val(value);
+        })
+        .focus(function () {
+            var value = $(this).val();
+            value = value.replace(/\s/g, '');
+            $(this).val(value);
+        });
+
+    function setInputFilter(textbox, inputFilter) {
+        ["input"].forEach(function (event) {
+            textbox.addEventListener(event, function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        });
+    }
+    setInputFilter(document.getElementById("cardNumber"), function (value) {
+        return /^-?\d*$/.test(value);
+    });
+    setInputFilter(document.getElementById("cvCode"), function (value) {
+        return /^-?\d*$/.test(value);
+    });
+</script>
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+<script src="/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/static/assets/js/ie-emulation-modes-warning.js"></script>
+<link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet"/>
+<script src="https://pay.vnpay.vn/lib/vnpay/vnpay.js"></script>
+
+<script type="text/javascript">
+        $("#btnPopup").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '/payment',
+                data: $("#create_form").serialize(),
+                dataType: 'JSON',
+                success: function (x) {
+                    if (x.code === '00') {
+                        if (window.vnpay) {
+                            vnpay.open({width: 768, height: 600, url: x.data});
+                        }
+                        else {
+                            location.href = x.data;
+                        }
+                        return false;
+                    } else {
+                        alert(x.Message);
+                    }
+                }
+            });
+            return false;
+        });
+    </script>
+<script type="text/javascript">
+        $("#btnPopup2").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '/payment',
+                data: $("#create_form2").serialize(),
+                dataType: 'JSON',
+                success: function (x) {
+                    if (x.code === '00') {
+                        if (window.vnpay) {
+                            vnpay.open({width: 768, height: 600, url: x.data});
+                        }
+                        else {
+                            location.href = x.data;
+                        }
+                        return false;
+                    } else {
+                        alert(x.Message);
+                    }
+                }
+            });
+            return false;
+        });
+    </script>
+{% endblock javascripts %}

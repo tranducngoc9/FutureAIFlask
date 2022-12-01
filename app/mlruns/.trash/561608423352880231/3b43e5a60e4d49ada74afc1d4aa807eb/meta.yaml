@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/3b43e5a60e4d49ada74afc1d4aa807eb/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: 3b43e5a60e4d49ada74afc1d4aa807eb
+run_name: Decision Tree Regressor
+run_uuid: 3b43e5a60e4d49ada74afc1d4aa807eb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669537102708
+status: 1
+tags: []
+user_id: luonghongquan

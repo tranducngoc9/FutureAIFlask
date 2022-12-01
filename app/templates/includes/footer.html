@@ -1,0 +1,33 @@
+<style>
+.footer{
+  margin-top: 10px;
+}
+</style>
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="copyright ml-auto">
+        &copy; {{ _('Copyright 2022 - ICT Solutions. All Rights Reserved') }}
+      </div>				
+    </div>
+  </footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $('select[id="select-language"]').change(function(e) {
+            var language = document.getElementById("select-language").value;
+            var lang = { 'lang': language }
+            console.log(language)  
+            $.ajax({
+                url: '/translate',
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                dataType: 'json',
+                data: JSON.stringify(lang),
+                success: location.reload()
+              });
+          });
+    </script>
+    

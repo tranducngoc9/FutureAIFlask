@@ -1,0 +1,99 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý nhật kí') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    .fix-right-mqn {
+        margin-right: 10px;
+    }
+</style>
+<div class="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ _('Quản lý yêu cầu') }}</h4>
+                        <!-- <button class="btn btn-primary btn-round ml-auto">
+                                <span class="btn-label">
+                                    <i class="fa fa-print"></i>
+                                </span>
+                                Print
+                            </button> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Modal -->
+
+                    <div class="table-responsive">
+                        <table id="datatable" class="display table table-striped table-hover table-head-bg-primary">
+                            <thead>
+                                <tr>
+                                    <th>{{ _('Thời gian') }}</th>
+                                    <th>{{ _('Người dùng') }}</th>
+                                    <th>{{ _('Nội dung yêu cầu') }}</th>
+                                    <th>{{ _('Thao tác') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>26/11/2022</td>
+                                    <td>Lương Hồng Quân</td>
+                                    <td>Yêu cầu cấp lại mật khẩu vào ngày 26/11/2022 14:40:20</td>
+
+                                    <td><div class="form-button-action"> <button type="button" title="" class="btn btn-link btn-primary btn-lg table_item_edit" data-original-title="Edit Task" data-toggle="modal" data-target="#editRowModal" data-id="1" data-name="Đơn vị 1"> <a href="detail-company.html?id=1"><i class="fa fa-reply"></i></a> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger table_item_remove" data-original-title="Remove" data-id="1" data-name="Đơn vị 1"> <i class="fa fa-times"></i> </button> </div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            "pageLength": 10,
+            "language": {
+                "decimal":        "",
+                "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                "loadingRecords": "{{ _('Đang tải ...') }}",
+                "processing":     "{{ _('Đang xử lý ...') }}",
+                "search":         "{{ _('Tìm kiếm:') }}",
+                "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                "paginate": {
+                    "first":      "<<",
+                    "last":       ">>",
+                    "next":       ">",
+                    "previous":   "<"
+                },
+                "aria": {
+                    "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                    "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                }
+            }
+
+        });
+
+    });
+</script>
+
+{% endblock javascripts %}

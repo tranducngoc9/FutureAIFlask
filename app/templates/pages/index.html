@@ -1,0 +1,476 @@
+{% extends "layouts/default.html" %}
+
+{% block title %}{{ _('Trang chủ') }}{% endblock %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+  <link href="{{ url_for('static', filename='vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+  .demo-container {
+    position: relative;
+    height: 400px;
+  }
+
+  .backgroundTotalCamera {
+    background: #f3545d !important;
+  }
+
+  .backgroundTotalCompany {
+    background: #fdaf4b !important;
+  }
+
+  #chart {
+    width: 100%;
+    height: 550px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .btn-print-pro-mqn{
+    float: right;
+    position: absolute;
+    right: -530px;
+    top: 10px;
+  }
+</style>
+<div class="page-inner">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex align-items-center">
+            <h4 class="card-title">{{ _('Trang chủ') }}</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-primary card-round">
+              <div class="card-body">
+                <div class="row">
+                  {% if current_user.has_roles("user") %}
+                  <div class="col-3">
+                    <div class="icon-big text-center">
+                      <i class="flaticon-user-2"></i>
+                    </div>
+                  </div> 
+                  <div class="col-9 col-stats">
+                    <div class="numbers">
+                      <p class="card-category">{{ _('Số lượng khách') }}</p>
+                      <h4 class="card-title">{{ user_num }}</h4>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% if current_user.has_roles("superuser") %}
+                  <div class="col-3">
+                    <div class="icon-big text-center">
+                      <i class="flaticon-network"></i>
+                    </div>
+                  </div>
+                  <div class="col-9 col-stats">
+                    <div class="numbers">
+                      <p class="card-category">{{ _('Đơn vị') }}</p>
+                      <h4 class="card-title">{{ company_num }}</h4>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-info card-round">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="icon-big text-center">
+                      <i class="flaticon-users"></i>
+                    </div>
+                  </div>
+                  {% if current_user.has_roles("superuser") %}
+                   <div class="col-9 col-stats">
+                    <div class="numbers">
+                      <p class="card-category">{{ _('Người dùng') }}</p>
+                      <h4 class="card-title">{{ user_num }}</h4>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-success card-round">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="icon-big text-center">
+                      <i class="flaticon-analytics"></i>
+                    </div>
+                  </div>
+                  <div class="col-9 col-stats">
+                    <div class="numbers">
+                      <p class="card-category">{{ _('Mô hình đang đào tạo') }}</p>
+                      <h4 class="card-title">{{ history_num }}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-secondary card-round">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="icon-big text-center">
+                      <i class="flaticon-layers"></i>
+                    </div>
+                  </div>
+                  <div class="col-9 col-stats">
+                    <div class="numbers">
+                      <p class="card-category">{{ _('Mô hình đã đào tạo') }}</p>
+                      <h4 class="card-title">{{ camera_num }}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Modal -->
+          <div class="card">
+            <div class="card-header">
+                <div class="t-datepicker">
+                    <div class="row">
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                          <div class="form-group form-group-default">
+                              <div id="timechange" class="pull-center" style="cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar pull-center"></i>
+                                <span></span> <b class="caret"></b>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+           
+              <div class="card-head-row">
+                
+                <canvas id="chart"></canvas>
+              </div>
+           
+            <div class="card-body">
+               
+            </div>
+            </div>
+          </div>
+          <!-- kiểm tra lịch visitor-staff -->
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+  
+{% block javascripts %}
+  {{ super()}}
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  
+ 
+  <script src="/static/assets/js/demo.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/themes/dark_blue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<!-- datepicker -->
+  <script src="{{ url_for('static', filename='vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>    
+  <script src="{{ url_for('static', filename='vendors/moment/min/moment.min.js') }}"></script>  
+  <script src="{{ url_for('static', filename='vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script> 
+  <script src="{{ url_for('static', filename='vendors/flot.curvedlines/curvedLines.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendors/DateJS/build/date.js') }}"></script>
+<!-- Chart -->
+<script>
+  var ctx_live = document.getElementById("chart");
+  var myChart = new Chart(ctx_live, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [
+      {
+        data: [],
+        borderWidth: 1,
+        borderColor:'#00c0ef',
+        {% if current_user.has_roles("superuser") %}
+        label: '{{ _('Người dùng') }}',
+        {% endif %}
+        {% if current_user.has_roles("user") %}
+        label: '{{ _('Người dùng') }}',
+        {% endif %}
+      },
+      {
+        data: [],
+        borderWidth: 1,
+        borderColor:'#008830',
+        {% if current_user.has_roles("superuser") %}
+        label: '{{ _('Mô hình') }}',
+        {% endif %}
+        {% if current_user.has_roles("user") %}
+        label: '{{ _('Mô hình') }}',
+        {% endif %}
+      }
+      ]
+    }
+  });
+
+
+  function getData() {
+      $.ajax({
+          url : '/chart',
+          type : 'GET',
+          dataType: 'JSON'
+      })
+      .then(function(data){
+        for(let label in data){
+          myChart.data.labels.push(label);
+          myChart.data.datasets[0].data.push(data[label]);
+        }
+
+        myChart.update();
+      });
+  }
+
+</script>
+
+<script>
+    function count(){
+      $.ajax({
+          url : '/count',
+          type : 'GET'
+      })
+      .then(function(data){
+          $('#count_users').text(data.count_users).show();
+          $('#count_companies').text(data.count_companies).show();
+          $('#count_cameras').text(data.count_cameras).show();
+      });
+    };
+    function chart(start, end, label){
+      myChart.reset();
+      $.ajax({
+        url: '/chart',
+        method : 'POST',
+        dataType: 'JSON',
+        data: {
+          start : start.format('YYYY-MM-DD'), 
+          end : end.format('YYYY-MM-DD'), 
+          label : label, 
+        },
+        success: function(data) {
+          console.log('Success',data);
+          //reset data
+          myChart.data.labels = []
+          myChart.data.datasets[0].data = []
+          myChart.data.datasets[1].data = []
+          {% if current_user.has_roles("superuser") %}
+          for(let label in data.user){
+              if (label == "01:00")
+                  myChart.data.labels.push("0:00 ~ 1:00");
+              else if (label == "02:00")
+                  myChart.data.labels.push("1:00 ~ 2:00");
+              else if (label == "03:00")
+                  myChart.data.labels.push("2:00 ~ 3:00");
+              else if (label == "04:00")
+                  myChart.data.labels.push("3:00 ~ 4:00");
+              else if (label == "05:00")
+                  myChart.data.labels.push("4:00 ~ 5:00");
+              else if (label == "06:00")
+                  myChart.data.labels.push("5:00 ~ 6:00");
+              else if (label == "07:00")
+                  myChart.data.labels.push("6:00 ~ 7:00");
+              else if (label == "08:00")
+                  myChart.data.labels.push("7:00 ~ 8:00");
+              else if (label == "09:00")
+                  myChart.data.labels.push("8:00 ~ 9:00");
+              else if (label == "10:00")
+                  myChart.data.labels.push("9:00 ~ 10:00");
+              else if (label == "11:00")
+                  myChart.data.labels.push("10:00 ~ 11:00");
+              else if (label == "12:00")
+                  myChart.data.labels.push("11:00 ~ 12:00");
+              else if (label == "13:00")
+                  myChart.data.labels.push("12:00 ~ 13:00");
+              else if (label == "14:00")
+                  myChart.data.labels.push("13:00 ~ 14:00");
+              else if (label == "15:00")
+                  myChart.data.labels.push("14:00 ~ 15:00");
+              else if (label == "16:00")
+                  myChart.data.labels.push("15:00 ~ 16:00");
+              else if (label == "17:00")
+                  myChart.data.labels.push("16:00 ~ 17:00");
+              else if (label == "18:00")
+                  myChart.data.labels.push("17:00 ~ 18:00");
+              else if (label == "19:00")
+                  myChart.data.labels.push("18:00 ~ 19:00");
+              else if (label == "20:00")
+                  myChart.data.labels.push("19:00 ~ 20:00");
+              else if (label == "21:00")
+                  myChart.data.labels.push("20:00 ~ 21:00");
+              else if (label == "22:00")
+                  myChart.data.labels.push("21:00 ~ 22:00");
+              else if (label == "23:00")
+                  myChart.data.labels.push("22:00 ~ 23:00");
+              else if (label == "24:00")
+                  myChart.data.labels.push("23:00 ~ 24:00");
+              else
+                  myChart.data.labels.push(label);
+              myChart.data.datasets[0].data.push(data.user[label]);
+          }
+          for(let label in data.history){
+              myChart.data.datasets[1].data.push(data.history[label]);
+          }
+          {% endif %}
+          {% if current_user.has_roles("user") %}
+          for(let label in data.visitor){
+              if (label == "01:00")
+                  myChart.data.labels.push("0:00 ~ 1:00");
+              else if (label == "02:00")
+                  myChart.data.labels.push("1:00 ~ 2:00");
+              else if (label == "03:00")
+                  myChart.data.labels.push("2:00 ~ 3:00");
+              else if (label == "04:00")
+                  myChart.data.labels.push("3:00 ~ 4:00");
+              else if (label == "05:00")
+                  myChart.data.labels.push("4:00 ~ 5:00");
+              else if (label == "06:00")
+                  myChart.data.labels.push("5:00 ~ 6:00");
+              else if (label == "07:00")
+                  myChart.data.labels.push("6:00 ~ 7:00");
+              else if (label == "08:00")
+                  myChart.data.labels.push("7:00 ~ 8:00");
+              else if (label == "09:00")
+                  myChart.data.labels.push("8:00 ~ 9:00");
+              else if (label == "10:00")
+                  myChart.data.labels.push("9:00 ~ 10:00");
+              else if (label == "11:00")
+                  myChart.data.labels.push("10:00 ~ 11:00");
+              else if (label == "12:00")
+                  myChart.data.labels.push("11:00 ~ 12:00");
+              else if (label == "13:00")
+                  myChart.data.labels.push("12:00 ~ 13:00");
+              else if (label == "14:00")
+                  myChart.data.labels.push("13:00 ~ 14:00");
+              else if (label == "15:00")
+                  myChart.data.labels.push("14:00 ~ 15:00");
+              else if (label == "16:00")
+                  myChart.data.labels.push("15:00 ~ 16:00");
+              else if (label == "17:00")
+                  myChart.data.labels.push("16:00 ~ 17:00");
+              else if (label == "18:00")
+                  myChart.data.labels.push("17:00 ~ 18:00");
+              else if (label == "19:00")
+                  myChart.data.labels.push("18:00 ~ 19:00");
+              else if (label == "20:00")
+                  myChart.data.labels.push("19:00 ~ 20:00");
+              else if (label == "21:00")
+                  myChart.data.labels.push("20:00 ~ 21:00");
+              else if (label == "22:00")
+                  myChart.data.labels.push("21:00 ~ 22:00");
+              else if (label == "23:00")
+                  myChart.data.labels.push("22:00 ~ 23:00");
+              else if (label == "24:00")
+                  myChart.data.labels.push("23:00 ~ 24:00");
+              else
+                  myChart.data.labels.push(label);
+              myChart.data.datasets[0].data.push(data.visitor[label]);
+          }
+          for(let label in data.staff){
+              myChart.data.datasets[1].data.push(data.staff[label]);
+          }
+          {% endif %}
+          myChart.update();
+        },
+        error: function(response) {
+          console.log('Fail')
+        },
+      });
+      return false;
+    };
+    $(document).ready(function(){
+      count();
+     });
+</script>
+<script type="text/javascript">
+  $(function() {
+    var start = moment();
+    var end = moment();
+
+    var cb = function(start, end, label) {
+          $('#timechange span').html(label + ' : ' + start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY')  );
+          chart(start, end, label)
+      };
+    $('#timechange').daterangepicker({
+      "locale": {
+          "format": "YYYY-MM-DD",
+          "separator": " - ",
+          "applyLabel": "{{ _('Chọn') }}",
+          "cancelLabel": "{{ _('Hủy') }}",
+          "fromLabel": "{{ _('Từ') }}",
+          "toLabel": "{{ _('Tới') }}",
+          "customRangeLabel": "{{ _('Tùy chọn') }}",
+          "daysOfWeek": [
+              "{{ _('CN') }}",
+              "{{ _('T2') }}",
+              "{{ _('T3') }}",
+              "{{ _('T4') }}",
+              "{{ _('T5') }}",
+              "{{ _('T6') }}",
+              "{{ _('T7') }}"
+          ],
+          "monthNames": [
+              "{{ _('Tháng 1') }}",
+              "{{ _('Tháng 2') }}",
+              "{{ _('Tháng 3') }}",
+              "{{ _('Tháng 4') }}",
+              "{{ _('Tháng 5') }}",
+              "{{ _('Tháng 6') }}",
+              "{{ _('Tháng 7') }}",
+              "{{ _('Tháng 8') }}",
+              "{{ _('Tháng 9') }}",
+              "{{ _('Tháng 10') }}",
+              "{{ _('Tháng 11') }}",
+              "{{ _('Tháng 12') }}"
+          ],
+          "firstDay": 1
+      },
+      startDate: start,
+      endDate: end,
+      minDate: '01/01/2018',
+      maxDate: '12/31/2049',
+      dateLimit: {
+        days: 60
+      },
+      showDropdowns: true,
+      showWeekNumbers: true,
+      timePicker: false,
+      timePickerIncrement: 1,
+      timePicker12Hour: true,
+      opens: 'left',
+      ranges: {
+        '{{ _('Hôm nay') }}': [moment(), moment()],
+        '{{ _('Hôm qua') }}': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        '{{ _('7 ngày trước') }}': [moment().subtract(6, 'days'), moment()],
+        '{{ _('30 ngày trước') }}': [moment().subtract(29, 'days'), moment()],
+        '{{ _('Tháng này') }}': [moment().startOf('month'), moment().endOf('month')],
+        '{{ _('Tháng trước') }}': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      }}, cb);
+    cb(start,end,'{{ _('Hôm nay') }}')
+});
+
+</script>  
+{% endblock javascripts %}

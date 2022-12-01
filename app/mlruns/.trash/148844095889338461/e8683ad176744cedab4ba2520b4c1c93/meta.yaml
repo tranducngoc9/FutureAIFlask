@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/148844095889338461/e8683ad176744cedab4ba2520b4c1c93/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '148844095889338461'
+lifecycle_stage: active
+run_id: e8683ad176744cedab4ba2520b4c1c93
+run_name: Light Gradient Boosting Machine
+run_uuid: e8683ad176744cedab4ba2520b4c1c93
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669539481431
+status: 1
+tags: []
+user_id: luonghongquan

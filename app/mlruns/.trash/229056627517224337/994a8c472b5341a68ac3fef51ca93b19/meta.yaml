@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/229056627517224337/994a8c472b5341a68ac3fef51ca93b19/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '229056627517224337'
+lifecycle_stage: active
+run_id: 994a8c472b5341a68ac3fef51ca93b19
+run_name: Elastic Net
+run_uuid: 994a8c472b5341a68ac3fef51ca93b19
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669536383142
+status: 1
+tags: []
+user_id: luonghongquan

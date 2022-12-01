@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/905373566749838333/ba36cb25a4da49aebd9b81ce619d7edf/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '905373566749838333'
+lifecycle_stage: active
+run_id: ba36cb25a4da49aebd9b81ce619d7edf
+run_name: Random Forest Regressor
+run_uuid: ba36cb25a4da49aebd9b81ce619d7edf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669526085085
+status: 1
+tags: []
+user_id: luonghongquan

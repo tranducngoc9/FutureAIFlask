@@ -1,0 +1,155 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý chi nhánh') }} {% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+{{ dropzone.load_css() }}
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    .fix-right-mqn {
+        margin-right: 10px;
+    }
+
+    .timepicker{
+        position: relative;
+    }
+    .dropzone {
+        border: 2px dashed #0087F7;
+        margin-bottom: 10%;
+        min-height: 400px;
+        border: dashed !important;
+        border-color: #ccc !important;
+        border-radius: 10px !important;
+    }
+    .card-body {
+        margin-right: 20%;
+        margin-left: 20%;
+    }
+</style>
+<div class="page-inner">
+    
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ _('Thêm dữ liệu') }}</h4>
+                        <button class="btn btn-primary btn-round ml-auto fix-right-mqn" id="labelBtn">
+                            <i class="fa fa-plus"></i>
+                            {{ _('Chuẩn bị dữ liệu học sâu') }}
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- {{ dropzone.create(action=url_for('upload')) }} -->
+                    <form class="addForm" method="post" id="addDataForm" novalidate="novalidate" enctype="multipart/form-data">
+                        <input id="id" type="hidden" value="{{ user.id }}">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Nhập tên dữ liệu') }}</label>
+                                    <input id="name" name="name" type="text"
+                                        class="form-control" placeholder="{{ _('Nhập tên') }}" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Mô tả dữ liệu') }}</label>
+                                    <input id="description" name="description" type="text"
+                                        class="form-control" placeholder="{{ _('Mô tả') }}" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                 <div class="form-group form-group-default">
+                                    <label>{{ _('Loại dữ liệu') }}</label>
+                                    <select name="datatype" id="datatype" class="form-control" required>
+                                        <option value="" selected disabled>{{ _('Lựa chọn loại dữ liệu') }}</option>
+                                        <option value="0">Học máy (csv, xlsx)</option>
+                                        <option value="1">Học sâu (tệp nén zip ảnh và dữ liệu gán nhãn)</option>
+                                        <option value="2">Tệp dữ liệu chứa các chuỗi có cấu trúc (txt)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Thêm tệp tin') }}</label>
+                                    <input type="file" id="file" name="file"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer no-bd">
+                            <input type="submit" name="" value="{{ _('Thêm') }}" class="btn btn-success">
+                            <input type="reset" name="" value="{{ _('Hủy Bỏ') }}" class="btn btn-danger">
+                           
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+    {{ dropzone.load_js() }}
+    {{ dropzone.config() }}
+    <script src="/static/assets/js/setting-demo2.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script >
+
+        $(document).ready(function() {
+            $("#labelBtn").click(function(){
+                window.location.href = "labeling.html";
+            });     
+
+            $('#addDataForm').submit(function(e){     
+
+                e.preventDefault();
+                var $form = $(this);
+                // check if the input is valid
+                if(! $form.valid()) return false;
+                var form_data = new FormData();
+                form_data.append("file", document.getElementById('file').files[0]);
+                form_data.append("name", $('#name').val());
+                form_data.append("description", $('#description').val());
+                form_data.append("datatype", $('#datatype').val());
+                form_data.append("user_id", $('#id').val());
+
+                $.ajax({
+                    url: '/add_data', // point to server-side URL
+                    dataType: 'json', // what to expect back from server
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success == true)
+                        {
+                            showSuccess('{{ _('Title') }}', '{{ _('Thêm thành công') }}');
+                            setTimeout(function() { window.location.href = "manager-dataset.html"; }, 2000);
+                        } else {
+                            showError('{{ _('ETitle') }}', '{{ _('Thêm thất bại') }}');
+                        }
+                            
+                    },
+                    error: function(error) {
+                        showError('{{ _('ETitle') }}', '{{ _('Thêm thất bại') }}');
+                    }
+                });
+            });
+        });
+
+        
+    </script>
+{% endblock javascripts %}

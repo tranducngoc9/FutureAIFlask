@@ -1,0 +1,236 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý camera') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    .flaticon-success{
+        color: green;
+        font-weight: bold;
+    }
+
+    .flaticon-error{
+        color:grey;
+        font-weight: bold;
+    }
+
+    .fix-right-mqn {
+            margin-right: 10px;
+        }
+</style>
+
+<div class="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ _('Quản lý camera') }}</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header no-bd">
+                                    <h5 class="modal-title">
+                                        <span class="fw-mediumbold">{{ _('Sửa thông tin camera') }}</span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="editForm" method="post" id="formEditValidation" novalidate="novalidate">
+                                         <div class="row">
+                                            <input id="editID" name="editID" type="hidden" class="form-control">
+                                            <div class="col-sm-12 pr-0">
+                                                <div class="form-group form-group-default">
+                                                    <label>{{ _('Tên Camera') }}</label>
+                                                    <input maxlength="16" id="editName" type="text" name="editName" class="form-control required"
+                                                        placeholder="{{ _('Tên Camera') }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 pr-0">
+                                                 <div class="form-group form-group-default"> 
+                                                    <label>{{ _('Địa điểm') }}</label>
+                                                    <select name="editAddress" id="editAddress" class="form-control" required>
+                                                        <option value="" selected disabled>{{ _('Lựa chọn địa điểm') }}</option>
+                                                        {% for address in addresses %}
+                                                        <option value="{{ address.id }}">{{ address.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer no-bd">
+                                            <input type="submit" name="" value="{{ _('Sửa') }}" class="btn btn-success">
+                                            <input type="reset" name="" value="{{ _('Hủy') }}" class="btn btn-danger">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table id="datatable" class="display table table-striped table-hover table-head-bg-primary">
+                            <thead>
+                                <tr>
+                                    <th>{{ _('Camera ID') }}</th>
+                                    <th>{{ _('Tên camera viết tắt (Tối đa 16 ký tự)') }} </th>
+                                    <th>{{ _('Địa điểm') }}</th>
+                                    <th>{{ _('Địa chỉ IP') }} </th>
+                                    <th>{{ _('Thời gian') }}</th>
+                                    <th>{{ _('Trạng thái') }}</th>
+                                    <th>{{ _('Thao tác') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <script src="/static/assets/js/setting-demo2.js"></script>
+    <script >
+
+        $(document).ready(function() {
+
+            $('#datatable').DataTable({
+                "pageLength": 10,
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{ url_for('company_cameras_data') }}",
+                "columns":[{"data":"1"},{"data":"2"},{"data":"3"},{"data":"4"},{"data":"5"},{"data":null,"defaultContent":"", "searchable":false,"orderable": false}],
+                "columnDefs": [{
+                    "targets": [ 5 ],
+                    "render": function ( data, type, row ) {
+                            var datetime = moment(row[5]);
+                            var now = Date.now();
+
+                            var duration = moment.duration(datetime.diff(now));
+                            var hours = duration.asHours();
+
+                            if (Math.abs(hours) * 3600 < 360)
+                                return '<span class="flaticon-success"> Online</span>'
+                            else
+                                return '<span class="flaticon-error"> Offline</span>'
+                        }
+                },{
+                    "targets": [ 6 ],
+                    "render": function ( data, type, row ) {
+                            return '<td> <div class="form-button-action"> <button type="button" title="" class="btn btn-link btn-primary btn-lg table_item_edit" data-original-title="Edit Task" data-toggle="modal" data-target="#editRowModal" data-id="' + row[0] +'" data-udid="' + row[1] +'" data-name="' + row[2] +'" data-address="' + row[3] + '"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-success table_item_streaming" data-original-title="Livestream" data-url="' + row[4] +'"> <i class="fa fa-camera"></i> </button> </div> </td>' ;
+
+
+                        }
+                }],
+                "language": {
+                    "decimal":        "",
+                    "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                    "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                    "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                    "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                    "loadingRecords": "{{ _('Đang tải ...') }}",
+                    "processing":     "{{ _('Đang xử lý ...') }}",
+                    "search":         "{{ _('Tìm kiếm:') }}",
+                    "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                    "paginate": {
+                        "first":      "<<",
+                        "last":       ">>",
+                        "next":       ">",
+                        "previous":   "<"
+                    },
+                    "aria": {
+                        "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                        "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                    }
+                }
+
+            });
+
+
+            // Delete a record
+            $('#datatable').on('click', '.table_item_streaming', function (e) {
+                link = $(this).attr("data-url");
+                window.open("http://" + link + ":1234/admin/",'_blank');
+            } );
+
+
+            // Edit a record
+            $('#datatable').on('click', '.table_item_edit', function (e) {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var address = $(this).data('address');
+
+                $("#editID").val(id);
+                $("#editName").val(name);
+                $("#editAddress option:selected").each(function () {
+                    $(this).attr('selected', false);
+                });
+                if (address) {
+                    $("#editAddress option").filter(function() {
+                        return this.text == address; 
+                    }).attr('selected', true);
+                }
+                
+                e.preventDefault();     
+            } );
+
+            $('#formEditValidation').submit(function(e){     
+
+                e.preventDefault();
+                var $form = $(this);
+
+                // check if the input is valid
+                if(! $form.valid()) return false;
+
+                $.ajax({
+                    url: '/edit_ccam',
+                    data: $('.editForm').serialize(),
+                    type: 'POST', 
+                    processData: false,
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success == true)
+                        {
+                            showSuccess('{{ _('Title') }}', '{{ _('Sửa thành công') }}');
+                            $('#datatable').DataTable().clear().draw();
+
+                        } else {
+                            showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                        }
+                            
+                    },
+                    error: function(error) {
+                        showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                    }
+                });
+
+                $('#editRowModal').modal('hide');
+            });
+
+
+        });
+    </script>
+
+{% endblock javascripts %}

@@ -1,0 +1,110 @@
+
+
+{% extends "layouts/login-defautl.html" %}
+
+{% block title %} {{ _('Đăng nhập') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<style>
+    .card-body{
+        margin: auto;
+        width: 400px;
+        padding: 10px;
+    }
+
+    .btn-center{
+        display: block;
+    margin: 0 auto;
+    }
+
+    .main-panel{
+        width: 100%;
+    }
+
+    .card-title{
+        text-align: center;
+    }
+
+    .card{
+        width: 400px;
+        margin: 0 auto;
+    }
+</style>
+    <div class="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+
+                            {% if msg %}
+                                <span class="text-danger">{{ msg | safe }}</span>
+                            {% else %}
+                                <span>{{ _('Đăng nhập tài khoản') }}</span>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                    <form method="post" action="{{ url_for('login') }}">
+
+                        {{ form.hidden_tag() }}
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-12">
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" name="user" required  placeholder="{{ _('Tài khoản') }}">
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="icon-lock"></i>
+                                                </span>
+                                            </div>
+                                            <input type="password" class="form-control" name="pass" required  placeholder="{{ _('Mật khẩu') }}">
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary btn-rounded btn-login btn-center">{{ _('Đăng nhập') }}</button>
+                            <a href="/resetpassword.html"><p style="text-align:center; margin-top:10px">{{ _('Quên mật khẩu') }}</p></a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+    <script src="/static/assets/js/setting-demo2.js"></script>
+    <script src="/static/assets/js/jquery.validate.min.js"></script>
+
+{% endblock javascripts %}

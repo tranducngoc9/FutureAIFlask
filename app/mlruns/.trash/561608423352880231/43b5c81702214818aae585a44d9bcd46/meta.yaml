@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/43b5c81702214818aae585a44d9bcd46/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: 43b5c81702214818aae585a44d9bcd46
+run_name: Least Angle Regression
+run_uuid: 43b5c81702214818aae585a44d9bcd46
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669558622080
+status: 1
+tags: []
+user_id: luonghongquan

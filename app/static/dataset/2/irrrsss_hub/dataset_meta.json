@@ -1,0 +1,78 @@
+{
+    "default_index": [
+        {
+            "start": null,
+            "step": null,
+            "stop": null
+        }
+    ],
+    "groups": [
+        "animals",
+        "irrrsss",
+        "motion_data"
+    ],
+    "hidden_tensors": [
+        "animals/_images_info",
+        "animals/_images_shape",
+        "animals/_images_id",
+        "animals/_labels_shape",
+        "animals/_labels_id",
+        "irrrsss/_images_info",
+        "irrrsss/_images_shape",
+        "irrrsss/_images_id",
+        "irrrsss/_labels_shape",
+        "irrrsss/_labels_id",
+        "motion_data/_images_info",
+        "motion_data/_images_shape",
+        "motion_data/_images_id",
+        "motion_data/_labels_shape",
+        "motion_data/_labels_id"
+    ],
+    "tensor_names": {
+        "animals/_images_id": "animals/_images_id",
+        "animals/_images_info": "animals/_images_info",
+        "animals/_images_shape": "animals/_images_shape",
+        "animals/_labels_id": "animals/_labels_id",
+        "animals/_labels_shape": "animals/_labels_shape",
+        "animals/images": "animals/images",
+        "animals/labels": "animals/labels",
+        "irrrsss/_images_id": "irrrsss/_images_id",
+        "irrrsss/_images_info": "irrrsss/_images_info",
+        "irrrsss/_images_shape": "irrrsss/_images_shape",
+        "irrrsss/_labels_id": "irrrsss/_labels_id",
+        "irrrsss/_labels_shape": "irrrsss/_labels_shape",
+        "irrrsss/images": "irrrsss/images",
+        "irrrsss/labels": "irrrsss/labels",
+        "motion_data/_images_id": "motion_data/_images_id",
+        "motion_data/_images_info": "motion_data/_images_info",
+        "motion_data/_images_shape": "motion_data/_images_shape",
+        "motion_data/_labels_id": "motion_data/_labels_id",
+        "motion_data/_labels_shape": "motion_data/_labels_shape",
+        "motion_data/images": "motion_data/images",
+        "motion_data/labels": "motion_data/labels"
+    },
+    "tensors": [
+        "animals/images",
+        "animals/_images_info",
+        "animals/_images_shape",
+        "animals/_images_id",
+        "animals/labels",
+        "animals/_labels_shape",
+        "animals/_labels_id",
+        "irrrsss/images",
+        "irrrsss/_images_info",
+        "irrrsss/_images_shape",
+        "irrrsss/_images_id",
+        "irrrsss/labels",
+        "irrrsss/_labels_shape",
+        "irrrsss/_labels_id",
+        "motion_data/images",
+        "motion_data/_images_info",
+        "motion_data/_images_shape",
+        "motion_data/_images_id",
+        "motion_data/labels",
+        "motion_data/_labels_shape",
+        "motion_data/_labels_id"
+    ],
+    "version": "3.1.0"
+}

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/229056627517224337/a1e2478e470a43eeaf921e4295a4b84c/artifacts
+end_time: 1669525964125
+entry_point_name: ''
+experiment_id: '229056627517224337'
+lifecycle_stage: active
+run_id: a1e2478e470a43eeaf921e4295a4b84c
+run_name: Dummy Regressor
+run_uuid: a1e2478e470a43eeaf921e4295a4b84c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669525943061
+status: 3
+tags: []
+user_id: luonghongquan

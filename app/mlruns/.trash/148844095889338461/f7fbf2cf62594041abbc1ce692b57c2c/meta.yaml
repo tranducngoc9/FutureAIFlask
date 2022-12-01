@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/148844095889338461/f7fbf2cf62594041abbc1ce692b57c2c/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '148844095889338461'
+lifecycle_stage: active
+run_id: f7fbf2cf62594041abbc1ce692b57c2c
+run_name: K Neighbors Regressor
+run_uuid: f7fbf2cf62594041abbc1ce692b57c2c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669539480352
+status: 1
+tags: []
+user_id: luonghongquan

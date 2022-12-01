@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/ce2ccddca44b4b218278fc692e6996b1/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: ce2ccddca44b4b218278fc692e6996b1
+run_name: Kernel Ridge
+run_uuid: ce2ccddca44b4b218278fc692e6996b1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669562108934
+status: 1
+tags: []
+user_id: luonghongquan

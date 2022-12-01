@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/229056627517224337/1617a2ec281c4cdebeec1c5fa102cb1e/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '229056627517224337'
+lifecycle_stage: active
+run_id: 1617a2ec281c4cdebeec1c5fa102cb1e
+run_name: Ridge Regression
+run_uuid: 1617a2ec281c4cdebeec1c5fa102cb1e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669522707818
+status: 1
+tags: []
+user_id: luonghongquan

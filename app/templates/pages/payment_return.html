@@ -1,0 +1,57 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Kết quả giao dịch') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="page-inner">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">{{ _('Kết quả giao dịch') }}</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="panel panel-default">
+                                <div class="panel-heading card-title">{{ title }}: {{ result }}</div>
+                                <div class="panel-body">
+                                    {% if vnp_ResponseCode == '00' %}
+                                        <p class="card-title">{{ _('Cảm ơn đã sử dụng dịch vụ.') }}
+                                    {% else %}
+                                        <p class="card-title">{{ _('Thanh toán không thành công. Liên hệ xxxxxxxxxxx để nhận hỗ trợ.') }}
+                                    {% endif %}
+                                    {% if msg %}
+                                        <p class="alert-warning"> {{ msg }}</p>
+                                        <p class="card-title">{{ _('Thanh toán không thành công. Liên hệ xxxxxxxxxxx để nhận hỗ trợ.') }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper not-found">
+                            <a href="index.html" class="btn btn-primary btn-back-home mt-4 animated fadeInUp">
+                                <span class="btn-label mr-2">
+                                    <i class="flaticon-home"></i>
+                                </span>
+                                {{ _('Quay về Trang chủ') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+	<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}
+
+
+

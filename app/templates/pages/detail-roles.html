@@ -1,0 +1,186 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} Dashboard {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Thông tin cá nhân Admin') }}</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-with-nav">
+                <div class="card-header">
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#profile"
+                                    role="tab" aria-selected="false">{{ _('Thông tin cá nhân Admin') }} ( ACTIVE )</a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab"
+                                    aria-selected="false">{{ _('Thay đổi mật khẩu') }}</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="" method="post">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Họ và tên') }}</label>
+                                            <input id="username" type="text" class="form-control" name="name" placeholder="{{ _('Họ và tên') }}"
+                                                value="Lương Hồng Quân">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>Email</label>
+                                            <input id="Email" type="email" class="form-control" name="email" placeholder="Name"
+                                                value="quanlh218@gmail.com">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Ngày sinh nhật') }}</label>
+                                            <input id="date" type="text" class="form-control" id="datepicker" name="datepicker"
+                                                value="03/21/1998" placeholder="{{ _('Ngày sinh nhật') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Giới tính') }}</label>
+                                            <select id="sex" class="form-control" id="gender">
+                                                <option>{{ _('Nam') }}</option>
+                                                <option>{{ _('Nữ') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Số điện thoại') }}</label>
+                                            <input id="phoneNumber" type="text" class="form-control" value="+62008765678" name="phone"
+                                                placeholder="{{ _('Số điện thoại') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Chức vụ công ty') }}</label>
+                                            <input id="positionCompany" type="text" class="form-control" value="Giám đốc"
+                                                name="position" placeholder="{{ _('Chức vụ công ty') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tên công ty') }}</label>
+                                            <input id="nameCompany" type="text" class="form-control"
+                                                value="MQ ( 12 khuất duy tiến , Thanh Xuân , Hà Nội)" name="company"
+                                                placeholder="{{ _('Tên công ty') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-1">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Giới thiệu bản thân') }}</label>
+                                            <textarea id="introduceCompany" class="form-control" name="about" placeholder="About Me"
+                                                rows="3">{{ _('Quản lý công ty') }} MQ solutions.</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-1">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Ảnh đại diện') }}</label>
+                                            <input id="avataLogo" type="file" class="form-control" name="avata">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success">{{ _('Lưu thông tin') }}</button>
+                                    <button type="reset" class="btn btn-danger">{{ _('Hủy Bỏ') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                            <form action="" method="post">
+                                <div class="row md-12">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mật khẩu hiện tại') }}</label>
+                                            <input id="password" type="password" class="form-control" name="password"
+                                                placeholder="{{ _('Mật khẩu hiện tại') }}" value="Lương Hồng Quân">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mật khẩu mới') }}</label>
+                                            <input id="newPassword" type="password" class="form-control" name="newpassword"
+                                                placeholder="{{ _('Mật khẩu mới') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Xác nhận mật khẩu') }}</label>
+                                            <input id="confirmPassword" type="password" class="form-control" name="confirmpassword"
+                                                placeholder="{{ _('Xác nhận mật khẩu') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success">{{ _('Đổi mật khẩu') }}</button>
+                                    <button type="reset" class="btn btn-danger">{{ _('Hủy Bỏ') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile card-secondary">
+                <div class="card-header" style="background-image: url('/static/assets/img/blogpost.jpg')">
+                    <div class="profile-picture">
+                        <div class="avatar avatar-xl">
+                            <img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="user-profile text-center">
+                        <div class="name">Lương Hồng Quân</div>
+                        <div class="desc">Giám đốc</div>
+                        <div class="desc">MQ ( 12 khuất duy tiến , Thanh Xuân , Hà Nội)</div>
+                        <div class="desc">{{ _('Số điện thoại') }} : +62008765678</div>
+                        <div class="desc">Email : quanlh218@gmail.com</div>
+                        <div class="social-media">
+                            <a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-twitter"></i></span>
+                            </a>
+                            <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
+                            </a>
+                            <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

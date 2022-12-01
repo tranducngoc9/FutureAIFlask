@@ -1,0 +1,190 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Thông tin công ty') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Thông tin công ty') }}</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-with-nav">
+                <div class="card-header">
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#chinhanh"
+                                    role="tab" aria-selected="false">{{ _('Thông tin chi tiết công ty') }}</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="chinhanh" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="" method="post" id="formValidation">
+                                <input id="id" type="hidden" value="{{ company.id }}">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tên công ty') }}</label>
+                                            <input id="name" type="text" class="form-control" name="name"
+                                                placeholder="{{ _('Tên công ty') }}" value="{{ company.name }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Key') }}</label>
+                                            <input id="secret" type="text" class="form-control" name="secret"
+                                                placeholder="{{ _('Key') }}" value="{{ company.secret }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Số điện thoại') }}</label>
+                                            <input id="phone" type="number" class="form-control" name="phone"
+                                                placeholder="{{ _('Số điện thoại') }}" value="{{ company.phone or '' }}" required aria-invalid="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>Email</label>
+                                            <input id="email" type="text" class="form-control" name="email"
+                                                placeholder="Email" value="{{ company.email or '' }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Loại tài khoản') }}</label>
+                                            <select name="plan" id="plan" class="form-control" required>
+                                                <option value="" disabled>{{ _('Lựa chọn loại tài khoản') }}</option>
+                                                {% for plan in plans %}
+                                                <option value="{{ plan.id }}" {% if company.plan_id == plan.id %} selected {% else %} {% endif %} >{{ plan.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Địa chỉ') }}</label>
+                                            <input id="address" type="text" class="form-control" name="address"
+                                                placeholder="{{ _('Địa chỉ') }}" value="{{ company.address or '' }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Hình ảnh đại diện') }}</label>
+                                            <input id="file" type="file" class="form-control"
+                                                name="file">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success" id="btn_save">{{ _('Lưu thông tin') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile">
+                <div class="card-header" style="background-image: url('/static/assets/img/blogpost.jpg')">
+                    <div class="profile-picture">
+                        {% if company.logo_image %}
+                        <div class="avatar avatar-xl">
+                            <img src="{{ company.logo_image or '/static/assets/img/company.jpeg' }}" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                        {% else %}
+                        <div class="avatar avatar-xl">
+                            <span class="avatar-title rounded-circle border border-dark"> {{company.name[0:2]}}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="user-profile text-center">
+                        <div class="name">{{ company.name or '______________'}}</div>
+                        {% if company.address  %} <div class="desc"><i class="flaticon-placeholder"></i><span style="padding-left:10px">{{ company.address or '______________' }}</span></div>  {% endif %}
+                        {% if company.email  %}<div class="desc"><i class="flaticon-envelope-1"></i><span style="padding-left:10px"> {{ company.email or '______________' }}</span></div>{% endif %}
+                        {% if company.phone  %}<div class="desc"><i class="icon-phone"></i><span style="padding-left:10px">{{ company.phone or '______________'}}</span></div>{% endif %}
+                        
+                        <div class="social-media">
+                            <a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-twitter"></i></span>
+                            </a>
+                            <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
+                            </a>
+                            <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#formValidation').submit(function(e){     
+
+            e.preventDefault();
+            var $form = $(this);
+
+            // check if the input is valid
+            if(! $form.valid()) return false;
+
+            var formData = new FormData();
+            formData.append('file', $('#file')[0].files[0]);
+            formData.append('id', $("#id").val());
+            formData.append('name', $("#name").val());
+            formData.append('email', $("#email").val());
+            formData.append('phone', $("#phone").val());
+            formData.append('plan', $("#plan").val());
+            formData.append('address', $("#address").val());
+            formData.append('secret', $("#secret").val());
+            $.ajax({
+                url: '/edit_company',
+                data: formData,
+                type: 'POST',
+                contentType: false, 
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Sửa thành công') }}');
+                        
+                        setTimeout(function() { location.reload(); }, 2000);
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                    }
+
+                        
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                }
+
+            });
+        });
+
+        
+
+    });
+</script>
+{% endblock javascripts %}

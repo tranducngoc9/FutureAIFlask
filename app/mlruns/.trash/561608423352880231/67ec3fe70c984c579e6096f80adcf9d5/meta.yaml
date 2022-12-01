@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/67ec3fe70c984c579e6096f80adcf9d5/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: 67ec3fe70c984c579e6096f80adcf9d5
+run_name: Linear Regression
+run_uuid: 67ec3fe70c984c579e6096f80adcf9d5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669558091155
+status: 1
+tags: []
+user_id: luonghongquan

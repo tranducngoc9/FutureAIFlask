@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/fe0f5053c5e84787b24df12f017222a0/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: fe0f5053c5e84787b24df12f017222a0
+run_name: Bayesian Ridge
+run_uuid: fe0f5053c5e84787b24df12f017222a0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669539697796
+status: 1
+tags: []
+user_id: luonghongquan

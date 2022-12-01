@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/56d38f10f1c6489590fca9963f78f6da/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: 56d38f10f1c6489590fca9963f78f6da
+run_name: Huber Regressor
+run_uuid: 56d38f10f1c6489590fca9963f78f6da
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669536105052
+status: 1
+tags: []
+user_id: luonghongquan

@@ -1,0 +1,1612 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý camera') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<!-- <style>
+    iframe {
+        display: block;       /* iframes are inline by default */
+        background: #000;
+        border: none;         /* Reset default border */
+        height: 100vh;        /* Viewport-relative units */
+        width: 100vw;
+    }
+</style>
+
+<div class="page-inner">
+     <iframe id="streamlit_content" allowfullscreen frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true wmode="transparent">
+        Your browser doesn't support iframes
+      </iframe>
+</div> -->
+
+<style type="text/css">
+ 
+/*form styles*/
+#msform {
+    width: 100%;
+    margin: 50px auto;
+    /*text-align: center;*/
+    position: relative;
+}
+#msform fieldset {
+    background: #1f283e;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    
+    box-sizing: border-box;
+    width: 85%;
+    margin: 0 10%;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+    display: none;
+}
+
+/*buttons*/
+#msform .action-button {
+    width: 100px;
+    background: #1572E8;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #1572E8;
+}
+/*headings*/
+.fs-title {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 10px;
+}
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+    text-align: center;
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+#progressbar li {
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    width: 20%;
+    float: left;
+    position: relative;
+}
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 40px;
+    line-height: 40px;
+    display: block;
+    font-size: 15px;
+    color: #333;
+    background: white;
+    border-radius: 3px;
+    margin: 0 auto 10px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: white;
+    position: absolute;
+    left: -50%;
+    top: 20px;
+    z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+    background: #1572E8 !important;
+    color: white;
+}
+
+/*fieldset .select2-container--bootstrap .select2-selection--multiple {
+    width: max-content;
+    border: 0px
+
+}
+*/
+</style>
+
+<div class="page-inner">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <h4 class="card-title">{{ _('Học máy') }}</h4>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- multistep form -->
+            <form id="msform">
+                <!-- progressbar -->
+                <ul id="progressbar">
+                        <li class="active">{{ _('Chuẩn bị') }}</li>
+                        <li>{{ _('Tiền xử lý') }}</li>
+                        <li>{{ _('Đào tạo') }}</>
+                        <li>{{ _('Phân tích') }}</>
+                        <li>{{ _('Lưu') }}</>
+                </ul>
+                <!-- fieldsets -->
+                <fieldset name="0">
+                    <h2 class="fs-title">{{ _('Chuẩn bị') }}</h2>
+                    <h3 class="fs-subtitle">{{ _('Chọn lựa mô hình và phân tích dữ liệu đào tạo') }}</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Chọn dự án') }}</label>
+                                <select name="project" id="project" class="form-control" required>
+                                    <!-- <option value="" selected disabled>{{ _('Lựa chọn dự án') }}</option> -->
+                                    <option value="0">Dự án 1</option>
+                                    <option value="1">Dự án 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Nhập tên mô hình') }}</label>
+                                <input id="modelname" name="modelname" type="text"
+                                    class="form-control" placeholder="{{ _('Nhập tên mô hình') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Chọn mô hình học máy') }}</label>
+                                <select name="modeltype" id="modeltype" class="form-control" required>
+                                    <option value="0">Phân loại</option>
+                                    <option value="1">Hồi quy</option>
+                                    <option value="2">Phân cụm</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Chọn dữ liệu đào tạo') }}</label>
+                                <select name="dataname" id="dataname" class="form-control" required>
+                                    <!-- <option value="" selected disabled>{{ _('Lựa chọn dữ liệu đào tạo') }}</option> -->
+                                    {% for data in dataset %}
+                                    <option value="{{ data.id }}">{{ data.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" name="eda" class="eda action-button" value="{{ _('Phân tích') }}" />
+                    <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
+                    <div class="row mt-3">
+                        <iframe id="eda" frameborder="0" scrolling="no" style="overflow: hidden; height: 5021px; display: none;" width="100%" ></iframe>
+                    </div>
+                    
+
+                </fieldset>
+                <fieldset name="1">
+                    <h2 class="fs-title">{{ _('Tiền xử lý') }}</h2>
+                    <h3 class="fs-subtitle">{{ _('Tiền xử dữ liệu trước khi đưa vào mô hình học máy') }}</h3>
+                    
+                    <div class="row mt-3">
+
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Cột mục tiêu') }}</label>
+                                <select name="targetcol" id="targetcol" class="form-control" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Chọn cột để xoá') }}</label>
+                                <div class="select2-input select2-warning">
+                                    <select id="removecol" name="removecol[]" class="form-control" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Phân chia dữ liệu đào tạo và kiểm tra') }}</label>
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Kích thước bộ đào tạo') }}</label>
+                                    <input type="number" class="form-control" id="trainsize" name="trainsize" placeholder="0.7" value="0.7" step="0.1">
+                                </div>
+                                <div class="custom-control custom-checkbox" id="data_split_stratify_session">
+                                  <input type="checkbox" class="custom-control-input" id="data_split_stratify">
+                                  <label class="custom-control-label" for="data_split_stratify">Kiểm soát phân tầng trong quá trình phân chia</label>
+                                </div>
+
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Lựa chọn chiến lược xác thực chéo') }}</label>
+                                    <select name="crossvalidate" id="crossvalidate" class="form-control" required>
+                                        <option value="kfold">kfold</option>
+                                        <option value="stratifiedkfold">stratifiedkfold</option>
+                                        <option value="stratifiedkfold">groupkfold</option>
+                                    </select>
+                                </div>
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Số fold được sử dụng trong Xác thực chéo') }}</label>
+                                    <input type="number" class="form-control" id="foldnum" name="foldnum" placeholder="10" value="10" step="1" min=2>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Tiền xử lý cho dữ liệu số:') }}</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Thiếu giá trị cho các cột số') }}</label>
+                                            <select name="missingval" id="missingval" class="form-control" required>
+                                                <option value="mean">mean</option>
+                                                <option value="median">median</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="nomalization">
+                                          <label class="custom-control-label" for="nomalization">{{ _('Chuẩn hoá') }}</label>
+                                        </div>
+                                        <div class="col-md-12" id="nomalization_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Lựa chọn phương pháp chuẩn hoá') }}</label>
+                                                        <select name="nomalization_method" id="nomalization_method" class="form-control" required>
+                                                            <option value="zscore">zscore</option>
+                                                            <option value="minmax">minmax</option>
+                                                            <option value="maxabs">maxabs</option>
+                                                            <option value="robust">robust</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="transformation">
+                                          <label class="custom-control-label" for="transformation">{{ _('Chuyển đổi cột thuộc tính') }}</label>
+                                        </div>
+                                        <div class="col-md-12" id="transformation_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Lựa chọn phương pháp chuẩn hoá') }}</label>
+                                                        <select name="transformation_method" id="transformation_method" class="form-control" required>
+                                                            <option value="yeo-johnson">yeo-johnson</option>
+                                                            <option value="quantile">quantile</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="target_transformation">
+                                          <label class="custom-control-label" for="target_transformation">{{ _('Chuyển đổi cột mục tiêu') }}</label>
+                                        </div>
+                                        <div class="col-md-12" id="target_transformation_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Lựa chọn phương pháp chuẩn hoá') }}</label>
+                                                        <select name="target_transformation_method" id="target_transformation_method" class="form-control" required>
+                                                            <option value="box-cox">box-cox</option>
+                                                            <option value="yeo-johnson">yeo-johnson</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="custom-control custom-checkbox" id="fix_imbalance_session">
+                                                  <input type="checkbox" class="custom-control-input" id="fix_imbalance">
+                                                  <label class="custom-control-label" for="fix_imbalance">Khắc phục sự mất cân bằng của các lớp mục tiêu</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if categorical_columns | length > 0  %}
+
+
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Tiền xử lý cho các cột phân loại:') }}</label>
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Thiếu giá trị cho các cột phân loại') }}</label>
+                                    <select name="cmissingval" id="cmissingval" class="form-control" required>
+                                        <option value="constant">constant</option>
+                                        <option value="mode">mode</option>
+                                    </select>
+                                </div>
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Xử lý các giá trị phân loại không xác định') }}</label>
+                                    <select name="unknown_cat_value" id="unknown_cat_value" class="form-control" required>
+                                        <option value="least_frequent">least_frequent</option>
+                                        <option value="most_frequent">most_frequent</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="ccomrarelevel">
+                                          <label class="custom-control-label" for="ccomrarelevel">Kết hợp các thuộc tính phân loại có cấp độ hiếm thành một cấp độ</label>
+                                        </div>
+                                        <div class="col-md-12" id="ccomrarelevel_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Ngưỡng kết hợp các thuộc tính phân loại hiếm') }}</label>
+                                                        <input type="number" class="form-control" id="ccomrarelevelthre" name="ccomrarelevelthre" placeholder="0.1" value="0.1" step="0.1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endif %} 
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Tạo thuộc tính mới') }}</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="interaction">
+                                          <label class="custom-control-label" for="interaction">Tạo thuộc tính mới sử dụng Interaction</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="calratios">
+                                          <label class="custom-control-label" for="calratios">Tạo thuộc tính mới sử dụng Calculating Ratios</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="polcom">
+                                          <label class="custom-control-label" for="polcom">Tạo thuộc tính mới sử dụng Polynomial Combinations</label>
+                                        </div>
+                                        <div class="col-md-12" id="polcom_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Polynomial Degree (int)') }}</label>
+                                                        <input type="number" class="form-control" id="poldegree" name="poldegree" placeholder="2" value="2" step="1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Polynomial Threshold') }}</label>
+                                                        <input type="number" class="form-control" id="polthre" name="polthre" placeholder="0.10" value="0.10" step="0.01">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="trigono">
+                                          <label class="custom-control-label" for="trigono">Tạo thuộc tính mới sử dụng Trigonometric</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Chọn các thuộc tính có đặc điểm liên quan') }}</label>
+                                            <div class="select2-input select2-warning">
+                                                <select id="relatefeatures" name="relatefeatures[]" class="form-control" multiple="multiple">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="bincom">
+                                          <label class="custom-control-label" for="bincom">Tạo thuộc tính mới sử dụng Bin Combinations</label>
+                                        </div>
+                                        <div class="col-md-12" id="bincom_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Chọn các thuộc tính số được chuyển đổi thành các thuộc tính phân loại bằng K-Means') }}</label>
+                                                        <div class="select2-input select2-warning">
+                                                            <select id="bincom_option" name="bincom_option[]" class="form-control" multiple="multiple">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Chọn các thuộc tính trong tập dữ liệu đóng góp nhiều nhất trong việc dự đoán biến mục tiêu') }}</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="subset">
+                                          <label class="custom-control-label" for="subset">Chọn một tập hợp con các thuộc tính bằng cách sử dụng kết hợp các tầm quan trọng hoán vị khác nhau</label>
+                                        </div>
+                                        <div class="col-md-12" id="subset_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Ngưỡng lựa chọn thuộc tính') }}</label>
+                                                        <input type="number" class="form-control" id="subsetthre" name="subsetthre" placeholder="0.80" value="0.80" step="0.01">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="featuredrop">
+                                          <label class="custom-control-label" for="featuredrop">Loại bỏ các thuộc tính tương quan tuyến tính cao</label>
+                                        </div>
+                                        <div class="col-md-12" id="featuredrop_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Ngưỡng được sử dụng để loại bỏ các thuộc tính tương quan') }}</label>
+                                                        <input type="number" class="form-control" id="featuredropthre" name="featuredropthre" placeholder="0.90" value="0.90" step="0.01">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="reppecoll">
+                                          <label class="custom-control-label" for="reppecoll">Loại bỏ thuộc tính cộng tuyến hoàn hảo (Tương quan=1)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="pca">
+                                          <label class="custom-control-label" for="pca">Sử dụng PCA để giảm kích thước của tập dữ liệu</label>
+                                        </div>
+                                        <div class="col-md-12" id="pca_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Phương pháp thực hiện giảm kích thước tuyến tính') }}</label>
+                                                        <select name="pca_method" id="pca_method" class="form-control" required>
+                                                            <option value="linear">linear</option>
+                                                            <option value="kernel">kernel</option>
+                                                            <option value="incremental">incremental</option>
+                                                        </select>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Số thành phần cần giữ (float hoặc int)') }}</label>
+                                                        <input type="number" class="form-control" id="pca_keep" name="pca_keep" placeholder="2" value="2" step="0.01">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="removecat">
+                                          <label class="custom-control-label" for="removecat">Xóa các thuộc tính phân loại với phương sai không đáng kể về mặt thống kê</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Tạo các cụm bằng cách sử dụng các thuộc tính hiện có từ dữ liệu bằng các kỹ thuật không giám sát') }}</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="add_cluster">
+                                          <label class="custom-control-label" for="add_cluster">Tạo các thuộc tính bổ sung với các cụm</label>
+                                        </div>
+                                        <div class="col-md-12" id="add_cluster_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Số lần lặp được sử dụng để tạo một cụm') }}</label>
+                                                        <input type="number" class="form-control" id="add_cluster_thre" name="add_cluster_thre" placeholder="20" value="20" step="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="remove_outliers_pca">
+                                          <label class="custom-control-label" for="remove_outliers_pca">Xóa các ngoại lệ khỏi dữ liệu đào tạo bằng PCA</label>
+                                        </div>
+                                        <div class="col-md-12" id="remove_outliers_pca_sel" style="display:none">
+                                            <div class="row mt-3">
+                                                <div class="col-md-12">
+                                                    <div class="form-group form-group-default">
+                                                        <label>{{ _('Tỷ lệ ngoại lệ') }}</label>
+                                                        <input type="number" class="form-control" id="remove_outliers_pca_per" name="remove_outliers_pca_per" placeholder="0.05" value="0.05" step="0.01">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <input type="button" name="previous" class="previous action-button" value="{{ _('Trước') }}" />
+                    <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
+                </fieldset>
+                <fieldset name="2">
+                    <h2 class="fs-title">{{ _('Đào tạo') }}</h2>
+                    <h3 class="fs-subtitle">Tạo mô hình từ kết quả tốt nhất hoặc chọn mô hình đơn lẻ hoặc tập hợp</h3>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label>{{ _('Thông tin tiền xử lý dữ liệu') }}</label>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="dataTb" class="display table table-hover table-head-bg-primary">
+                                <thead>
+                                    <tr>
+                                        <th>{{ _('Mô tả') }}</th>
+                                        <th>{{ _('Giá trị') }} </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Chọn chế độ huấn luyện mô hình') }}</label>
+                                <select name="trainingmode" id="trainingmode" class="form-control" required>
+                                    <!-- <option value="" selected disabled>{{ _('Lựa chọn chế độ huấn luyện mô hình') }}</option> -->
+                                    <option value="0">{{ _('Từ mô hình tốt nhất') }}</option>
+                                    <option value="1">{{ _('Mô hình đơn') }}</option>
+                                    <!-- <option value="2">{{ _('Mô hình tập hợp') }}</option> -->
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
+                    <div id="best_model_option">
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('So sánh tất cả các mô hình học máy') }}</label>
+                                    <div class="row mt-3"> 
+                                        <div class="col-md-6">
+                                            <label>{{ _('Tiêu chí sắp xếp') }}</label>
+                                            <select name="sort" id="sort" class="form-control" required>
+                                                <option value="R2">R2</option>
+                                                <option value="1">MAE</option>
+                                                <option value="2">MSE</option>
+                                                <option value="R2">RMSE</option>
+                                                <option value="1">RMSLE</option>
+                                                <option value="2">MAPE</option>
+                                            </select>  
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="custom-control custom-checkbox">
+                                              <input type="checkbox" class="custom-control-input" id="_enable_cross_val" checked>
+                                              <label class="custom-control-label" for="compare_enable_cross_val">Cho phép đánh giá chéo</label>
+                                            </div>
+                                        </div>
+                                        </br>
+                                        </br>
+                                        <div class="col-md-12">
+                                            <button class="btn btn-warning btn-round ml-auto fix-right-mqn" id="comparemodel" style="margin-top: 10px;margin-bottom: 20px;">
+                                                <i class="fa fa-bars"></i>
+                                                {{ _('So sánh các mô hình') }}
+                                            </button>
+                                        </div>
+                                        </br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3" id="compare_result" style="display:none">
+                            <div class="col-md-12">
+                                <label>{{ _('Kết quả so sánh các mô hình:') }}</label>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table id="dataTbCompare" class="display table table-hover table-head-bg-primary">
+                                            <thead>
+                                                <tr>
+                                                    <th>{{ _('Mô hình') }}</th>
+                                                    <th>{{ _('MAE') }} </th>
+                                                    <th>{{ _('MSE') }} </th>
+                                                    <th>{{ _('RMSE') }} </th>
+                                                    <th>{{ _('R2') }} </th>
+                                                    <th>{{ _('RMSLE') }} </th>
+                                                    <th>{{ _('MAPE') }} </th>
+                                                    <th>{{ _('TT(Sec)') }} </th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="single_model_option" style="display:none">
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-default">
+                                    <label>{{ _('Lựa chọn mô hình để tạo') }}</label>
+                                    <select name="singlemodel" id="singlemodel" class="form-control" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Tham số đào tạo mô hình học máy') }}</label>
+                                <div class="row mt-3"> 
+                                    <div class="col-md-6">
+                                        <div class="custom-control custom-checkbox">
+                                          <input type="checkbox" class="custom-control-input" id="training_enable_cross_val" checked>
+                                          <label class="custom-control-label" for="training_enable_cross_val">Cho phép đánh giá chéo</label>
+                                        </div>
+                                    </div>
+                                    </br>
+                                    </br>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-warning btn-round ml-auto fix-right-mqn" id="train" style="margin-top: 10px;margin-bottom: 20px;">
+                                            <i class="fa fa-cogs"></i>
+                                            {{ _('Đào tạo mô hình') }}
+                                        </button>
+                                    </div>
+                                    </br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3" id="train_result" style="display:none">
+                        <div class="col-md-12">
+                            <label>{{ _('Kết quả đào tạo mô hình:') }}</label>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="dataTbTrain" class="display table table-hover table-head-bg-primary">
+                                        <thead>
+                                            <tr>
+                                                <th> </th>
+                                                <th>{{ _('MAE') }} </th>
+                                                <th>{{ _('MSE') }} </th>
+                                                <th>{{ _('RMSE') }} </th>
+                                                <th>{{ _('R2') }} </th>
+                                                <th>{{ _('RMSLE') }} </th>
+                                                <th>{{ _('MAPE') }} </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <input type="button" name="previous" class="previous action-button" value="{{ _('Trước') }}" />
+                    <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
+                </fieldset>
+                <fieldset name="3">
+                    <h2 class="fs-title">{{ _('Phân tích') }}</h2>
+                    <h3 class="fs-subtitle"></h3>
+                    
+                    <input type="button" name="previous" class="previous action-button" value="{{ _('Trước') }}" />
+                    <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
+                </fieldset>
+                <fieldset name="4">
+                    <h2 class="fs-title">{{ _('Lưu') }}</h2>
+                    <h3 class="fs-subtitle">HBA1C</h3>
+
+                    <input type="button" name="previous" class="previous action-button" value="{{ _('Trước') }}" />
+                    <input type="submit" name="submit" class="submit action-button" value="Calculate" />
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+{% endblock content %}
+
+{% block javascripts %}
+    <!-- jQuery easing plugin -->
+    <script src="/static/assets/js/jquery.easing.min.js"></script>
+
+
+    <script src="/static/assets/js/setting-demo2.js"></script>
+ <!--    <script >
+        document.getElementById('streamlit_content').src = "http://" + window.location.hostname + ":8501/?p=OD";
+    </script> -->
+    <script type="text/javascript">
+        var target_col = undefined;
+        var bestname = ""
+        var trained = false;
+        feature_list = [];
+        $('#removecol').select2({
+            theme: "bootstrap",
+            width: '100%'
+        });
+        $('#relatefeatures').select2({
+            theme: "bootstrap",
+            width: '100%'
+        });
+
+        $('#bincom_option').select2({
+            theme: "bootstrap",
+            width: '100%'
+        });
+
+        // populate the data table with JSON data
+        function populatePrepocessingDataTable(data) {
+            // clear the table before populating it with more data
+            $("#dataTb").DataTable().clear();
+            var description = data.Description;
+            var value = data.Value;
+            var length = Object.keys(description).length;
+            for(var i =0; i < length; i++) {
+              $('#dataTb').dataTable().fnAddData( [
+                description[i],
+                value[i]
+              ]);
+            }
+        }
+
+
+        function populateTrainModelDataTable(data) {
+            // clear the table before populating it with more data
+            $("#dataTbTrain").DataTable().clear();
+            var mae = data.MAE;
+            var mse = data.MSE;
+            var rmse = data.RMSE;
+            var r2 = data.R2;
+            var rmsle = data.RMSLE;
+            var mape = data.MAPE;
+            for (const property in mae) {
+                $('#dataTbTrain').dataTable().fnAddData( [
+                    property,
+                    mae[property],
+                    mse[property],
+                    rmse[property],
+                    r2[property],
+                    rmsle[property],
+                    mape[property]
+                ]);
+            }
+
+            $("#train_result").show();
+        }
+
+
+        function populateCompareModelDataTable(data) {
+            // clear the table before populating it with more data
+            $("#dataTbCompare").DataTable().clear();
+            console.log(data)
+            var model = data.Model;
+            var mae = data.MAE;
+            var mse = data.MSE;
+            var rmse = data.RMSE;
+            var r2 = data.R2;
+            var rmsle = data.RMSLE;
+            var mape = data.MAPE;
+            var tt = data["TT (Sec)"];
+            for (const property in model) {
+              $('#dataTbCompare').dataTable().fnAddData( [
+                model[property],
+                mae[property],
+                mse[property],
+                rmse[property],
+                r2[property],
+                rmsle[property],
+                mape[property],
+                tt[property]
+              ]);
+            }
+
+            $("#compare_result").show();
+        }
+
+        $(document).ready(function() {
+            var table = $('#dataTb').DataTable({
+                "pageLength": 10,
+                "bFilter": false,
+                "bInfo": false,
+                "language": {
+                    "decimal":        "",
+                    "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                    "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                    "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                    "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                    "loadingRecords": "{{ _('Đang tải ...') }}",
+                    "processing":     "{{ _('Đang xử lý ...') }}",
+                    "search":         "{{ _('Tìm kiếm:') }}",
+                    "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                    "paginate": {
+                        "first":      "<<",
+                        "last":       ">>",
+                        "next":       ">",
+                        "previous":   "<"
+                    },
+                    "aria": {
+                        "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                        "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                    }
+                }
+            });
+
+            var table = $('#dataTbCompare').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "language": {
+                    "decimal":        "",
+                    "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                    "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                    "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                    "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                    "loadingRecords": "{{ _('Đang tải ...') }}",
+                    "processing":     "{{ _('Đang xử lý ...') }}",
+                    "search":         "{{ _('Tìm kiếm:') }}",
+                    "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                    "paginate": {
+                        "first":      "<<",
+                        "last":       ">>",
+                        "next":       ">",
+                        "previous":   "<"
+                    },
+                    "aria": {
+                        "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                        "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                    }
+                }
+            });
+            var table = $('#dataTbTrain').DataTable({
+                "bPaginate": false,
+                "bFilter": false,
+                "bInfo": false,
+                "language": {
+                    "decimal":        "",
+                    "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                    "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                    "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                    "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                    "loadingRecords": "{{ _('Đang tải ...') }}",
+                    "processing":     "{{ _('Đang xử lý ...') }}",
+                    "search":         "{{ _('Tìm kiếm:') }}",
+                    "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                    "paginate": {
+                        "first":      "<<",
+                        "last":       ">>",
+                        "next":       ">",
+                        "previous":   "<"
+                    },
+                    "aria": {
+                        "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                        "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                    }
+                }
+            });
+        });
+
+
+        //jQuery time
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var left, opacity, scale; //fieldset properties which we will animate
+        var animating; //flag to prevent quick multi-click glitches
+
+        $(document).ajaxStart(function() {
+            $("#loading").show();
+        });
+        $(document).ajaxStop(function() {
+            $("#loading").hide();
+        });
+
+        $(".next").click(function(){
+           
+            
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+            
+            if (next_fs.attr('name') == "1") {
+                if ($('#project').val() == null) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn dự án để tiếp tục') }}');
+                    return;
+                } else if ($('#modelname').val() == null) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng điền tên mô hình để tiếp tục') }}');
+                    return;
+                } else if ($('#modeltype').val() == null) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn mô hình học máy để tiếp tục') }}');
+                    return;
+                } else if ($('#dataname').val() == null) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn dữ liệu để tiếp tục') }}');
+                    return;
+                }else {
+                    var form_data = new FormData();
+                    form_data.append("data_id", $('#dataname').val());
+
+                    $.ajax({
+                        url: '/select_data', // point to server-side URL
+                        dataType: 'json', // what to expect back from server
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,
+                        type: 'post',
+                        success: function(response) {
+                            console.log(response);
+                            if (response.success == true)
+                            {
+                                $("#targetcol option").remove();
+                                $("#removecol option").remove();
+                                $("#relatefeatures option").remove();
+                                $("#bincom_option option").remove();
+                                
+                                feature_list = response.columns_name;
+                                for (loop=0; loop < feature_list.length; loop++) {
+
+                                    $("#targetcol").get(0).options.add(new Option(feature_list[loop]));
+
+                                    if (loop != 0) {
+                                        $("#removecol").get(0).options.add(new Option(feature_list[loop]));
+                                        $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
+                                        $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
+                                    } else {
+                                        target_col = feature_list[loop];
+                                    }
+                                    
+                                }
+
+                            } else {
+                                showError('{{ _('ETitle') }}', '{{ _('Không thể chọn dữ liệu') }}');
+                            }
+                                
+                        },
+                        error: function(error) {
+                            showError('{{ _('ETitle') }}', '{{ _('Không thể chọn dữ liệu') }}');
+                        }
+                    });
+                }
+                
+
+            } else if (next_fs.attr('name') == "2") {
+                var form_data = new FormData();
+                form_data.append("project", $('#project').val());
+                form_data.append("modelname", $('#modelname').val());
+                form_data.append("modeltype", $('#modeltype').val());
+                form_data.append("data_id", $('#dataname').val());
+                form_data.append("targetcol", $('#targetcol').val());
+                form_data.append("removecol", $('#removecol').select2("val"));
+                form_data.append("trainsize", $('#trainsize').val());
+                form_data.append("data_split_stratify", $('#data_split_stratify').is(":checked") ? 1 : 0);
+                form_data.append("crossvalidate", $('#crossvalidate').val());
+                form_data.append("foldnum", $('#foldnum').val());
+                form_data.append("missingval", $('#missingval').val());
+                form_data.append("nomalization", $('#nomalization').is(":checked") ? 1 : 0);
+                form_data.append("nomalization_method", $('#nomalization_method').val());
+                form_data.append("transformation", $('#transformation').is(":checked") ? 1 : 0);
+                form_data.append("transformation_method", $('#transformation_method').val());
+                form_data.append("target_transformation", $('#target_transformation').is(":checked") ? 1 : 0);
+                form_data.append("target_transformation_method", $('#target_transformation_method').val());
+                form_data.append("fix_imbalance", $('#fix_imbalance').is(":checked") ? 1 : 0);
+                form_data.append("cmissingval", $('#cmissingval').val() == undefined ? 'constant' : $('#cmissingval').val());
+                form_data.append("unknown_cat_value", $('#unknown_cat_value').val() == undefined ? 'least_frequent' :  $('#unknown_cat_value').val());
+                form_data.append("ccomrarelevel", $('#ccomrarelevel').val() == undefined ? 0 : $('#ccomrarelevel').val());
+                form_data.append("ccomrarelevelthre", $('#ccomrarelevelthre').val() == undefined ? 0.1 : $('#ccomrarelevelthre').val());
+                form_data.append("interaction", $('#interaction').is(":checked") ? 1 : 0);
+                form_data.append("calratios", $('#calratios').is(":checked") ? 1 : 0);
+                form_data.append("polcom", $('#polcom').is(":checked") ? 1 : 0);
+                form_data.append("poldegree", $('#poldegree').val());
+                form_data.append("polthre", $('#polthre').val());
+                form_data.append("trigono", $('#trigono').is(":checked") ? 1 : 0);
+                form_data.append("relatefeatures", $('#relatefeatures').select2('val'));
+                form_data.append("bincom", $('#bincom').is(":checked") ? 1 : 0);
+                form_data.append("bincom_option", $('#bincom_option').select2('val'));
+                form_data.append("subset", $('#subset').is(":checked") ? 1 : 0);
+                form_data.append("subsetthre", $('#subsetthre').val());
+                form_data.append("featuredrop", $('#featuredrop').is(":checked") ? 1 : 0);
+                form_data.append("featuredropthre", $('#featuredropthre').val());
+                form_data.append("reppecoll", $('#reppecoll').is(":checked") ? 1 : 0);
+                form_data.append("pca", $('#pca').is(":checked") ? 1 : 0);
+                form_data.append("pca_method", $('#pca_method').val());
+                form_data.append("pca_keep", $('#pca_keep').val());
+                form_data.append("removecat", $('#removecat').is(":checked") ? 1 : 0);
+                form_data.append("add_cluster", $('#add_cluster').is(":checked") ? 1 : 0);
+                form_data.append("add_cluster_thre", $('#add_cluster_thre').val());
+                form_data.append("remove_outliers_pca", $('#remove_outliers_pca').is(":checked") ? 1 : 0);
+                form_data.append("remove_outliers_pca_per", $('#remove_outliers_pca_per').val());
+
+                $.ajax({
+                    url: '/preprocessing_data', // point to server-side URL
+                    dataType: 'json', // what to expect back from server
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success == true)
+                        {
+                            showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành tiền xử lý dữ liệu') }}');
+                            populatePrepocessingDataTable(JSON.parse(response.result));
+
+                            $("#singlemodel option").remove();
+                            
+                            modeltype = $('#modeltype').val();
+                            modellist = response.classification_models;
+
+                            if (modeltype == 0)
+                                modellist = JSON.parse(response.classification_models);
+                            else if (modeltype == 1)
+                                modellist = JSON.parse(response.regression_models);
+                            else if (modeltype == 2)
+                                modellist = JSON.parse(response.clustering_models);
+                            modellist = modellist.Name;
+                            console.log(modellist);
+                            
+                            $.each(modellist, function(key, value) {   
+                                 $('#singlemodel').append($("<option></option>")
+                                                .attr("value", key)
+                                                .text(value)); 
+                            });
+
+                            
+                        } else {
+                            showError('{{ _('ETitle') }}', '{{ _('Không thể tiền xử lý dữ liệu') }}');
+                        }
+                            
+                    },
+                    error: function(error) {
+                        showError('{{ _('ETitle') }}', '{{ _('Không thể tiền xử lý dữ liệu') }}');
+                    }
+                });
+            } else if (next_fs.attr('name') == "3") {
+                if (!trained) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng hoàn thành đào tạo mô hình để tiếp tục') }}');
+                    return;
+                }
+            } else {
+
+            }
+
+            if(animating) return false;
+            animating = true;
+
+            //activate next step on progressbar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+            
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({opacity: 0}, {
+                step: function(now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    //2. bring next_fs from the right(50%)
+                    left = (now * 50)+"%";
+                    //3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({'transform': 'scale('+scale+')'});
+                    next_fs.css({'left': left, 'opacity': opacity});
+                }, 
+                duration: 800, 
+                complete: function(){
+                    current_fs.hide();
+                    animating = false;
+                }, 
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+
+
+            
+        });
+
+        $(".previous").click(function(){
+            if(animating) return false;
+            animating = true;
+            
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+            
+            //de-activate current step on progressbar
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+            
+            //show the previous fieldset
+            previous_fs.show(); 
+            //hide the current fieldset with style
+            current_fs.animate({opacity: 0}, {
+                step: function(now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale previous_fs from 80% to 100%
+                    scale = 0.8 + (1 - now) * 0.2;
+                    //2. take current_fs to the right(50%) - from 0%
+                    left = ((1-now) * 50)+"%";
+                    //3. increase opacity of previous_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({'left': left});
+                    previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+                }, 
+                duration: 800, 
+                complete: function(){
+                    current_fs.hide();
+                    animating = false;
+                }, 
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+        });
+        $("#train").click(function(e){
+            e.preventDefault();
+            trainingmode = $("#trainingmode").val();
+
+            if (trainingmode == 0)
+            {
+                if (bestname == "")
+                {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng so sánh các mô hình trước khi tiến hành đào tạo') }}');
+                    return;
+                }
+            }
+            bestname = $("#singlemodel").val();
+            //alert(bestname);
+            var form_data = new FormData();
+            form_data.append("training_enable_cross_val", $('#training_enable_cross_val').is(":checked") ? 1 : 0);
+            form_data.append("bestname", bestname);
+            form_data.append("trainingmode", $('#trainingmode').val());
+            form_data.append("modeltype", $('#modeltype').val());
+
+            $.ajax({
+                url: '/trainmodel', // point to server-side URL
+                dataType: 'json', // what to expect back from server
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành đào tạo mô hình') }}');
+                        populateTrainModelDataTable(JSON.parse(response.result));
+                        trained = true;
+                        
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Không thể đào tạo mô hình') }}');
+                    }
+                        
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Không thể đào tạo mô hình') }}');
+                }
+            });
+        });
+
+        
+        $("#comparemodel").click(function(e){
+            e.preventDefault();
+            var form_data = new FormData();
+            form_data.append("compare_enable_cross_val", $('#compare_enable_cross_val').is(":checked") ? 1 : 0);
+            form_data.append("sort", $('#sort').val());
+            form_data.append("modeltype", $('#modeltype').val());
+
+            $.ajax({
+                url: '/comparemodel', // point to server-side URL
+                dataType: 'json', // what to expect back from server
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành so sánh mô hình') }}');
+                        populateCompareModelDataTable(JSON.parse(response.result));
+
+                        bestname = response.bestname;
+                        $("#singlemodel option").each(function() {
+                            
+                            if($(this).text().trim().replace(/ /g,'') == bestname.trim().replace(/ /g,'')) {
+                                $(this).attr('selected', 'selected');            
+                            }                        
+                        });
+                        
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Không thể so sánh mô hình') }}');
+                    }
+                        
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Không thể so sánh mô hình') }}');
+                }
+            });
+        });
+
+        $(".eda").click(function(e){
+            e.preventDefault();
+
+            var form_data = new FormData();
+            //form_data.append("modeltype", $('#modeltype').val());
+            form_data.append("data_id", $('#dataname').val());
+
+            $.ajax({
+                url: '/eda', // point to server-side URL
+                dataType: 'json', // what to expect back from server
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành phân tích dữ liệu') }}');
+                        
+                        $("#eda").attr('src',window.location.protocol + '//' + window.location.host + '/' + response.eda_file_path);
+                        $("#eda").show();   
+                        $('#eda').height($('#eda').contents().height() + 500);
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Không thể phân tích dữ liệu') }}');
+                    }
+                        
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Không thể phân tích dữ liệu') }}');
+                }
+            });
+        });
+
+
+        $("#polcom" ).change(function() {
+            if(this.checked) {
+                $("#polcom_sel").show();
+            } else {
+                $("#polcom_sel").hide();
+            }
+        });
+
+        $("#subset" ).change(function() {
+            if(this.checked) {
+                $("#subset_sel").show();
+            } else {
+                $("#subset_sel").hide();
+            }
+        });
+
+        $("#featuredrop" ).change(function() {
+            if(this.checked) {
+                $("#featuredrop_sel").show();
+            } else {
+                $("#featuredrop_sel").hide();
+            }
+        });
+
+        $("#pca" ).change(function() {
+            if(this.checked) {
+                $("#pca_sel").show();
+            } else {
+                $("#pca_sel").hide();
+            }
+        });
+
+        $("#ccomrarelevel" ).change(function() {
+            if(this.checked) {
+                $("#ccomrarelevel_sel").show();
+            } else {
+                $("#ccomrarelevel_sel").hide();
+            }
+        });
+        $("#add_cluster" ).change(function() {
+            if(this.checked) {
+                $("#add_cluster_sel").show();
+            } else {
+                $("#add_cluster_sel").hide();
+            }
+        });
+        
+        $("#remove_outliers_pca" ).change(function() {
+            if(this.checked) {
+                $("#remove_outliers_pca_sel").show();
+            } else {
+                $("#remove_outliers_pca_sel").hide();
+            }
+        });
+
+        $("#bincom" ).change(function() {
+            if(this.checked) {
+                $("#bincom_sel").show();
+            } else {
+                $("#bincom_sel").hide();
+            }
+        });
+
+        $("#nomalization" ).change(function() {
+            if(this.checked) {
+                $("#nomalization_sel").show();
+            } else {
+                $("#nomalization_sel").hide();
+            }
+        });
+
+        $("#transformation" ).change(function() {
+            if(this.checked) {
+                $("#transformation_sel").show();
+            } else {
+                $("#transformation_sel").hide();
+            }
+        });
+
+        $("#target_transformation" ).change(function() {
+            if(this.checked) {
+                $("#target_transformation_sel").show();
+            } else {
+                $("#target_transformation_sel").hide();
+            }
+        });
+
+        $('#targetcol').change(function () {
+            var optionSelected = $(this).find("option:selected");
+            target_col  = optionSelected.val();
+
+            $("#removecol option").remove();
+            $("#relatefeatures option").remove();
+            $("#bincom_option option").remove();
+            for (loop=0; loop < feature_list.length; loop++) {
+                if (target_col != feature_list[loop]) {
+                    $("#removecol").get(0).options.add(new Option(feature_list[loop]));
+                    $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
+                    $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
+                }
+                
+            }
+
+        });
+
+        
+
+
+
+        $('#removecol').on('select2:select', function (e) {
+            var data = e.params.data;
+            $("#relatefeatures option").remove();
+            $("#bincom_option option").remove();
+            removecol = $('#removecol').select2("val");
+            console.log(removecol)
+            for (loop=0; loop < feature_list.length; loop++) {
+                if (target_col != feature_list[loop]) {
+                    var is_remove = false;
+                    for (loop1=0; loop1 < removecol.length; loop1++) {
+                        if (removecol[loop1] == feature_list[loop]) {
+                            is_remove = true;
+                            break;
+                            
+                        }
+                        
+                    }
+                    if (!is_remove) {
+                        $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
+                        $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
+                    }
+                }
+                
+            }
+        });
+
+        $('#removecol').on('select2:unselect', function (e) {
+            var data = e.params.data;
+            $("#relatefeatures option").remove();
+            $("#bincom_option option").remove();
+            removecol = $('#removecol').select2("val");
+            console.log(removecol)
+            for (loop=0; loop < feature_list.length; loop++) {
+                if (target_col != feature_list[loop]) {
+                    var is_remove = false;
+                    for (loop1=0; loop1 < removecol.length; loop1++) {
+                        if (removecol[loop1] == feature_list[loop]) {
+                            is_remove = true;
+                            break;
+                            
+                        }
+                        
+                    }
+                    if (!is_remove) {
+                        $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
+                        $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
+                    }
+                }
+                
+            }
+        });
+
+
+         $('#trainingmode').change(function () {
+            var optionSelected = $(this).find("option:selected");
+            trainingmode  = optionSelected.val();
+
+            if (trainingmode == 0) {
+                $("#best_model_option").show();
+                $("#single_model_option").hide();
+                $("#ensemble_model_option").hide();
+            }
+            else if (trainingmode == 1){
+                $("#best_model_option").hide();
+                $("#single_model_option").show();
+                $("#ensemble_model_option").hide();
+            }
+            
+            else if (trainingmode == 2) {
+                $("#best_model_option").hide();
+                $("#single_model_option").hide();
+                $("#ensemble_model_option").show();
+            }
+            else {
+
+            }
+
+        });
+
+
+        $('#modeltype').change(function () {
+            var optionSelected = $(this).find("option:selected");
+            modeltypemode  = optionSelected.val();
+
+            if (modeltypemode == 0) {
+                $("#fix_imbalance_session").show();
+                $("#data_split_stratify_session").show();
+            }
+            else if (modeltypemode == 1){
+                $("#fix_imbalance_session").hide();
+                $("#data_split_stratify_session").hide();
+            }
+            
+            else if (modeltypemode == 2) {
+                $("#fix_imbalance_session").hide();
+                $("#data_split_stratify_session").hide();
+            }
+            else {
+
+            }
+
+        });
+
+        $(".submit").click(function(){
+            return false;
+        })
+    </script>>
+
+{% endblock javascripts %}

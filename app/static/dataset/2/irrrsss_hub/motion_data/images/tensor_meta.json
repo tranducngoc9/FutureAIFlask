@@ -1,0 +1,33 @@
+{
+    "chunk_compression": null,
+    "dtype": "uint8",
+    "hidden": false,
+    "htype": "image",
+    "is_link": false,
+    "is_sequence": false,
+    "length": 0,
+    "links": {
+        "motion_data/_images_id": {
+            "extend": "extend_id",
+            "flatten_sequence": false
+        },
+        "motion_data/_images_info": {
+            "extend": "extend_info",
+            "flatten_sequence": true,
+            "update": "update_info"
+        },
+        "motion_data/_images_shape": {
+            "extend": "extend_shape",
+            "flatten_sequence": true,
+            "update": "update_shape"
+        }
+    },
+    "max_chunk_size": null,
+    "max_shape": [],
+    "min_shape": [],
+    "name": "motion_data/images",
+    "sample_compression": "jpeg",
+    "tiling_threshold": null,
+    "verify": true,
+    "version": "3.1.0"
+}

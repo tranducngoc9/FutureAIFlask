@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/52b521d0b50d4b018c8f02e44b876c4f/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: 52b521d0b50d4b018c8f02e44b876c4f
+run_name: Extra Trees Regressor
+run_uuid: 52b521d0b50d4b018c8f02e44b876c4f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669558225781
+status: 1
+tags: []
+user_id: luonghongquan

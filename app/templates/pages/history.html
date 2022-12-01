@@ -1,0 +1,492 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý lịch sử vào / ra') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+<style>
+    a:hover {
+        text-decoration: none;
+    }
+
+
+    .avatar {
+        margin-bottom: 50px;
+    }
+
+
+    .card-profile .user-profile .desc {
+        color: black;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 11px;
+
+    }
+
+    .user-profile a {
+        color: white;
+        background: #6861ce;
+        padding: 5px 5px;
+        border-radius: 5px;
+    }
+
+    .user-profile a:hover {
+        text-decoration: none;
+    }
+
+    .card-profile .profile-picture {
+        position: absolute;
+        margin: 0 !important;;
+        top: 0;
+        width: 50px;
+        height: 50px;
+    }
+
+
+
+
+    .avatar-user {
+        width: 3rem;
+        height: 3rem;
+        -o-object-fit: cover;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .item-user-mqn {
+        float: left;
+        width: 145px;
+        margin-right: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .item-info-profile-user {
+        padding: 1px 1px;
+        cursor: pointer;
+    }
+
+    .desc {
+        white-space: nowrap; 
+        width: 140px;
+        font-size: 11.5px;
+        text-align: center;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: white;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .pagination {
+        float: right;
+        margin-top: -20px;
+        margin-bottom: 35px;
+    }
+
+    .demo {
+        position: relative;
+        top: 30px
+    }
+
+    .fix-right-mqn {
+        margin-right: 10px;
+    }
+
+    .image-checkbox-container input[type="checkbox"] {
+        display: none;
+    }
+
+    .image-checkbox-container img {
+        border: 0;
+    }
+
+    .avata-mqn-pro {
+        height: 150px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    .boder-pro-user-mqn-main {
+        border: 1px solid white;
+        border-radius: 5px;
+        height: 220px;
+    }
+
+    .item-fix-width-pro {
+        border: 1px solid white;
+        border-radius: 5px;
+        height: 240px;
+    }
+
+    .item-info-profile-user-nhandang {
+        position: relative;
+        top: -25px;
+    }
+
+    .avata-pro-mqn-main-chosse img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .avata-pro-mqn-main-chosse {
+        float: left;
+        margin-right: 13px;
+    }
+
+    .fix-top-button {
+        margin-top: 20px;
+    }
+
+    #display
+    {
+        width:250px;
+        display:none;
+        float:right; margin-right:30px;
+        border-left:solid 1px #dedede;
+        border-right:solid 1px #dedede;
+        border-bottom:solid 1px #dedede;
+        overflow:hidden;
+        position: absolute;
+        top: 60px;
+    }
+    .display_box
+    {
+        padding:4px;
+        border-top:solid 1px #dedede;
+        font-size:12px;
+        height:30px;
+        background: white;
+        cursor: pointer;
+    }
+    .load_more
+    {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        display: none;
+    }
+    .display_box:hover
+    {
+        background:#3b5998;
+        color:#FFFFFF;
+    }
+</style>
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Danh sách lịch sử ra / vào') }}</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-with-nav">
+                <div class="card-header">
+                    <div class="d-flex align-items-center fix-top-button">
+                        <button class="btn btn-primary btn-round ml-auto fix-right-mqn" data-toggle="modal"
+                            data-target="#xetUser">
+                            <i class="fa fa-user"></i>
+                            {{ _('Xác nhận người dùng') }}
+                        </button>
+                        <!-- <a href="add-user.html">
+                            <button class="btn btn-primary btn-round">
+                                <span class="btn-label">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+                                {{ _('Thêm người dùng') }}
+                            </button>
+                        </a> -->
+                    </div>
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" id="main-tab" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#alluser"
+                                    role="tab" aria-selected="false">{{ _('Tất cả') }}</a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#nhandang" role="tab"
+                                    aria-selected="false">{{ _('Đã nhận diện') }}</a> </li>
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#khongnhandang" role="tab"
+                                    aria-selected="false">{{ _('Không nhận diện') }}</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal fade" id="xetUser" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header no-bd">
+                                <h5 class="modal-title">
+                                    <span class="fw-mediumbold">{{ _('Xác nhận người dùng') }}</span>
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group form-group-default">
+                                                <label>{{ _('Mã nhân viên / Tên nhân viên') }}</label>
+                                                <input id="searchID" type="hidden" value="">
+                                                <input list="listUser" class="form-control" placeholder="{{ _('Nhập mã hoặc tên nhân viên') }}" id="searchbox">
+                                                
+                                            </div>
+                                            <div id="display">
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                </form>
+                            </div>
+                            <div class="modal-footer no-bd">
+                                <button type="button" id="confirmButton" class="btn btn-primary">{{ _('Xác nhận') }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table id="add-row" class="display table table-striped table-hover table-head-bg-primary">
+                    <div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="alluser" role="tabpanel" aria-labelledby="alluser-tab">
+                                    <div class="row">
+                                        <div id="content">
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <button class="btn btn-primary btn-rounded btn-center load_more" id="load_more">{{ _('Xem thêm') }}</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="nhandang" role="tabpanel" aria-labelledby="settings-tab">
+                                    <div class="row">
+                                        <div id="content1">
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <button class="btn btn-primary btn-rounded btn-center load_more" id="load_more1">{{ _('Xem thêm') }}</button>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="khongnhandang" role="tabpanel"
+                                    aria-labelledby="khongnhandang-tab">
+                                    <div class="row">
+                                        <div id="content2">
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <button class="btn btn-primary btn-rounded btn-center load_more" id="load_more2">{{ _('Xem thêm') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+<script>
+    var is_busy = false;
+    var page0 = 0;
+    var page1 = 0;
+    var page2 = 0;
+    var record_per_page = 20;
+    var stopped = false;
+    
+    $(document).ready(function()
+    {
+        $("#searchbox").keyup(function()
+        {
+            var searchbox = $(this).val();
+            var dataString = 'searchword='+ searchbox;
+            if(searchbox=='')
+            {
+
+            }
+            else
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/search_user",
+                    data: dataString,
+                    cache: false,
+                    success: function(html)
+                    {
+                        $("#display").html(html).show();
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+    function load(type, page)
+    {
+        
+        // ELement hiển thị chữ loadding
+        $button = $(this);
+        $button.hide();
+        // Nếu đang gửi ajax thì ngưng
+        if (is_busy == true) {
+            return false;
+        }
+         
+        
+        // Hiển thị loadding ...
+        $button.html('{{ _('Đang tải ...') }}');
+ 
+        // Gửi Ajax
+        $.ajax(
+        {
+            type: "GET",
+            url: "/history_data_list",
+            data: {page : page, size :　record_per_page, type : type},
+            cache: false,
+            success: function(result)
+            {   
+                if (result.trim() != "") {
+                    page++;
+                    if (type == 0) {
+                        $('#content').append(result);
+                        page0 = page;
+                    }
+                    else if (type == 1) {
+                        $('#content1').append(result);
+                        page1 =  page;
+                    }
+                    else if (type == 2) {
+                        $('#content2').append(result);
+                        page2 =  page;
+                    }
+                    $('#load_more').show();
+                    $('#load_more1').show();
+                    $('#load_more2').show();
+                } else {
+                    if (type == 0) {
+                        $('#load_more').hide();
+                    }
+                    else if (type == 1) {
+                        $('#load_more1').hide();
+                    }
+                    else if (type == 2) {
+                        $('#load_more2').hide();
+                    }
+                }
+                
+ 
+            }
+        })
+        .always(function()
+        {
+            // Sau khi thực hiện xong thì đổi giá trị cho button
+            $button.html('{{ _('Xem thêm') }}');
+            is_busy = false;
+        });
+    }
+
+    load(0, page0);
+    load(1, page1);
+    load(2, page2);
+    $('#load_more').click(function()
+    {
+        load(0, page0);
+        is_busy = true;
+ 
+    });
+    $('#load_more1').click(function()
+    {
+        load(1, page1);
+        is_busy = true;
+ 
+    });
+    $('#load_more2').click(function()
+    {
+        load(2, page2);
+        is_busy = true;
+ 
+    });
+
+
+    $("#confirmButton").click(function(){
+        var id = $("#searchID").val();
+        var name = $("#searchbox").val();
+
+        var selectedItems = new Array();
+        var selectedHisItems = new Array();
+
+        $('.his_1').each(function () {
+            if (this.checked) {
+                selectedItems.push($(this).data('id'));
+                selectedHisItems.push($(this).data('hid'));
+            }
+                
+        });
+
+        $('.his_2').each(function () {
+            if (this.checked) {
+                selectedItems.push($(this).data('id'));
+                selectedHisItems.push($(this).data('hid'));
+            }
+                
+        });
+
+        $('.his_3').each(function () {
+            if (this.checked) {
+                selectedItems.push($(this).data('id'));
+                selectedHisItems.push($(this).data('hid'));
+            }
+                
+        });
+
+        swal({
+            title: '{{ _('Bạn có chắc chắn không?') }}',
+            text: "{{ _('Bạn sẽ không thể khôi phục như trước!') }}",
+            type: '{{ _('Cảnh báo') }}',
+            buttons:{
+                confirm: {
+                    text : '{{ _('Có') }}',
+                    className : 'btn btn-success'
+                },
+                cancel: {
+                    text : '{{ _('Không') }}',
+                    visible: true,
+                    className: 'btn btn-danger'
+                }
+            }
+        }).then((OK) => {
+            if (OK) {
+                $.ajax({
+                    type: "POST",
+                    url: "/confirm_user",
+                    dataType: "json",
+                    contextType: "application/json",
+                    data: {selectedHIds : selectedHisItems.join(","), selectedIds : selectedItems.join(","), id : id},
+                    cache: false,
+                    success: function(html)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Xác nhận thành công') }}');
+                        setTimeout(function() { location.reload(); }, 2000);
+                    },
+                    error: function(error) {
+                        showError('{{ _('ETitle') }}', '{{ _('Xác nhận thất bại') }}');
+                    }
+                });
+            } else {
+                swal.close();
+            }
+        });
+
+
+
+        
+    });
+
+</script>
+
+{% endblock javascripts %}

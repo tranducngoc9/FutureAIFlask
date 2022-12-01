@@ -1,0 +1,33 @@
+{
+    "chunk_compression": null,
+    "dtype": "uint8",
+    "hidden": false,
+    "htype": "image",
+    "is_link": false,
+    "is_sequence": false,
+    "length": 0,
+    "links": {
+        "irrrsss/_images_id": {
+            "extend": "extend_id",
+            "flatten_sequence": false
+        },
+        "irrrsss/_images_info": {
+            "extend": "extend_info",
+            "flatten_sequence": true,
+            "update": "update_info"
+        },
+        "irrrsss/_images_shape": {
+            "extend": "extend_shape",
+            "flatten_sequence": true,
+            "update": "update_shape"
+        }
+    },
+    "max_chunk_size": null,
+    "max_shape": [],
+    "min_shape": [],
+    "name": "irrrsss/images",
+    "sample_compression": "jpeg",
+    "tiling_threshold": null,
+    "verify": true,
+    "version": "3.1.0"
+}

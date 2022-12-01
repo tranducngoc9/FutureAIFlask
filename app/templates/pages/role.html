@@ -1,0 +1,289 @@
+
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Quản lý nhóm người dùng') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">{{ _('Quản lý nhóm người dùng') }}</h4>
+                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+                                <i class="fa fa-plus"></i>
+                                {{ _('Thêm') }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Modal -->
+                        <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header no-bd">
+                                        <h5 class="modal-title">
+                                            <span class="fw-mediumbold">
+                                            {{ _('Thêm vai trò') }}</span> 
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="addForm" method="post" id="formValidation" novalidate="novalidate">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default" action="" method="post" role="form">
+                                                        <label>{{ _('Tên nhóm người dùng') }}</label>
+                                                        <input id="addName" name="name"  type="text" class="form-control" placeholder="{{ _('Nhập tên') }}" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer no-bd">
+                                                <input type="submit" name="" value="{{ _('Thêm') }}" class="btn btn-success">
+                                                <input type="reset" name="" value="{{ _('Hủy') }}" class="btn btn-danger">
+                                            </div>
+                                        </form>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header no-bd">
+                                        <h5 class="modal-title">
+                                            <span class="fw-mediumbold">
+                                            {{ _('Sửa vai trò người dùng trong hệ thống') }} </span> 
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="editForm" method="post" id="formEditValidation" novalidate="novalidate">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default" action="" method="post" role="form">
+                                                        <input id="editID" name="id" type="hidden" class="form-control">
+                                                        <label>{{ _('Tên nhóm người dùng') }}</label>
+                                                        <input id="editName" name="name"  type="text" class="form-control" placeholder="{{ _('Nhập tên') }}" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer no-bd">
+                                                <input type="submit" name="" value="{{ _('Sửa') }}" class="btn btn-success">
+                                                <input type="reset" name="" value="{{ _('Hủy') }}" class="btn btn-danger">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive">
+                            <table id="datatable" class="display table table-striped table-hover table-head-bg-primary" >
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>{{ _('Tên') }}</th>
+                                        <th style="width: 10%">{{ _('Thao tác') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+
+		$(document).ready(function() {
+
+			$('#datatable').DataTable({
+				"pageLength": 10,
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{ url_for('role_data') }}",
+                "columns":[{"data":"0"},{"data":"1"},{"data":null,"defaultContent":"", "searchable":false,"orderable": false}],
+                "columnDefs": [{
+                    "targets": [ 2 ],
+                    "render": function ( data, type, row ) {
+                            return '<td> <div class="form-button-action"> <button type="button" title="" class="btn btn-link btn-primary btn-lg table_item_edit" data-original-title="Edit Task" data-toggle="modal" data-target="#editRowModal" data-id="' + row[0] +'" data-name="' + row[1] +'"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger table_item_remove" data-original-title="Remove" data-id="' + row[0] + '" data-name="' + row[1] +'"> <i class="fa fa-times"></i> </button> </div> </td>' ;
+                        }
+                }],
+                "language": {
+                    "decimal":        "",
+                    "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                    "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                    "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                    "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                    "loadingRecords": "{{ _('Đang tải ...') }}",
+                    "processing":     "{{ _('Đang xử lý ...') }}",
+                    "search":         "{{ _('Tìm kiếm:') }}",
+                    "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                    "paginate": {
+                        "first":      "<<",
+                        "last":       ">>",
+                        "next":       ">",
+                        "previous":   "<"
+                    },
+                    "aria": {
+                        "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                        "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                    }
+                }
+
+			});
+
+            // Edit a record
+            $('#datatable').on('click', '.table_item_edit', function (e) {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                $("#editID").val(id);
+                $("#editName").val(name);
+                e.preventDefault();     
+            } );
+
+
+            // Delete a record
+            $('#datatable').on('click', '.table_item_remove', function (e) {
+                e.preventDefault();  
+                data_id = $(this).attr("data-id");
+                row = $(this).closest('tr');
+                swal({
+                    title: '{{ _('Bạn có chắc chắn xóa không?') }}',
+                    text: "{{ _('Bạn sẽ không thể khôi phục như trước!') }}",
+                    type: '{{ _('Cảnh báo') }}',
+                    buttons:{
+                        confirm: {
+                            text : '{{ _('Có') }}',
+                            className : 'btn btn-success'
+                        },
+                        cancel: {
+                            text : '{{ _('Không') }}',
+                            visible: true,
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((Delete) => {
+                    if (Delete) {
+                        $.ajax({
+                            url: '/del_roles',
+                            data: {id : data_id},
+                            type: 'POST',
+                            success: function(response) {
+                                console.log(response);
+                                if (response.success == true)
+                                {
+                                    showSuccess('{{ _('Title') }}', '{{ _('Xóa thành công') }}');
+                                    row.remove();
+                                    $('#datatable').DataTable().clear().draw();
+
+                                } else {
+                                    showError('{{ _('ETitle') }}', '{{ _('Xóa thất bại') }}');
+                                }
+                                    
+                            },
+                            error: function(error) {
+                                showError('{{ _('ETitle') }}', '{{ _('Xóa thất bại') }}');
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+                });
+                
+            } );
+
+
+            $('#formValidation').submit(function(e){     
+
+                e.preventDefault();
+                var $form = $(this);
+
+                // check if the input is valid
+                if(! $form.valid()) return false;
+
+                $.ajax({
+                    url: '/add_roles',
+                    data: $('.addForm').serialize(),
+                    type: 'POST', 
+                    processData: false,
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success == true)
+                        {
+                            showSuccess('{{ _('Title') }}', '{{ _('Thêm thành công') }}');
+                            $('#datatable').DataTable().clear().draw();
+
+                        } else {
+                            showError('{{ _('ETitle') }}', '{{ _('Thêm thất bại') }}');
+                        }
+                            
+                    },
+                    error: function(error) {
+                        showError('{{ _('ETitle') }}', '{{ _('Thêm thất bại') }}');
+                    }
+                });
+
+                $('#addRowModal').modal('hide');
+            });
+
+            $('#formEditValidation').submit(function(e){     
+
+                e.preventDefault();
+                var $form = $(this);
+
+                // check if the input is valid
+                if(! $form.valid()) return false;
+
+                $.ajax({
+                    url: '/edit_roles',
+                    data: $('.editForm').serialize(),
+                    type: 'POST',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.success == true)
+                        {
+                            showSuccess('{{ _('Title') }}', '{{ _('Sửa thông tin thành công') }}');
+                            $('#datatable').DataTable().clear().draw();
+
+                        } else {
+                            showError('{{ _('ETitle') }}', '{{ _('Sửa thông tin thất bại') }}');
+                        }
+                            
+                    },
+                    error: function(error) {
+                        showError('{{ _('ETitle') }}', '{{ _('Sửa thông tin thất bại') }}');
+                    }
+                });
+
+                $('#editRowModal').modal('hide');
+            });
+
+		});
+	</script>
+
+{% endblock javascripts %}

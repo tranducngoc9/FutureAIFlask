@@ -1,0 +1,90 @@
+
+
+		<div class="main-header">
+			
+			<!-- Logo Header -->
+			<div class="logo-header" data-background-color="dark2">
+				
+				<a href="index.html" class="logo">
+					<img src="/static/assets/img/logo.png" alt="navbar brand" class="navbar-brand">
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End Logo Header -->
+
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+				
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+<!-- 						<form class="navbar-left navbar-form nav-search mr-md-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button type="submit" class="btn btn-search pr-1">
+										<i class="fa fa-search search-icon"></i>
+									</button>
+								</div>
+								<input type="text" placeholder="Tìm kiếm ..." class="form-control">
+							</div>
+						</form> -->
+						<nav class="navbar-left navbar-form mr-md-3">
+					        <select name="bank_code" id="select-language" class="form-control">
+					          <option value="">{{ _('Lựa chọn ngôn ngữ') }}</option>
+					          <option value="en">English</option>
+					          <option value="vi_VN">Tiếng Việt</option>
+					          <option value="ja_JP">日本語</option>
+					        </select>
+					        <ul class="nav">
+					          <li class="nav-item">
+					          </li>
+					        </ul>
+					      
+					    </nav>
+					</div>
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item dropdown hidden-caret">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+								<div class="avatar-sm">
+									<img src="{% if current_user.faces | length > 0 %} {{ current_user.faces[0].file_name }} {% else %} /static/assets/img/profile.jpg {% endif %} " alt="..." class="avatar-img rounded-circle">
+								</div>
+							</a>
+
+							<ul class="dropdown-menu dropdown-user animated fadeIn">
+								<div class="dropdown-user-scroll scrollbar-outer">
+									<li>
+										<div class="user-box">
+											<div class="avatar-lg"><img src="{% if current_user.faces | length > 0 %} {{ current_user.faces[0].file_name }} {% else %} /static/assets/img/profile.jpg {% endif %} " alt="image profile" class="avatar-img rounded"></div>
+											<div class="u-text">
+												<h4>
+													{{ current_user.user }}
+												</h4>
+												<p class="text-muted">
+												{{ current_user.email }}
+												</p>
+                        						<a href="/profile.html" class="btn btn-xs btn-secondary btn-sm">{{ _('Trang cá nhân') }}</a>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href={{ url_for('logout') }}>{{ _('Đăng xuất') }}</a>
+									</li>
+								</div>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+
+		</div>

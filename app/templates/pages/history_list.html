@@ -1,0 +1,51 @@
+{% for history, camera, user, face in histories %}
+<div class="item-user-mqn">
+   
+    <span class="image-checkbox-container">
+        <div class="boder-pro-user-mqn-main">
+            
+            <div class="card card-profile">
+                <div class="profile-picture">
+                    <div class="avatar avatar-user">
+                        <img src="{{ face.file_name or '/static/assets/img/profile.jpg' }}"
+                            class="avatar-img rounded-circle border 
+                            {% if (user.is_unknown) %} border-white {% else %} border-success {% endif %}">
+                    </div>
+                </div>
+               
+                <img src="{{ history.image }}" alt=""
+                    class="avata-mqn-pro" data-id=" {{ user.id }}">
+                <input class="his_1" type="checkbox" name="black-box" value="1" data-id="{{ user.id }}" data-hid="{{ history.id }}"/>
+                <div class="item-info-profile-user">
+                    <div class="desc">{{ user.full_name }}</div>
+                    <div class="desc">{{ camera.name or camera.udid }}</div>
+                    <div class="desc">{{ history.time.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+                </div>
+            </div>
+        </div>
+    </span>
+    
+</div>
+{% endfor %}
+{% if histories|length > 0 %}
+<script type="text/javascript">
+	$('.item-info-profile-user').unbind().click(function(){
+        if (!$(this).prev('input[type="checkbox"]').prop('checked')) {
+            $(this).prev('input[type="checkbox"]').prop('checked', true).attr('checked', 'checked');
+            this.parentNode.style.border = '3px solid #6861ce';
+
+        } else {
+            $(this).prev('input[type="checkbox"]').prop('checked', false).removeAttr('checked');
+            this.parentNode.style.border = '0';
+
+        }
+    });
+
+
+    $(".avata-mqn-pro").click(function(){
+        var id = $(this).data('id');
+        window.location.href = "profile.html?id=" + id;
+    });
+
+</script>
+{% endif %}

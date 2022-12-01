@@ -1,0 +1,94 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Thông tin camera') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+        .form-control:disabled,
+        .form-control[readonly] {
+            background: transparent !important;
+        }
+    </style>
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Thông tin camera') }}</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-with-nav">
+                <div class="card-header">
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#chinhanh"
+                                    role="tab" aria-selected="false">{{ _('Thông tin chi tiết camera') }}</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="chinhanh" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="" method="post">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tên công ty') }}</label>
+                                            <input id="nameCompany" type="text" class="form-control" name="name" placeholder="{{ _('Tên công ty') }}"
+                                                value="MQ Solutions" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                        <div class="col-md-6">
+                                                <div class="form-group form-group-default">
+                                                    <label>Camera ID</label>
+                                                    <input id="cameraId" type="text" class="form-control" name="name" placeholder="Camera ID"
+                                                        value="0123456789">
+                                                </div>
+                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Địa chỉ IP') }}</label>
+                                            <input id="addressIp" type="text" class="form-control" name="name" placeholder="{{ _('Địa chỉ IP') }}"
+                                                value="info@solutions.vn">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Vị trí lắp đặt') }}</label>
+                                            <input id="locationInstall" type="text" class="form-control" name="name" placeholder="{{ _('Vị trí lắp đặt') }}"
+                                                value="Công ty công nghệ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group form-group-default">
+                                                <label>{{ _('Trạng thái') }}</label>
+                                                <select name="" id="status" class="form-control">
+                                                        <option value="">Online</option>
+                                                        <option value="">Offline</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button class="btn btn-success">{{ _('Lưu thông tin') }}</button>
+                                    <button type="reset" class="btn btn-danger">{{ _('Hủy Bỏ') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

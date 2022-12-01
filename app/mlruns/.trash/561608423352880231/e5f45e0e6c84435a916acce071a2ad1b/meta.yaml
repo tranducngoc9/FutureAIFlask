@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/e5f45e0e6c84435a916acce071a2ad1b/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: e5f45e0e6c84435a916acce071a2ad1b
+run_name: Orthogonal Matching Pursuit
+run_uuid: e5f45e0e6c84435a916acce071a2ad1b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669539701885
+status: 1
+tags: []
+user_id: luonghongquan

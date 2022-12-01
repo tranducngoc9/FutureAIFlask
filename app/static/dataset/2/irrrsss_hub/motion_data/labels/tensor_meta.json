@@ -1,0 +1,33 @@
+{
+    "_disable_temp_transform": false,
+    "_info": [
+        "class_names"
+    ],
+    "chunk_compression": null,
+    "class_names": [],
+    "dtype": "uint32",
+    "hidden": false,
+    "htype": "class_label",
+    "is_link": false,
+    "is_sequence": false,
+    "length": 0,
+    "links": {
+        "motion_data/_labels_id": {
+            "extend": "extend_id",
+            "flatten_sequence": false
+        },
+        "motion_data/_labels_shape": {
+            "extend": "extend_shape",
+            "flatten_sequence": true,
+            "update": "update_shape"
+        }
+    },
+    "max_chunk_size": null,
+    "max_shape": [],
+    "min_shape": [],
+    "name": "motion_data/labels",
+    "sample_compression": null,
+    "tiling_threshold": null,
+    "verify": true,
+    "version": "3.1.0"
+}

@@ -1,0 +1,1049 @@
+{% extends "layouts/default.html" %}
+
+{% block title %} {{ _('Trang cá nhân') }} {% endblock title %}
+
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<style>
+    .form-control:disabled,
+    .form-control[readonly] {
+        background: transparent !important;
+    }
+
+    .avta-top {
+        margin-bottom: 10px;
+    }
+
+    .avta-top img {
+        cursor: pointer;
+    }
+
+    .srcoll-avata-info-right {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 300px;
+        background: #202940;
+        padding: 10px 10px;
+        border-radius: 10px;
+
+    }
+
+    .srcoll-avata-info-right::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: #1a2035;
+    }
+
+    .srcoll-avata-info-right::-webkit-scrollbar {
+        width: 10px;
+        background-color: #1a2035;
+        height: 10px;
+    }
+
+    .srcoll-avata-info-right::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background-color: #c2c2c2;
+    }
+
+
+    .imageThumb {
+        height: 80px;
+        max-width: 80px;
+        border: 2px solid;
+        padding: 1px;
+        cursor: pointer;
+        object-fit: cover;
+    }
+
+    .camera-btn-group {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .pip {
+        display: inline-block;
+        margin-top: 10px;
+        margin-right: 10px;
+        height: 80px;
+    }
+
+    .remove {
+        display: block;
+        background: #444;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        top: -77px;
+        position: relative;
+        margin-bottom: 60px;
+        width: 19px;
+        left: 62px;
+    }
+
+    .remove:hover {
+        background: white;
+        color: black;
+    }
+
+    .remove_webcam {
+        display: block;
+        background: #444;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        top: -77px;
+        position: relative;
+        margin-bottom: 60px;
+        width: 19px;
+        left: 62px;
+    }
+
+    .remove_webcam:hover {
+        background: white;
+        color: black;
+    }
+
+    .face-image {
+        margin-bottom: 10px; 
+        padding: 5px;
+    }
+
+</style>
+<div class="page-inner">
+    <h4 class="page-title">{{ _('Thông tin cá nhân') }}</h4>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card card-with-nav">
+                <div class="card-header">
+                    <div class="row row-nav-line">
+                        <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
+                            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#profile"
+                                    role="tab" aria-selected="false">{{ _('Thông tin cá nhân') }}</a> </li>
+                            {% if not user.is_unknown %}
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab"
+                                    aria-selected="false">{{ _('Thay đổi mật khẩu') }}</a> </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="" method="post" id="formValidation" enctype="multipart/form-data">
+                                <input id="id" type="hidden" value="{{ user.id }}">
+                                
+                                {% if current_user.has_roles("staff") or current_user.has_roles("user") %}
+
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tài khoản') }}</label>
+                                            <input type="text" class="form-control" id="user" name="user" placeholder="" required value="{{ user.user }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Họ và tên') }}</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="" required value="{{ user.full_name  or ''  }}"  disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-default">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="" required value="{{ user.email or '' }}" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Số điện thoại') }}</label>
+                                            <input type="text" class="form-control" value="{{ user.phone or '' }}" id="phone" name="phone" placeholder="" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Ngày sinh nhật') }}</label>
+                                            <input type="text" class="form-control" id="birth" name="birth"   value="{% if user.birthday %} {{ user.birthday.date().strftime('%m/%d/%Y') }} {% endif %}" placeholder="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Giới tính') }}</label>
+                                            <input type="text" class="form-control" value="{% if user.gender == 1 %} Nam {% endif %} {% if user.gender == 2 %} {{ _('Nữ') }} {% endif %}" id="gender" name="gender" placeholder="" disabled>
+                                        </div>
+                                    </div>
+                                    
+ 
+                                </div>
+                                <!-- <div class="row mt-3">
+                                    {% if current_user.has_roles("staff") %}
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Chức vụ') }}</label>
+                                            <input type="text" class="form-control" value="{{ user.position or '' }}" id="position" name="position" placeholder="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mã nhân viên') }}</label>
+                                            <input type="text" class="form-control" id="code" name="code"
+                                                placeholder="" value="{{ user.code or ''  }}" disabled>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if current_user.has_roles("user") %}
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mã khách hàng') }}</label>
+                                            <input type="text" class="form-control" id="code" name="code"
+                                                placeholder="" value="{{ user.code or ''  }}" disabled>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div> -->
+                                {% endif %}
+
+
+
+
+                                {% if current_user.has_roles("superuser") or current_user.has_roles("admin") %}
+                                {% if user.is_unknown %}
+                                <p class="text-danger">{{ _('Người dùng này chưa được nhận diện trong hệ thống. Hãy nhập và lưu thông tin để xác nhận người dùng') }}</p>
+                                {% endif %}
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tài khoản') }}</label>
+                                            <input type="text" class="form-control" id="user" name="user" placeholder="{{ _('Nhập tài khoản') }}" required value="{{ user.user }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Họ và tên') }}</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="{{ _('Nhập họ và tên') }}" required value="{{ user.full_name  or ''  }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Loại người dùng') }}</label>
+                                            <select name="role" id="role" class="form-control" required >
+                                                <option value="" disabled>{{ _('Lựa chọn loại người dùng') }}</option>
+                                                {% for role in roles %}
+                                                <option value="{{ role.id }}" {% if user.roles and user.roles[0].id == role.id %} selected {% else %} {% endif %} >{{ role.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="{{ _('Nhập email') }}" value="{{ user.email or '' }}" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Số điện thoại') }}</label>
+                                            <input type="text" class="form-control" value="{{ user.phone or '' }}" id="phone" name="phone" placeholder="{{ _('Nhập số điện thoại') }}" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Ngày sinh nhật') }}</label>
+                                            <input type="text" class="form-control" id="birth" name="birth"   value="{% if user.birthday %} {{ user.birthday.date().strftime('%m/%d/%Y') }} {% endif %}" placeholder="{{ _('Chọn ngày sinh') }}" >
+                                        </div>
+                                    </div>
+                                    
+                                    
+ 
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Giới tính') }}</label>
+                                            <select class="form-control" id="gender" name="gender" >
+                                                <option value="0" {% if user.gender == 0 %} selected {% else %} {% endif %} disabled>{{ _('Chọn giới tính') }}</option>
+                                                <option value="1" {% if user.gender == 1 %} selected {% else %} {% endif %} >{{ _('Nam') }}</option>
+                                                <option value="2" {% if user.gender == 2 %} selected {% else %} {% endif %} >{{ _('Nữ') }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {% if  current_user.has_roles("superuser") %} 
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Tên đơn vị') }}</label>
+                                            <select name="company" id="company" class="form-control" required >
+                                                <option value="0" {% if not user.company_id  %} selected {% endif %} disabled>{{ _('Lựa chọn đơn vị') }}</option>
+                                                {% for company in companies %}
+                                                <option value="{{ company.id }}" {% if user.company_id == company.id %} selected {% else %} {% endif %} >{{ company.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <input id="company" name="company" type="hidden" value="{{ companies[0].id or "" }}">
+                                    {% endif %}
+                                    
+                                    <div class="col-md-4" id="staff-show" style="{% if not user.has_roles('staff') %} display:none {% endif %}">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Chức vụ') }}</label>
+                                            <input type="text" class="form-control" value="{{ user.position or '' }}" id="position" name="position" placeholder="{{ _('Chức vụ') }}" >
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- <div class="col-md-4" id="user-show">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mã người dùng') }}</label>
+                                            <input type="text" class="form-control" id="code" name="code"
+                                                placeholder="{{ _('Mã người dùng') }}" value="{{ user.code or ''  }}" >
+                                        </div>
+                                    </div> -->
+                                </div>
+                               <!--  <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Thêm tệp ảnh khuôn mặt') }}</label>
+                                            <input type="file" id="avataName" name="avataName[]" class="form-control" multiple />
+                                            
+                                            <div id="file_selected"></div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="image_preview"></div>
+                                
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Thêm ảnh khuôn mặt từ camera') }}</label>
+
+                                            <div class="camera-btn-group">
+                                            <button class="btn btn-primary btn-round btn-sm" type="button" id="startWebcam"> <span class="btn-label"> <i class="flaticon-play-button-1"></i> </span> {{ _('Mở WebCam') }} </button>
+                                            
+                                            <button class="btn btn-danger btn-round btn-sm" type="button" id="stopWebcam" style="display: none"> <span class="btn-label"> <i class="flaticon-signs"></i> </span> {{ _('Đóng WebCam') }} </button>
+
+                                            <button class="btn btn-info btn-round btn-sm" type="button" id="snapshot" style="display: none"> <span class="btn-label"> <i class="flaticon-photo-camera"></i> </span> {{ _('Chụp ảnh') }} </button>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <video onclick="snapshot(this);" width=200 height=200 id="video" autoplay style="display: none"></video>
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <img id="webcam-output"> 
+                                            </div>
+                                            <div class="col-md-0">
+                                                <canvas  id="canvas" width="240" height="200" style="display: none"></canvas>
+                                            </div>
+                                        </div>
+                                     </div>
+                                </div> -->
+                                
+                                <div class="text-right mt-3 mb-3">
+                                    {% if user.is_unknown %}
+                                    <button class="btn btn-success">{{ _('Thêm người dùng') }}</button>
+                                    {% else %}
+                                    <button class="btn btn-primary">{{ _('Lưu thông tin') }}</button>
+                                    {% endif %}
+                                    <button type="reset" class="btn btn-danger">{{ _('Hủy Bỏ') }}</button>
+                                </div>
+                                {% endif %}
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                            {% if current_user.id == user.id %}
+                            <form action="" method="post" id="formPassWordPros">
+                               
+                                <div class="row md-12">
+                                    
+
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mật khẩu hiện tại') }}</label>
+                                            <input id="password" type="password" class="form-control" name="password" required placeholder="{{ _('Mật khẩu hiện tại') }}" value="">
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Mật khẩu mới') }}</label>
+                                            <input id="newpassword" type="password" class="form-control"
+                                                name="newpassword" required  placeholder="{{ _('Mật khẩu mới') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group form-group-default">
+                                            <label>{{ _('Xác nhận mật khẩu') }}</label>
+                                            <input id="confirmpassword" type="password" class="form-control"
+                                                name="confirmpassword" required placeholder="{{ _('Xác nhận mật khẩu') }}">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="text-right mt-3 mb-3">
+                                    <button type="submit" class="btn btn-primary">{{ _('Đổi mật khẩu') }}</button>
+                                </div>
+                             </form>
+                            {% else %}
+                                {% if current_user.has_roles("superuser") or current_user.has_roles("admin") %}
+                                <div class="row md-12">
+                                    <div class="col-md-12">
+                                        <p>{{ _('Mật khẩu mới sẽ được tạo và gửi đến địa chỉ email của người dùng') }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button id="btn-resetpassword" class="btn btn-primary">{{ _('Tạo mật khẩu mới') }}</button>
+                                    </div>
+                                </div>
+                                {% endif  %}
+                            {% endif  %}
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile">
+                <div class="card-header" style="background-image: url('/static/assets/img/blogpost.jpg')">
+                    <div class="profile-picture">
+                        <div class="avatar avatar-xl">
+                            {% if faces | length > 0  %}
+                                <img src="{{ faces[0].file_name }}" alt="..." class="avatar-img rounded-circle">
+                            {% else %} 
+                                <img src="/static/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                            {% endif %} 
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="user-profile text-center">
+                        <div class="name" style="color:#6861CE">{{ user.full_name  or ''  }}
+                        {% if faces | length > 0  %}
+                        (
+                            {% if gender != -1  %}
+                                {% if gender  %}
+                                    {{ _('Nam') }}
+                                {% else %} 
+                                    {{ _('Nữ') }}
+                                {% endif %} 
+                            {% endif %} 
+                            {% if age != -1  %}
+                                {% if age  %}
+                                   - {{ age  }}{{ _(' Tuổi') }}
+                                {% endif %} 
+                            {% endif %} 
+                        )
+                        {% endif %} 
+                        </div>
+                        <div class="job">{{ user.position  or ''  }}</div>
+                        {% if user.phone  %}<div class="desc"><span class="icon-phone"> {{ user.phone }}</span> </div>{% endif %} 
+                        {% if user.email  %}<div class="desc"><span class="flaticon-envelope-1"> {{ user.email }}</span> </div>{% endif %} 
+                        <div class="social-media">
+                            <a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-twitter"></i></span>
+                            </a>
+                            <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
+                            </a>
+                            <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
+                                <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if faces | length > 0 %}
+            <div class="text-right">
+                <button class="btn btn-primary btn-border btn-sm" id="btn-delete-face" style="display: none; margin-bottom: 5px">{{ _('Xóa ảnh') }}</button>
+            </div>
+            <div class="srcoll-avata-info-right">
+                <div class="row">
+                    {% for face in faces %}
+                    
+                    <label class="imagecheck face-image col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <input name="imagecheck" type="checkbox" value="{{ face.id }}" class="imagecheck-input">
+                        <figure class="imagecheck-figure">
+                            <img src="{{ face.file_name }}" alt="title" class="imagecheck-image">
+                        </figure>
+                    </label>
+
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block javascripts %}
+
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script src="/static/assets/js/setting-demo2.js"></script>
+
+<!-- Điều hướng tab -->
+<script>
+    var hash = document.location.hash;
+    if (hash) {
+        // $('.nav-link').removeClass('active show');
+        $('.nav-link[href="' + hash + '"]').click();
+    }
+</script>
+
+<script>
+   
+    $(document).ready(function () {
+        var sendData = [];
+
+        $('#datatable').DataTable({
+            "pageLength": 10,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+               "url": "{{ url_for('profile_log_time') }}",
+               "data": function ( d ) {
+                   d.id = $('#id').val();
+               }
+            },
+            "columnDefs": [{
+                "targets": [ 0 ],
+                "render": function ( data, type, row ) {
+                        return '<td><div class="profile-picture"> <div class="avatar avatar-lg"> <img src="' + row[1] + '" alt="..." class="avatar-img rounded"> </div></div></td>' ;
+                    }
+            },{
+                "targets": [ 4 ],
+                "render": function ( data, type, row ) {
+                        return '<td> <div class="form-button-action"> <button type="button" title="" class="btn  btn-primary btn-lg table_item_add" data-original-title="Add Image" data-hid="' + row[0] + '"> <i class="fa fa-plus"></i> </button> </div> </td>' ;
+                    }
+            }],
+            "columns":[{"data":"1"},{"data":"2"},{"data":"3"},{"data":"4"},{"data":null,"defaultContent":"", "searchable":false,"orderable": false}],
+            "language": {
+                "decimal":        "",
+                "emptyTable":     "{{ _('Không có dữ liệu') }}",
+                "info":           "{{ _('Hiển thị từ _START_ tới _END_ trong tổng số _TOTAL_ dữ liệu') }}",
+                "infoEmpty":      "{{ _('Không có dữ liệu hiển thị') }}",
+                "infoFiltered":   "{{ _('(lọc từ _MAX_ dữ liệu)') }}",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "{{ _('Hiển thị _MENU_ dữ liệu trên 1 trang') }}",
+                "loadingRecords": "{{ _('Đang tải ...') }}",
+                "processing":     "{{ _('Đang xử lý ...') }}",
+                "search":         "{{ _('Tìm kiếm:') }}",
+                "zeroRecords":    "{{ _('Không tìm thấy dữ liệu') }}",
+                "paginate": {
+                    "first":      "<<",
+                    "last":       ">>",
+                    "next":       ">",
+                    "previous":   "<"
+                },
+                "aria": {
+                    "sortAscending":  "{{ _(': sắp xếp tăng dần') }}",
+                    "sortDescending": "{{ _(': sắp xếp giảm dần') }}"
+                }
+            }
+
+        });
+
+
+        $('#datatable').on('click', '.table_item_add', function (e) {
+            e.preventDefault();
+            var id = $("#id").val();
+            var hid = $(this).data('hid');
+            swal({
+                title: '{{ _('Thêm ảnh') }}',
+                text: "{{ _('Bạn có sử dụng ảnh lịch sử này cho việc nhận dạng người dùng?') }}",
+                type: '{{ _('Cảnh báo') }}',
+                buttons:{
+                    confirm: {
+                        text : '{{ _('Có') }}',
+                        className : 'btn btn-success'
+                    },
+                    cancel: {
+                        text : '{{ _('Không') }}',
+                        visible: true,
+                        className: 'btn btn-danger'
+                    }
+                }
+            }).then((OK) => {
+                if (OK) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/add_history_face",
+                        dataType: "json",
+                        contextType: "application/json",
+                        data: {id : id, hid: hid},
+                        cache: false,
+                        success: function(html)
+                        {
+                            showSuccess('{{ _('Title') }}', '{{ _('Thêm thành công') }}');
+                            setTimeout(function() { location.reload(); }, 2000);
+                        },
+                        error: function(error) {
+                            showError('{{ _('ETitle') }}', '{{ _('Thêm thất bại') }}');
+                        }
+                    });
+                } else {
+                    swal.close();
+                }
+            });
+            
+        });
+
+
+         $('#formPassWordPros').submit(function(e){     
+
+            e.preventDefault();
+            var $form = $(this);
+
+            // check if the input is valid
+            if(! $form.valid()) return false;
+
+            var formData = new FormData();
+            formData.append('id', $("#id").val());
+            formData.append('password', $("#password").val());
+            formData.append('newpassword', $("#newpassword").val());
+
+            $.ajax({
+                url: '/edit_password',
+                data: formData,
+                type: 'POST',
+                contentType: false, 
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Sửa thành công') }}');
+                        
+                        setTimeout(function() { location.reload(); }, 2000);
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                    }
+ 
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                }
+
+            });
+        });
+
+        {% if current_user.has_roles("superuser") or current_user.has_roles("admin") %}
+
+        $('#formValidation').submit(function(e){     
+
+            e.preventDefault();
+            var $form = $(this);
+
+            // check if the input is valid
+            if(! $form.valid()) return false;
+
+            var formData = new FormData();
+            var file_num = sendData.length;
+            formData.append('file_num', file_num);
+            for (var i = 0; i < file_num; i++) {
+                formData.append('file' + i, sendData[i].f);
+            }
+            formData.append('id', $("#id").val());
+            formData.append('user', $("#user").val());
+            formData.append('name', $("#name").val());
+            formData.append('email', $("#email").val());
+            formData.append('phone', $("#phone").val());
+            formData.append('birth', $("#birth").val());
+            formData.append('role', $("#role").val());
+            formData.append('gender', $("#gender").val());
+            //formData.append('position', $("#position").val());
+            formData.append('company', $("#company").val());
+            //formData.append('code', $("#code").val());
+
+            $.ajax({
+                url: '/edit_profile',
+                data: formData,
+                    type: 'POST',
+                contentType: false, 
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Sửa thành công') }}');
+                        
+                        setTimeout(function() { location.reload(); }, 2000);
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                    }
+ 
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Sửa thất bại') }}');
+                }
+
+            });
+        });
+
+        
+
+        if (window.File && window.FileList && window.FileReader) {
+            $("#avataName").on("change", function (e) {
+                var files = e.target.files,
+                    filesLength = files.length;
+                for (var i = 0; i < filesLength; i++) {
+                    var f = files[i]
+                    var fileReader = new FileReader();
+                    fileReader.file = f;
+                    fileReader.onload = (function (e) {
+                        var file = e.target;
+                        $("<span class=\"pip\">" +
+                            "<img class=\"imageThumb\" src=\"" + e.target.result +
+                            "\" title=\"" + file.name + "\"/>" +
+                            "<br/><span class=\"remove\"><i class='flaticon-cross'></i></span>" +
+                            "</span>").insertAfter("#file_selected");
+                        sendData.push({f: this.file,file: file, url: e.target.result});
+
+                        $(".remove").click(function () {
+                            //$(this).parent(".pip").remove();
+                            var self = $(this).parent().children();
+                            sendData.map(function(value, currentIndex, data) {
+                              // Remove only image which removed from preview
+                              if (self[0].currentSrc === value.url) {
+                                sendData.splice(currentIndex, 1);
+                              }
+                            });
+                            $(this).parent().remove();
+                        });
+                    });
+                    fileReader.readAsDataURL(f);
+                }
+            });
+        } else {
+            alert("{{ _('Trình duyệt của bạn không hỗ trợ tính năng này , vui lòng thay đổi trình duyệt !') }}")
+        }
+
+       
+        $(".imagecheck-input").change(function() {
+            $('#btn-delete-face').hide()
+            $('input.imagecheck-input:checkbox:checked').each(function () {
+                $('#btn-delete-face').show();
+            });
+        });
+
+        $('#btn-delete-face').click(function (e) {
+            var data = [];
+            $('input.imagecheck-input:checkbox:checked').each(function () {
+                var sThisVal = $(this).val();
+                data.push(sThisVal);
+            });
+
+            data_id = $(this).attr("data-id");
+            swal({
+                title: '{{ _('Bạn có chắc không?') }}',
+                type: 'warning',
+                buttons: {
+                    cancel: {
+                        visible: true,
+                        text: '{{ _('HỦY BỎ') }}',
+                        className: 'btn btn-danger'
+                    },
+                    confirm: {
+                        text: '{{ _('ĐỒNG Ý XÓA') }}',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then((willDelete) => {
+                if (willDelete) {
+
+                    var formData = new FormData();
+                    formData.append('id', data);
+
+                    $.ajax({
+                        url: '/del_face',
+                        data: formData,
+                        type: 'POST',
+                        contentType: false, 
+                        processData: false,
+                        success: function(response) {
+                            console.log(response);
+                            if (response.success == true)
+                            {
+                                swal("{{ _('Xóa ảnh thành công') }}", {
+                                    icon: "success",
+                                    buttons: {
+                                        confirm: {
+                                            className: 'btn btn-success'
+                                        }
+                                    }
+                                });
+                                
+                                setTimeout(function() { location.reload(); }, 2000);
+                            } else {
+                                showError('{{ _('ETitle') }}', '{{ _('Xóa thất bại') }}');
+                            }
+
+                                
+                        },
+                        error: function(error) {
+                            showError('{{ _('ETitle') }}', '{{ _('Xóa thất bại') }}');
+                        }
+
+                    });
+
+                    
+                } else {
+                    swal("{{ _('Bạn đã hủy tác vụ xóa') }}", {
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-success'
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+
+        navigator.getUserMedia = ( navigator.getUserMedia ||
+                             navigator.webkitGetUserMedia ||
+                             navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia);
+
+        var video;
+        var webcamStream;
+        var canvas, ctx;
+        var streaming = false;
+        var width = 320;
+        var height = 240;
+
+
+        $('#btn-resetpassword').click(function (e) {
+            swal({
+                title: '{{ _('Bạn có chắc chắn không?') }}',
+                type: 'warning',
+                buttons: {
+                    cancel: {
+                        visible: true,
+                        text: '{{ _('HỦY BỎ') }}',
+                        className: 'btn btn-danger'
+                    },
+                    confirm: {
+                        text: 'OK',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then((willDelete) => {
+                if (willDelete) {
+
+                    var formData = new FormData();
+                    formData.append('id', $("#id").val());
+
+                    $.ajax({
+                        url: '/reset_password',
+                        data: formData,
+                        type: 'POST',
+                        contentType: false, 
+                        processData: false,
+                        success: function(response) {
+                            console.log(response);
+                            if (response.success == true)
+                            {
+                                swal("{{ _('Tạo mật khẩu mới thành công') }}", {
+                                    icon: "success",
+                                    buttons: {
+                                        confirm: {
+                                            className: 'btn btn-success'
+                                        }
+                                    }
+                                });
+                            } else {
+                                showError('{{ _('ETitle') }}', '{{ _('Tạo mật khẩu thất bại') }}');
+                            }
+
+                                
+                        },
+                        error: function(error) {
+                            showError('{{ _('ETitle') }}', '{{ _('Tạo mật khẩu thất bại') }}');
+                        }
+
+                    });
+
+                    
+                }
+            });
+        });
+
+
+
+        $("#startWebcam").click(function() {
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia (
+                      // constraints
+                      {
+                            video: true,
+                            audio: false
+                      },
+
+                      // successCallback
+                      function(localMediaStream) {
+                            video = document.querySelector('video');
+                            video.controls = false;
+                            $("#startWebcam").hide();
+                            $("#video").show();
+                            $("#stopWebcam").show();
+                            $("#snapshot").show();
+                            video.srcObject = localMediaStream;
+                            webcamStream = localMediaStream;
+
+                            video.addEventListener('canplay', function(ev){
+                            if (!streaming) {
+                              height = video.videoHeight / (video.videoWidth/width);
+                              video.setAttribute('width', width/2);
+                              video.setAttribute('height', height/2);
+                              canvas.setAttribute('width', width/2);
+                              canvas.setAttribute('height', height/2);
+                              streaming = true;
+                            }
+                        }, false);
+                      },
+
+                      // errorCallback
+                      function(err) {
+                         console.log("The following error occured: " + err);
+                      }
+               );
+            } else {
+               console.log("getUserMedia not supported");
+            }  
+        });
+        $("#stopWebcam").click(function() {
+            streaming = false;
+            $("#startWebcam").show();
+            $("#video").hide();
+            $("#stopWebcam").hide();
+            $("#snapshot").hide();
+            webcamStream.getTracks().forEach(track => track.stop())
+        });
+        //---------------------
+        // TAKE A SNAPSHOT CODE
+        //---------------------
+
+        canvas = document.getElementById("canvas");
+        ctx = canvas.getContext('2d');
+        // Convert DataURL to Blob object
+        function dataURLtoBlob(dataURL) {
+            // Decode the dataURL
+            var dataURL = canvas.toDataURL();    
+            var binary = atob(dataURL.split(',')[1]);
+            // Create 8-bit unsigned array
+            var array = [];
+            for(var i = 0; i < binary.length; i++) {
+                array.push(binary.charCodeAt(i));
+            }
+            // Return our Blob object
+            return new Blob([new Uint8Array(array)], {type: 'image/png'});
+        }
+
+        function getRandomString() {
+            if (window.crypto && window.crypto.getRandomValues && navigator.userAgent.indexOf('Safari') === -1) {
+                var a = window.crypto.getRandomValues(new Uint32Array(3)),
+                  token = '';
+                for (var i = 0, l = a.length; i < l; i++) {
+                  token += a[i].toString(36);
+                }
+                return token;
+            } else {
+                return (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
+            }
+        }
+
+        function getFileName(fileExtension) {
+            var d = new Date();
+            var year = d.getUTCFullYear();
+            var month = d.getUTCMonth();
+            var date = d.getUTCDate();
+            return 'blob' + year + month + date + '-' + getRandomString() + '.' + fileExtension;
+        }
+
+
+        function dataURLtoFile(dataurl, filename) {
+            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while(n--){
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new File([u8arr], filename, {type:mime});
+        }
+
+
+
+        $("#snapshot").click(function() {
+            // Draws current image from the video element into the canvas
+            ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+            //$("#canvas").show();
+            var data = canvas.toDataURL('image/png');
+            var dataURL = canvas.toDataURL();
+
+            var file= dataURLtoFile(dataURL, getFileName("jpg"));
+
+
+            sendData.push({f: file,file: file, url: dataURL});
+            console.log(sendData);
+            //alert(dataURL);
+            //$("#photo").attr('src', data);
+
+            $("<span class=\"pip\">" +
+                "<img class=\"imageThumb\" src=\"" + data +
+                "\"/>" +
+                "<br/><span class=\"remove_webcam\"><i class='flaticon-cross'></i></span>" +
+                "</span>").insertAfter("#webcam-output");
+
+            $(".remove_webcam").click(function () {
+                var self = $(this).parent().children();
+                sendData.map(function(value, currentIndex, data) {
+                  // Remove only image which removed from preview
+                  if (self[0].currentSrc === value.url) {
+                    sendData.splice(currentIndex, 1);
+                  }
+                });
+                $(this).parent().remove();
+            });
+
+
+        });
+
+        $( "#role" ).change(function() {
+            if ($("#role option:selected").text() == "user") {
+                $("#staff-show").hide();
+                $("#user-show").show();
+            } else if (($("#role option:selected").text() == "staff")) {
+                $("#staff-show").show();
+                $("#user-show").show();
+            } else {
+                $("#staff-show").hide();
+                $("#user-show").hide();
+            }
+
+        });
+
+
+        {% endif %}
+
+
+
+    });
+   
+</script>
+{% endblock javascripts %}

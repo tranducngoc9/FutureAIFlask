@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/luonghongquan/WORKSPACE/FutureAI/FutureAIFlask/app/mlruns/561608423352880231/c04ef9f514664351b66f5c7c750bdd0b/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '561608423352880231'
+lifecycle_stage: active
+run_id: c04ef9f514664351b66f5c7c750bdd0b
+run_name: AdaBoost Regressor
+run_uuid: c04ef9f514664351b66f5c7c750bdd0b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669527925446
+status: 1
+tags: []
+user_id: luonghongquan
