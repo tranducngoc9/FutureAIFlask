@@ -2459,7 +2459,7 @@ def manager_training():
     else:
         return render_template( 'pages/error-404.html')
 
-
+#hoc may
 @app.route('/eda', methods=['POST'])
 @login_required
 @user_is("user")
@@ -2760,7 +2760,7 @@ def detaildataset():
 
 
 
-@app.route('/ngoc.html')
+@app.route('/time_series_ngoc.html')
 @login_required
 @user_is("user")
 def ngoc():
@@ -2769,10 +2769,10 @@ def ngoc():
 
     if dataset:
         
-        return render_template( 'pages/ngoc.html', dataset=dataset)
+        return render_template( 'pages/time_series_ngoc.html', dataset=dataset)
         
     else:
-        return render_template( 'ngoc.html')
+        return render_template( 'time_series_ngoc.html')
 
 @app.route('/resetpassword.html')
 def resetpassword():

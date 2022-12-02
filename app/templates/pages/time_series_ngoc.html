@@ -1,6 +1,6 @@
 {% extends "layouts/default.html" %}
 
-{% block title %} {{ _('Quản lý camera') }} {% endblock title %}
+{% block title %} {{ _('Chuỗi thời gian') }} {% endblock title %}
 
 {% block stylesheets %}
 
@@ -47,6 +47,19 @@
 #msform fieldset:not(:first-of-type) {
     display: none;
 }
+
+#msform .action-button-longer {
+    width: 188px;
+    background: #1572E8;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
 
 /*buttons*/
 #msform .action-button {
@@ -184,10 +197,10 @@
 
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
-                                <label>{{ _('Chọn mô hình học máy') }}</label>
+                                <label>{{ _('Chọn mô hình Time Series') }}</label>
                                 <select name="modeltype" id="modeltype" class="form-control" required>
-                                    <option value="0">Phân loại</option>
-                                    <option value="1">Hồi quy</option>
+                                    <option value="0">Mo hinh 1</option>
+                                    <option value="1">Mo Hinh 2 </option>
                                     <option value="2">Phân cụm</option>
                                 </select>
                             </div>
@@ -204,8 +217,17 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>{{ _('Thêm tệp tin') }}</label>
+                                <input type="file" id="file" name="file"/>
+                            </div>
+                        </div>
+
+
                     </div>
-                    <input type="button" name="eda" class="eda action-button" value="{{ _('Phân tích') }}" />
+                    <input type="button" name="eda" class="eda action-button-longer" value="{{ _('Nhìn tổng quan dữ liệu') }}" /> 
                     <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
                     <div class="row mt-3">
                         <iframe id="eda" frameborder="0" scrolling="no" style="overflow: hidden; height: 5021px; display: none;" width="100%" ></iframe>
