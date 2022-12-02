@@ -199,9 +199,14 @@
                             <div class="form-group form-group-default">
                                 <label>{{ _('Chọn mô hình Time Series') }}</label>
                                 <select name="modeltype" id="modeltype" class="form-control" required>
-                                    <option value="0">Mo hinh 1</option>
-                                    <option value="1">Mo Hinh 2 </option>
-                                    <option value="2">Phân cụm</option>
+                                    <option value="0">Naïve forecast</option>
+                                    <option value="1">Dense model (window = 7, horizon = 1) </option>
+                                    <option value="2">Model 2: Dense (window = 30, horizon = 1)</option>
+                                    <option value="2">Dense (window = 30, horizon = 7)</option>
+                                    <option value="2">Conv1D</option>
+                                    <option value="2">RNN (LSTM)</option>
+                                    <option value="2">Dense (chuỗi thời gian đa biến)</option>
+                                    <option value="2">xếp chồng các mô hình khác lại với nhau</option>
                                 </select>
                             </div>
                         </div>
@@ -218,16 +223,9 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="form-group form-group-default">
-                                <label>{{ _('Thêm tệp tin') }}</label>
-                                <input type="file" id="file" name="file"/>
-                            </div>
-                        </div>
-
 
                     </div>
-                    <input type="button" name="eda" class="eda action-button-longer" value="{{ _('Nhìn tổng quan dữ liệu') }}" /> 
+                    <input type="button" name="eda" class="eda action-button" value="{{ _('Phân tích') }}" /> 
                     <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
                     <div class="row mt-3">
                         <iframe id="eda" frameborder="0" scrolling="no" style="overflow: hidden; height: 5021px; display: none;" width="100%" ></iframe>
@@ -463,7 +461,7 @@
                                                         <input type="number" class="form-control" id="poldegree" name="poldegree" placeholder="2" value="2" step="1">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6">a
                                                     <div class="form-group form-group-default">
                                                         <label>{{ _('Polynomial Threshold') }}</label>
                                                         <input type="number" class="form-control" id="polthre" name="polthre" placeholder="0.10" value="0.10" step="0.01">

@@ -2464,6 +2464,7 @@ def manager_training():
 @login_required
 @user_is("user")
 def eda():
+    print("####################  eda() ###############################################################################################################################")
     #print(request.form['name'])
     #modeltype =  request.form['modeltype']
     data_id =  request.form['data_id']
@@ -2490,6 +2491,7 @@ def eda():
 @login_required
 @user_is("user")
 def select_data():
+    print("####################  select_data() ###############################################################################################################################")
     #print(request.form['name'])
     #modeltype =  request.form['modeltype']
     data_id =  request.form['data_id']
@@ -2512,6 +2514,7 @@ def select_data():
 @login_required
 @user_is("user")
 def preprocessing_data():
+    print("####################  preprocessing_data() ###############################################################################################################################")
     project = request.form['project']
     modelname = request.form['modelname']
     modeltype = int(request.form['modeltype'])
@@ -2686,7 +2689,7 @@ def preprocessing_data():
 @login_required
 @user_is("user")
 def trainmodel():
-
+    print("####################  trainmodel() ###############################################################################################################################")
     training_enable_cross_val = True if request.form['training_enable_cross_val'] == "1" else False
     bestname = request.form['bestname']
     modeltype = int(request.form['modeltype'])
@@ -2715,7 +2718,7 @@ def trainmodel():
 @login_required
 @user_is("user")
 def comparemodel():
-
+    print("####################  comparemodel() ###############################################################################################################################")
     compare_enable_cross_val = True if request.form['compare_enable_cross_val'] == "1" else False
     sort = request.form['sort']
     modeltype = int(request.form['modeltype'])
@@ -2739,6 +2742,7 @@ def comparemodel():
 @login_required
 @user_is("user")
 def detaildataset():
+    print("####################  detaildataset() ###############################################################################################################################")
     data_id = request.args.get('id')
     dataset = db.session.query(Dataset).filter(Dataset.id == data_id).filter(Dataset.datatype == 0).first()
     if dataset:
@@ -2785,4 +2789,3 @@ def sendresetpassword():
 if __name__ == '__main__':
     #app.run(host='0.0.0.0', port=3456, debug=True)
     socketio.run(app,host='0.0.0.0', port=1309, debug=True)
-

@@ -78,74 +78,74 @@ from views import *
 from models import *
 from api import *
 
-def authenticate(username, password):
-    user = User.query.filter(User.user == username).first()
+# def authenticate(username, password):
+#     user = User.query.filter(User.user == username).first()
 
-    if user:
-        if (user.has_roles("user") or user.has_roles("superuser")):
-            if user.company_id and bcrypt.check_password_hash(user.password, password):
-                return user
+#     if user:
+#         if (user.has_roles("user") or user.has_roles("superuser")):
+#             if user.company_id and bcrypt.check_password_hash(user.password, password):
+#                 return user
 
-def identify(payload):
-    return User.query.filter(User.id == payload['identity']).scalar()
-
-
-jwt = JWT(app, authenticate, identify)
+# def identify(payload):
+#     return User.query.filter(User.id == payload['identity']).scalar()
 
 
-
-def insertFeatureToDB(name, feature, company_id):
-    #print("insertFeatureToDB")
-    db_path = feature_db_path + company_id + ".db"
-    if not os.path.isfile(db_path):
-    	db_o_path = feature_db_path + "mq_feature_empty.db"
-    	shutil.copy2(db_o_path, db_path)
-
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    try:
-      c.execute('''INSERT INTO Features (name, data) VALUES (?, ?)''', (name, feature,))
-    except sqlite3.IntegrityError as e:
-      print('Insert feature errror: ', e.args[0]) # column name is not unique
-    conn.commit()
-
-    conn.close()
+# jwt = JWT(app, authenticate, identify)
 
 
-# When the client emits 'connection', this listens and executes
-@socketio.on('status', namespace='/camera')
-def camera_connected(data):
-    print ('Camera connected:', data)
-    status = js.loads(data)
-    if not 'version' in status:
-        status['version'] = 0
-    cam = db.session.query(Cameras).filter(Cameras.udid == status['udid']).first()
-    if cam != None:
-        db.session.query(Cameras).filter(Cameras.udid == status['udid']).update({"ipaddr": status['ip_address'], "time": datetime.now(), "version": status['version']}, synchronize_session='fetch')
-    else:
-        cam = Cameras(udid=status['udid'], version= status['version'], ipaddr=status['ip_address'], time=datetime.now());
-        db.session.add(cam)
 
-    db.session.commit()
-    print("===============camera joined: " + status['ip_address'])
-    if cam.company_id:
-        room = session.get(str(cam.company_id))
-        join_room(room)
-    else:
-        room = session.get("camera_global")
-        join_room(room)
+# def insertFeatureToDB(name, feature, company_id):
+#     #print("insertFeatureToDB")
+#     db_path = feature_db_path + company_id + ".db"
+#     if not os.path.isfile(db_path):
+#     	db_o_path = feature_db_path + "mq_feature_empty.db"
+#     	shutil.copy2(db_o_path, db_path)
 
-# When the client emits 'new message', this listens and executes
-@socketio.on('new face', namespace='/camera')
-def new_face(data):
-    #print ('New face:', data)
-    feature_data = js.loads(data)
-    if feature_data and feature_data['udid']:
-        cam = db.session.query(Cameras).filter(Cameras.udid == feature_data['udid']).first()
-        if cam and cam.company_id:
-            insertFeatureToDB(feature_data['name'], feature_data['feature'], str(cam.company_id))
-            room = session.get(str(cam.company_id))
-            socketio.emit('feature', { 'data' :  data }, namespace='/camera', room=room )
+#     conn = sqlite3.connect(db_path)
+#     c = conn.cursor()
+#     try:
+#       c.execute('''INSERT INTO Features (name, data) VALUES (?, ?)''', (name, feature,))
+#     except sqlite3.IntegrityError as e:
+#       print('Insert feature errror: ', e.args[0]) # column name is not unique
+#     conn.commit()
+
+#     conn.close()
+
+
+# # When the client emits 'connection', this listens and executes
+# @socketio.on('status', namespace='/camera')
+# def camera_connected(data):
+#     print ('Camera connected:', data)
+#     status = js.loads(data)
+#     if not 'version' in status:
+#         status['version'] = 0
+#     cam = db.session.query(Cameras).filter(Cameras.udid == status['udid']).first()
+#     if cam != None:
+#         db.session.query(Cameras).filter(Cameras.udid == status['udid']).update({"ipaddr": status['ip_address'], "time": datetime.now(), "version": status['version']}, synchronize_session='fetch')
+#     else:
+#         cam = Cameras(udid=status['udid'], version= status['version'], ipaddr=status['ip_address'], time=datetime.now());
+#         db.session.add(cam)
+
+#     db.session.commit()
+#     print("===============camera joined: " + status['ip_address'])
+#     if cam.company_id:
+#         room = session.get(str(cam.company_id))
+#         join_room(room)
+#     else:
+#         room = session.get("camera_global")
+#         join_room(room)
+
+# # When the client emits 'new message', this listens and executes
+# @socketio.on('new face', namespace='/camera')
+# def new_face(data):
+#     #print ('New face:', data)
+#     feature_data = js.loads(data)
+#     if feature_data and feature_data['udid']:
+#         cam = db.session.query(Cameras).filter(Cameras.udid == feature_data['udid']).first()
+#         if cam and cam.company_id:
+#             insertFeatureToDB(feature_data['name'], feature_data['feature'], str(cam.company_id))
+#             room = session.get(str(cam.company_id))
+#             socketio.emit('feature', { 'data' :  data }, namespace='/camera', room=room )
 
 if __name__ == '__main__':
     #app.run(host='0.0.0.0', port=3456, debug=True)
