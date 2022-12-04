@@ -2482,6 +2482,7 @@ def eda():
         profile.config.html.navbar_show = False
         profile.to_file(eda_file_path)
         return_output = json.dumps({"success": True, "eda_file_path": eda_file_path})  
+        print("In ra return_output:",return_output)
         return success_handle(return_output)
     else:
         return error_handle("Please select modeltype and dataname.")
@@ -2504,6 +2505,7 @@ def select_data():
         columns_name = df_train.columns.tolist()  
         categorical_columns = df_train.select_dtypes(include=['category','object']).columns.tolist()
         return_output = json.dumps({"success": True,"columns_name": columns_name, "categorical_columns": categorical_columns})  
+        print("In ra return_output:",return_output)
         return success_handle(return_output)
     else:
         return error_handle("Please select modeltype and dataname.")
@@ -2522,51 +2524,51 @@ def preprocessing_data():
     target_column = request.form['targetcol']
     ignore_columns = request.form['removecol'].split(',') if request.form['removecol'] != "" else None
     trainsize = float(request.form['trainsize'])
-    data_split_stratify = True if request.form['data_split_stratify'] == "1" else False
-    fold_strategy = request.form['crossvalidate']
-    foldnum = int(request.form['foldnum'])
-    numeric_imputation = request.form['missingval']
-    normalize = True if request.form['nomalization'] == "1" else False
-    normalize_method = request.form['nomalization_method']
-    transformation = True if request.form['transformation'] == "1" else False
-    transformation_method = request.form['transformation_method']
-    transform_target = True if request.form['target_transformation'] == "1" else False
-    transform_target_method = request.form['target_transformation_method']
-    fix_imbalance = True if request.form['fix_imbalance'] == "1" else False
-    categorical_imputation = request.form['cmissingval']
-    unknown_categorical_method = request.form['unknown_cat_value']
-    combine_rare_levels = True if request.form['ccomrarelevel'] == "1" else False
-    rare_level_threshold = float(request.form['ccomrarelevelthre']) 
-    feature_interaction = True if request.form['interaction'] == "1" else False
-    feature_ratio = True if request.form['calratios'] == "1" else False
-    polynomial_features = True if request.form['polcom'] == "1" else False
-    polynomial_degree = int(request.form['poldegree'])
-    polynomial_threshold = float(request.form['polthre'])
-    trigonometry_features = True if request.form['trigono'] == "1" else False
-    group_features = request.form['relatefeatures'].split(',') if request.form['relatefeatures'] != "" else None
-    bincom = True if request.form['bincom'] == "1" else False
-    select_bin_numeric_features = request.form['bincom_option'].split(',') if request.form['bincom_option'] != "" else None
-    feature_selection = True if request.form['subset'] == "1" else False
-    feature_selection_threshold = float(request.form['subsetthre'])
-    remove_multicollinearity = True if request.form['featuredrop'] == "1" else False
-    multicollinearity_threshold = float(request.form['featuredropthre'])
-    remove_perfect_collinearity = True if request.form['reppecoll'] == "1" else False
-    pca = True if request.form['pca'] == "1" else False
-    pca_method = request.form['pca_method']
-    pca_components = float(request.form['pca_keep'])
-    ignore_low_variance = True if request.form['removecat'] == "1" else False
-    create_clusters = True if request.form['add_cluster'] == "1" else False
-    cluster_iter = int(request.form['add_cluster_thre'])
-    remove_outliers = True if request.form['remove_outliers_pca'] == "1" else False
-    outliers_threshold = float(request.form['remove_outliers_pca_per'])
+    # data_split_stratify = True if request.form['data_split_stratify'] == "1" else False
+    # fold_strategy = request.form['crossvalidate']
+    # # foldnum = int(request.form['foldnum'])
+    # numeric_imputation = request.form['missingval']
+    # normalize = True if request.form['nomalization'] == "1" else False
+    # normalize_method = request.form['nomalization_method']
+    # transformation = True if request.form['transformation'] == "1" else False
+    # transformation_method = request.form['transformation_method']
+    # transform_target = True if request.form['target_transformation'] == "1" else False
+    # transform_target_method = request.form['target_transformation_method']
+    # fix_imbalance = True if request.form['fix_imbalance'] == "1" else False
+    # categorical_imputation = request.form['cmissingval']
+    # unknown_categorical_method = request.form['unknown_cat_value']
+    # combine_rare_levels = True if request.form['ccomrarelevel'] == "1" else False
+    # rare_level_threshold = float(request.form['ccomrarelevelthre']) 
+    # feature_interaction = True if request.form['interaction'] == "1" else False
+    # feature_ratio = True if request.form['calratios'] == "1" else False
+    # polynomial_features = True if request.form['polcom'] == "1" else False
+    # # polynomial_degree = int(request.form['poldegree'])
+    # # polynomial_threshold = float(request.form['polthre'])
+    # trigonometry_features = True if request.form['trigono'] == "1" else False
+    # bincom = True if request.form['bincom'] == "1" else False
+    # select_bin_numeric_features = request.form['bincom_option'].split(',') if request.form['bincom_option'] != "" else None
+    # feature_selection = True if request.form['subset'] == "1" else False
+    # # feature_selection_threshold = float(request.form['subsetthre'])
+    # remove_multicollinearity = True if request.form['featuredrop'] == "1" else False
+    # # multicollinearity_threshold = float(request.form['featuredropthre'])
+    # remove_perfect_collinearity = True if request.form['reppecoll'] == "1" else False
+    # pca = True if request.form['pca'] == "1" else False
+    # pca_method = request.form['pca_method']
+    # # pca_components = float(request.form['pca_keep'])
+    # ignore_low_variance = True if request.form['removecat'] == "1" else False
+    # create_clusters = True if request.form['add_cluster'] == "1" else False
+    # # cluster_iter = int(request.form['add_cluster_thre'])
+    # remove_outliers = True if request.form['remove_outliers_pca'] == "1" else False
+    # # outliers_threshold = float(request.form['remove_outliers_pca_per'])
 
-    # print(modeltype) #
-    # print(data_id) #
-    # print(target_column) #
-    # print(ignore_columns) 
-    # print(trainsize)
+    print("==================================================================\n",request.form)
+    # print("modeltype: ",modeltype) #
+    # print("data_id",data_id) #
+    # print("target_column",target_column) #
+    # print("ignore_columns",ignore_columns) 
+    # print("trainsize: ",trainsize)
     # print(fold_strategy)
-    # print(foldnum)
+    # # print(foldnum)
     # print(numeric_imputation)
     # print(normalize)
     # print(normalize_method)
@@ -2581,30 +2583,32 @@ def preprocessing_data():
     # print(feature_interaction)
     # print(feature_ratio)
     # print(polynomial_features)
-    # print(polynomial_degree)
-    # print(polynomial_threshold)
+    # # print(polynomial_degree)
+    # # print(polynomial_threshold)
     # print(trigonometry_features)
     # print(group_features)
     # print(bincom)
     # print(select_bin_numeric_features)
     # print(feature_selection)
-    # print(feature_selection_threshold)
+    # # print(feature_selection_threshold)
     # print(remove_multicollinearity)
-    # print(multicollinearity_threshold)
+    # # print(multicollinearity_threshold)
     # print(remove_perfect_collinearity)
     # print(pca)
     # print(pca_method)
-    # print(pca_components)
+    # # print(pca_components)
     # print(ignore_low_variance)
     # print(create_clusters)
-    # print(cluster_iter)
+    # # print(cluster_iter)
     # print(remove_outliers)
-    # print(outliers_threshold)
+    # # print(outliers_threshold)
 
     is_setup = False
     dataset = db.session.query(Dataset).filter(Dataset.id == data_id).filter(Dataset.datatype == 0).first()
+    print("==========================================================================================\n",dataset)
     if dataset:
         df = pd.read_csv(dataset.path)
+        print("df:",df)
         result = None
         if modeltype == 0 or modeltype == 1:
             #experiment_name = project + "_" + modelname + "_" + data_id + datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -2612,45 +2616,47 @@ def preprocessing_data():
             if modeltype == 0:
                 from pycaret.classification import  setup, pull
                 setup(data=df, target=target_column,train_size=trainsize, preprocess=True,
-                    categorical_imputation=categorical_imputation, numeric_imputation=numeric_imputation,
-                    normalize=normalize,normalize_method=normalize_method, transformation=transformation,
-                    transformation_method=transformation_method, 
-                    unknown_categorical_method=unknown_categorical_method,
-                    combine_rare_levels=combine_rare_levels,rare_level_threshold=rare_level_threshold,
-                    feature_interaction=feature_interaction,ignore_features=ignore_columns,
-                    feature_ratio=feature_ratio,polynomial_features=polynomial_features,
-                    polynomial_degree=polynomial_degree,polynomial_threshold=polynomial_threshold,
-                    trigonometry_features=trigonometry_features,group_features=group_features,
-                    bin_numeric_features=select_bin_numeric_features,feature_selection=feature_selection,
-                    feature_selection_threshold=feature_selection_threshold,remove_multicollinearity=remove_multicollinearity,
-                    multicollinearity_threshold = multicollinearity_threshold,           
-                    remove_perfect_collinearity=remove_perfect_collinearity,
-                    fix_imbalance = fix_imbalance, 
-                    data_split_stratify=data_split_stratify,fold_strategy=fold_strategy,fold=int(foldnum),
-                    pca=pca,pca_method=pca_method,pca_components=pca_components,
-                    ignore_low_variance=ignore_low_variance,create_clusters=create_clusters,cluster_iter=cluster_iter,
-                    remove_outliers=remove_outliers,outliers_threshold=outliers_threshold,html=False,silent=True, log_experiment=True, experiment_name=experiment_name)
+                    # categorical_imputation=categorical_imputation, numeric_imputation=numeric_imputation,
+                    # normalize=normalize,normalize_method=normalize_method, transformation=transformation,
+                    # transformation_method=transformation_method, 
+                    # unknown_categorical_method=unknown_categorical_method,
+                    # combine_rare_levels=combine_rare_levels,rare_level_threshold=rare_level_threshold,
+                    # feature_interaction=feature_interaction,ignore_features=ignore_columns,
+                    # feature_ratio=feature_ratio,polynomial_features=polynomial_features,
+                    # polynomial_degree=polynomial_degree,polynomial_threshold=polynomial_threshold,
+                    # trigonometry_features=trigonometry_features,group_features=group_features,
+                    # bin_numeric_features=select_bin_numeric_features,feature_selection=feature_selection,
+                    # feature_selection_threshold=feature_selection_threshold,remove_multicollinearity=remove_multicollinearity,
+                    # multicollinearity_threshold = multicollinearity_threshold,           
+                    # remove_perfect_collinearity=remove_perfect_collinearity,
+                    # fix_imbalance = fix_imbalance, 
+                    # data_split_stratify=data_split_stratify,fold_strategy=fold_strategy,fold=int(foldnum),
+                    # pca=pca,pca_method=pca_method,pca_components=pca_components,
+                    # ignore_low_variance=ignore_low_variance,create_clusters=create_clusters,cluster_iter=cluster_iter,
+                    # remove_outliers=remove_outliers,outliers_threshold=outliers_threshold,html=False,silent=True, log_experiment=True, experiment_name=experiment_name
+                    )
 
             elif modeltype == 1:
                 from pycaret.regression import  setup, pull
                 setup(data=df, target=target_column,train_size=trainsize, preprocess=True,
-                        fold_strategy=fold_strategy,fold=int(foldnum),
-                        categorical_imputation=categorical_imputation, numeric_imputation=numeric_imputation,
-                        normalize=normalize,normalize_method=normalize_method, transformation=transformation,
-                        transformation_method=transformation_method, transform_target=transform_target,
-                        transform_target_method=transform_target_method,unknown_categorical_method=unknown_categorical_method,
-                        combine_rare_levels=combine_rare_levels,rare_level_threshold=rare_level_threshold,
-                        feature_interaction=feature_interaction,ignore_features=ignore_columns,
-                        feature_ratio=feature_ratio,polynomial_features=polynomial_features,
-                        polynomial_degree=polynomial_degree,polynomial_threshold=polynomial_threshold,
-                        trigonometry_features=trigonometry_features,group_features=group_features,
-                        bin_numeric_features=select_bin_numeric_features,feature_selection=feature_selection,
-                        feature_selection_threshold=feature_selection_threshold,remove_multicollinearity=remove_multicollinearity,
-                        multicollinearity_threshold = multicollinearity_threshold,           
-                        remove_perfect_collinearity=remove_perfect_collinearity,
-                        pca=pca,pca_method=pca_method,pca_components=pca_components,
-                        ignore_low_variance=ignore_low_variance,create_clusters=create_clusters,cluster_iter=cluster_iter,
-                        remove_outliers=remove_outliers,outliers_threshold=outliers_threshold,html=False,silent=True, log_experiment=True, experiment_name=experiment_name)
+                        # fold_strategy=fold_strategy,fold=int(foldnum),
+                        # categorical_imputation=categorical_imputation, numeric_imputation=numeric_imputation,
+                        # normalize=normalize,normalize_method=normalize_method, transformation=transformation,
+                        # transformation_method=transformation_method, transform_target=transform_target,
+                        # transform_target_method=transform_target_method,unknown_categorical_method=unknown_categorical_method,
+                        # combine_rare_levels=combine_rare_levels,rare_level_threshold=rare_level_threshold,
+                        # feature_interaction=feature_interaction,ignore_features=ignore_columns,
+                        # feature_ratio=feature_ratio,polynomial_features=polynomial_features,
+                        # polynomial_degree=polynomial_degree,polynomial_threshold=polynomial_threshold,
+                        # trigonometry_features=trigonometry_features,group_features=group_features,
+                        # bin_numeric_features=select_bin_numeric_features,feature_selection=feature_selection,
+                        # feature_selection_threshold=feature_selection_threshold,remove_multicollinearity=remove_multicollinearity,
+                        # multicollinearity_threshold = multicollinearity_threshold,           
+                        # remove_perfect_collinearity=remove_perfect_collinearity,
+                        # pca=pca,pca_method=pca_method,pca_components=pca_components,
+                        # ignore_low_variance=ignore_low_variance,create_clusters=create_clusters,cluster_iter=cluster_iter,
+                        # remove_outliers=remove_outliers,outliers_threshold=outliers_threshold,html=False,silent=True, log_experiment=True, experiment_name=experiment_name
+                        )
             elif modeltype == 2:
                 from pycaret.clustering import  setup, pull
 
@@ -2762,7 +2768,7 @@ def detaildataset():
         return render_template( 'pages/error-404.html')
 
 
-
+#Chuỗi thời gian
 
 @app.route('/time_series_ngoc.html')
 @login_required
@@ -2777,6 +2783,120 @@ def ngoc():
         
     else:
         return render_template( 'time_series_ngoc.html')
+
+@app.route('/select_data_ts', methods=['POST'])
+@login_required
+@user_is("user")
+def select_data_ts():
+    print("####################  select_data_ts() ###############################################################################################################################")
+    #print(request.form['name'])
+    #modeltype =  request.form['modeltype']
+    data_id =  request.form['data_id']
+
+    #print(modeltype)
+    print(data_id)
+    print(request.form)
+    dataset = db.session.query(Dataset).filter(Dataset.id == data_id).filter(Dataset.datatype == 0).first()
+    if dataset:
+        df_train = pd.read_csv(dataset.path)
+        columns_name = df_train.columns.tolist()  
+        categorical_columns = df_train.select_dtypes(include=['category','object']).columns.tolist()
+        return_output = json.dumps({"success": True,"columns_name": columns_name, "categorical_columns": categorical_columns})  
+        print("In ra return_output:",return_output)
+        return success_handle(return_output)
+    else:
+        return error_handle("Please select modeltype and dataname.")
+    #if f.filename.split('.')[1] != 'png':
+
+@app.route('/preprocessing_data_ts', methods=['POST'])
+@login_required
+@user_is("user")
+def preprocessing_data_ts():
+    print("####################  preprocessing_data_ts() ###############################################################################################################################")
+    project = request.form['project_ts']
+    modelname = request.form['modelname_ts']
+    modeltype = int(request.form['modeltype_ts'])
+    data_id = request.form['data_id']
+    target_column = request.form['targetcol']
+    ignore_columns = request.form['removecol'].split(',') if request.form['removecol'] != "" else None
+    trainsize = float(request.form['trainsize'])
+    data_split_stratify = True if request.form['data_split_stratify'] == "1" else False
+
+    print("==================================================================\n",request.form)
+
+
+    is_setup = False
+    dataset = db.session.query(Dataset).filter(Dataset.id == data_id).filter(Dataset.datatype == 0).first()
+    print("==========================================================================================\n",dataset)
+    if dataset:
+        data = pd.read_csv(dataset.path)
+        
+        data[data.columns[0]] = pd.to_datetime(data[data.columns[0]])
+
+        # extract month and year from dates**
+        data['Month'] = [i.month for i in data[data.columns[0]]]
+        data['Year'] = [i.year for i in data[data.columns[0]]]
+
+        # create a sequence of numbers
+        data['Series'] = np.arange(1,len(data)+1)
+
+        data_columns_name = data.columns
+        print("data:",data)
+        print("type data:", type(data))
+        print("data_columns_name:", data_columns_name)
+        print("modeltype:",modeltype)
+
+
+        result = None
+        if modeltype == 0 or modeltype == 1:
+            #experiment_name = project + "_" + modelname + "_" + data_id + datetime.now().strftime("%Y%m%d-%H%M%S")
+            experiment_name = project + "_" + modelname + "_" + data_id
+            if modeltype == 0:
+                from pycaret.regression import setup, compare_models, predict_model, pull
+                print("####################### start set up")
+                s = setup(data = data, target = target_column,train_size=trainsize, fold_strategy = 'timeseries', numeric_features = [data.columns[-2], data.columns[-1]], fold = 3, transform_target = True, session_id = 123)
+                print("###############end setup")
+
+            # elif modeltype == 1:
+            #     from pycaret.regression import  setup, pull
+            #     setup(data=data, target=target_column,train_size=trainsize, preprocess=True)
+            # elif modeltype == 2:
+            #     from pycaret.clustering import  setup, pull
+
+            # setup(data = df, target = target_column, session_id=123)
+            
+            best = compare_models(sort = 'MAE')
+            prediction_holdout = predict_model(best)
+            print(prediction_holdout)
+
+            result = pull(True)
+            if result:
+                result = result.data
+                print("result (edit 2926): ",result)
+
+            is_setup = True
+            
+
+            # best = compare_models(exclude=['xgboost'],fold=None, cross_validation=True)
+            # compare_models = pull(True)
+        return_output = json.dumps({"success": True, "result": result.to_json()}) 
+
+        if is_setup:
+            from pycaret.regression import models as regression_models
+            from pycaret.classification import models as classification_models
+            from pycaret.clustering import models as clustering_models
+
+            
+            regression_models = regression_models() 
+            classification_models = classification_models()
+            clustering_models = clustering_models()
+            print(regression_models)
+            return_output = json.dumps({"success": True, "result": result.to_json(), "regression_models": regression_models.to_json(), "classification_models": classification_models.to_json(), "clustering_models": clustering_models.to_json()}) 
+
+        return success_handle(return_output)
+    else:
+        return error_handle("Please select modeltype and dataname.")
+    #if f.filename.split('.')[1] != 'png':
 
 @app.route('/resetpassword.html')
 def resetpassword():

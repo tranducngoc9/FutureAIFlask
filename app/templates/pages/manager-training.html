@@ -159,6 +159,7 @@
                         <li>{{ _('Lưu') }}</>
                 </ul>
                 <!-- fieldsets -->
+                <!-- chuẩn bị -->
                 <fieldset name="0">
                     <h2 class="fs-title">{{ _('Chuẩn bị') }}</h2>
                     <h3 class="fs-subtitle">{{ _('Chọn lựa mô hình và phân tích dữ liệu đào tạo') }}</h3>
@@ -213,6 +214,7 @@
                     
 
                 </fieldset>
+                <!-- Tiền xử lí -->
                 <fieldset name="1">
                     <h2 class="fs-title">{{ _('Tiền xử lý') }}</h2>
                     <h3 class="fs-subtitle">{{ _('Tiền xử dữ liệu trước khi đưa vào mô hình học máy') }}</h3>
@@ -641,6 +643,7 @@
                     <input type="button" name="previous" class="previous action-button" value="{{ _('Trước') }}" />
                     <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
                 </fieldset>
+                <!-- Đào tạo  -->
                 <fieldset name="2">
                     <h2 class="fs-title">{{ _('Đào tạo') }}</h2>
                     <h3 class="fs-subtitle">Tạo mô hình từ kết quả tốt nhất hoặc chọn mô hình đơn lẻ hoặc tập hợp</h3>
@@ -1358,11 +1361,9 @@
 
         $(".eda").click(function(e){
             e.preventDefault();
-
             var form_data = new FormData();
             //form_data.append("modeltype", $('#modeltype').val());
-            form_data.append("data_id", $('#dataname').val());
-
+            form_data.append("data_id", $('#dataname').val());  // Phải có cái này nó mới tạo ra file eda.html trong thư mục static/dataset/2
             $.ajax({
                 url: '/eda', // point to server-side URL
                 dataType: 'json', // what to expect back from server
@@ -1375,11 +1376,11 @@
                     console.log(response);
                     if (response.success == true)
                     {
-                        showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành phân tích dữ liệu') }}');
-                        
-                        $("#eda").attr('src',window.location.protocol + '//' + window.location.host + '/' + response.eda_file_path);
-                        $("#eda").show();   
+                        showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành phân tích dữ liệu và edit dòng 1385') }}');
+                        $("#eda").attr('src',window.location.protocol + '//' + window.location.host + '/' + response.eda_file_path); //cung cấp đất để hiện 
+                        $("#eda").show();   //để hiển thị lên bảng OverView
                         $('#eda').height($('#eda').contents().height() + 500);
+                        showSuccess('{{ _('Title') }}', '{{ _('Luông có đi qua dòng 1389') }}');
                     } else {
                         showError('{{ _('ETitle') }}', '{{ _('Không thể phân tích dữ liệu') }}');
                     }

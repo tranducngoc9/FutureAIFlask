@@ -179,7 +179,7 @@
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
                                 <label>{{ _('Chọn dự án') }}</label>
-                                <select name="project" id="project" class="form-control" required>
+                                <select name="project_ts" id="project_ts" class="form-control" required>
                                     <!-- <option value="" selected disabled>{{ _('Lựa chọn dự án') }}</option> -->
                                     <option value="0">Dự án 1</option>
                                     <option value="1">Dự án 2</option>
@@ -189,8 +189,8 @@
 
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
-                                <label>{{ _('Nhập tên mô hình') }}</label>
-                                <input id="modelname" name="modelname" type="text"
+                                <label>{{ _('Nhập tên mô hình') }}<  /label>
+                                <input id="modelname_ts" name="modelname_ts" type="text"
                                     class="form-control" placeholder="{{ _('Nhập tên mô hình') }}" required>
                             </div>
                         </div>
@@ -198,15 +198,8 @@
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
                                 <label>{{ _('Chọn mô hình Time Series') }}</label>
-                                <select name="modeltype" id="modeltype" class="form-control" required>
-                                    <option value="0">Naïve forecast</option>
-                                    <option value="1">Dense model (window = 7, horizon = 1) </option>
-                                    <option value="2">Model 2: Dense (window = 30, horizon = 1)</option>
-                                    <option value="2">Dense (window = 30, horizon = 7)</option>
-                                    <option value="2">Conv1D</option>
-                                    <option value="2">RNN (LSTM)</option>
-                                    <option value="2">Dense (chuỗi thời gian đa biến)</option>
-                                    <option value="2">xếp chồng các mô hình khác lại với nhau</option>
+                                <select name="modeltype_ts" id="modeltype_ts" class="form-control" required>
+                                    <option value="0"> Regression Time Series </option>
                                 </select>
                             </div>
                         </div>
@@ -228,10 +221,10 @@
                     <input type="button" name="eda" class="eda action-button" value="{{ _('Phân tích') }}" /> 
                     <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
                     <div class="row mt-3">
+                        <!-- Phải có dòng này mới hiện ra bảng OverView -->
                         <iframe id="eda" frameborder="0" scrolling="no" style="overflow: hidden; height: 5021px; display: none;" width="100%" ></iframe>
                     </div>
-                    
-
+                <!-- Phần Tiền xử lí    -->
                 </fieldset>
                 <fieldset name="1">
                     <h2 class="fs-title">{{ _('Tiền xử lý') }}</h2>
@@ -265,219 +258,25 @@
                                     <label>{{ _('Kích thước bộ đào tạo') }}</label>
                                     <input type="number" class="form-control" id="trainsize" name="trainsize" placeholder="0.7" value="0.7" step="0.1">
                                 </div>
-                                <div class="custom-control custom-checkbox" id="data_split_stratify_session">
-                                  <input type="checkbox" class="custom-control-input" id="data_split_stratify">
-                                  <label class="custom-control-label" for="data_split_stratify">Kiểm soát phân tầng trong quá trình phân chia</label>
-                                </div>
-
-                                <div class="form-group form-group-default">
-                                    <label>{{ _('Lựa chọn chiến lược xác thực chéo') }}</label>
-                                    <select name="crossvalidate" id="crossvalidate" class="form-control" required>
-                                        <option value="kfold">kfold</option>
-                                        <option value="stratifiedkfold">stratifiedkfold</option>
-                                        <option value="stratifiedkfold">groupkfold</option>
-                                    </select>
-                                </div>
-                                <div class="form-group form-group-default">
-                                    <label>{{ _('Số fold được sử dụng trong Xác thực chéo') }}</label>
-                                    <input type="number" class="form-control" id="foldnum" name="foldnum" placeholder="10" value="10" step="1" min=2>
-                                </div>
+                                
                                 
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <div class="form-group form-group-default">
-                                <label>{{ _('Tiền xử lý cho dữ liệu số:') }}</label>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group form-group-default">
-                                            <label>{{ _('Thiếu giá trị cho các cột số') }}</label>
-                                            <select name="missingval" id="missingval" class="form-control" required>
-                                                <option value="mean">mean</option>
-                                                <option value="median">median</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="nomalization">
-                                          <label class="custom-control-label" for="nomalization">{{ _('Chuẩn hoá') }}</label>
-                                        </div>
-                                        <div class="col-md-12" id="nomalization_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Lựa chọn phương pháp chuẩn hoá') }}</label>
-                                                        <select name="nomalization_method" id="nomalization_method" class="form-control" required>
-                                                            <option value="zscore">zscore</option>
-                                                            <option value="minmax">minmax</option>
-                                                            <option value="maxabs">maxabs</option>
-                                                            <option value="robust">robust</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="transformation">
-                                          <label class="custom-control-label" for="transformation">{{ _('Chuyển đổi cột thuộc tính') }}</label>
-                                        </div>
-                                        <div class="col-md-12" id="transformation_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Lựa chọn phương pháp chuẩn hoá') }}</label>
-                                                        <select name="transformation_method" id="transformation_method" class="form-control" required>
-                                                            <option value="yeo-johnson">yeo-johnson</option>
-                                                            <option value="quantile">quantile</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="target_transformation">
-                                          <label class="custom-control-label" for="target_transformation">{{ _('Chuyển đổi cột mục tiêu') }}</label>
-                                        </div>
-                                        <div class="col-md-12" id="target_transformation_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Lựa chọn phương pháp chuẩn hoá') }}</label>
-                                                        <select name="target_transformation_method" id="target_transformation_method" class="form-control" required>
-                                                            <option value="box-cox">box-cox</option>
-                                                            <option value="yeo-johnson">yeo-johnson</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="custom-control custom-checkbox" id="fix_imbalance_session">
-                                                  <input type="checkbox" class="custom-control-input" id="fix_imbalance">
-                                                  <label class="custom-control-label" for="fix_imbalance">Khắc phục sự mất cân bằng của các lớp mục tiêu</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {% if categorical_columns | length > 0  %}
-
-
-                        <div class="col-md-12">
-                            <div class="form-group form-group-default">
-                                <label>{{ _('Tiền xử lý cho các cột phân loại:') }}</label>
-                                <div class="form-group form-group-default">
-                                    <label>{{ _('Thiếu giá trị cho các cột phân loại') }}</label>
-                                    <select name="cmissingval" id="cmissingval" class="form-control" required>
-                                        <option value="constant">constant</option>
-                                        <option value="mode">mode</option>
-                                    </select>
-                                </div>
-                                <div class="form-group form-group-default">
-                                    <label>{{ _('Xử lý các giá trị phân loại không xác định') }}</label>
-                                    <select name="unknown_cat_value" id="unknown_cat_value" class="form-control" required>
-                                        <option value="least_frequent">least_frequent</option>
-                                        <option value="most_frequent">most_frequent</option>
-                                    </select>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="ccomrarelevel">
-                                          <label class="custom-control-label" for="ccomrarelevel">Kết hợp các thuộc tính phân loại có cấp độ hiếm thành một cấp độ</label>
-                                        </div>
-                                        <div class="col-md-12" id="ccomrarelevel_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Ngưỡng kết hợp các thuộc tính phân loại hiếm') }}</label>
-                                                        <input type="number" class="form-control" id="ccomrarelevelthre" name="ccomrarelevelthre" placeholder="0.1" value="0.1" step="0.1">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {% endif %} 
-                    </div>
-
+ 
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
                                 <label>{{ _('Tạo thuộc tính mới') }}</label>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="interaction">
-                                          <label class="custom-control-label" for="interaction">Tạo thuộc tính mới sử dụng Interaction</label>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="calratios">
-                                          <label class="custom-control-label" for="calratios">Tạo thuộc tính mới sử dụng Calculating Ratios</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="polcom">
-                                          <label class="custom-control-label" for="polcom">Tạo thuộc tính mới sử dụng Polynomial Combinations</label>
-                                        </div>
-                                        <div class="col-md-12" id="polcom_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Polynomial Degree (int)') }}</label>
-                                                        <input type="number" class="form-control" id="poldegree" name="poldegree" placeholder="2" value="2" step="1">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">a
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Polynomial Threshold') }}</label>
-                                                        <input type="number" class="form-control" id="polthre" name="polthre" placeholder="0.10" value="0.10" step="0.01">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="trigono">
-                                          <label class="custom-control-label" for="trigono">Tạo thuộc tính mới sử dụng Trigonometric</label>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 </br>
                                 <div class="row">
@@ -517,149 +316,10 @@
                         </div>
 
                     </div>
-
-
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <div class="form-group form-group-default">
-                                <label>{{ _('Chọn các thuộc tính trong tập dữ liệu đóng góp nhiều nhất trong việc dự đoán biến mục tiêu') }}</label>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="subset">
-                                          <label class="custom-control-label" for="subset">Chọn một tập hợp con các thuộc tính bằng cách sử dụng kết hợp các tầm quan trọng hoán vị khác nhau</label>
-                                        </div>
-                                        <div class="col-md-12" id="subset_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Ngưỡng lựa chọn thuộc tính') }}</label>
-                                                        <input type="number" class="form-control" id="subsetthre" name="subsetthre" placeholder="0.80" value="0.80" step="0.01">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="featuredrop">
-                                          <label class="custom-control-label" for="featuredrop">Loại bỏ các thuộc tính tương quan tuyến tính cao</label>
-                                        </div>
-                                        <div class="col-md-12" id="featuredrop_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Ngưỡng được sử dụng để loại bỏ các thuộc tính tương quan') }}</label>
-                                                        <input type="number" class="form-control" id="featuredropthre" name="featuredropthre" placeholder="0.90" value="0.90" step="0.01">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="reppecoll">
-                                          <label class="custom-control-label" for="reppecoll">Loại bỏ thuộc tính cộng tuyến hoàn hảo (Tương quan=1)</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="pca">
-                                          <label class="custom-control-label" for="pca">Sử dụng PCA để giảm kích thước của tập dữ liệu</label>
-                                        </div>
-                                        <div class="col-md-12" id="pca_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Phương pháp thực hiện giảm kích thước tuyến tính') }}</label>
-                                                        <select name="pca_method" id="pca_method" class="form-control" required>
-                                                            <option value="linear">linear</option>
-                                                            <option value="kernel">kernel</option>
-                                                            <option value="incremental">incremental</option>
-                                                        </select>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Số thành phần cần giữ (float hoặc int)') }}</label>
-                                                        <input type="number" class="form-control" id="pca_keep" name="pca_keep" placeholder="2" value="2" step="0.01">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="removecat">
-                                          <label class="custom-control-label" for="removecat">Xóa các thuộc tính phân loại với phương sai không đáng kể về mặt thống kê</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <div class="form-group form-group-default">
-                                <label>{{ _('Tạo các cụm bằng cách sử dụng các thuộc tính hiện có từ dữ liệu bằng các kỹ thuật không giám sát') }}</label>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="add_cluster">
-                                          <label class="custom-control-label" for="add_cluster">Tạo các thuộc tính bổ sung với các cụm</label>
-                                        </div>
-                                        <div class="col-md-12" id="add_cluster_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Số lần lặp được sử dụng để tạo một cụm') }}</label>
-                                                        <input type="number" class="form-control" id="add_cluster_thre" name="add_cluster_thre" placeholder="20" value="20" step="1">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="remove_outliers_pca">
-                                          <label class="custom-control-label" for="remove_outliers_pca">Xóa các ngoại lệ khỏi dữ liệu đào tạo bằng PCA</label>
-                                        </div>
-                                        <div class="col-md-12" id="remove_outliers_pca_sel" style="display:none">
-                                            <div class="row mt-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-group form-group-default">
-                                                        <label>{{ _('Tỷ lệ ngoại lệ') }}</label>
-                                                        <input type="number" class="form-control" id="remove_outliers_pca_per" name="remove_outliers_pca_per" placeholder="0.05" value="0.05" step="0.01">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-                    <input type="button" name="previous" class="previous action-button" value="{{ _('Trước') }}" />
-                    <input type="button" name="next" class="next action-button" value="{{ _('Tiếp') }}" />
+                    <input type="button" name="previous" class="previous action-button" value="{{ _('Trước 2') }}" />
+                    <input type="button" name="next" class="next action-button" value="{{ _('Tiếp 2' ) }}" />
+               
+               
                 </fieldset>
                 <fieldset name="2">
                     <h2 class="fs-title">{{ _('Đào tạo') }}</h2>
@@ -868,10 +528,7 @@
             theme: "bootstrap",
             width: '100%'
         });
-        $('#relatefeatures').select2({
-            theme: "bootstrap",
-            width: '100%'
-        });
+
 
         $('#bincom_option').select2({
             theme: "bootstrap",
@@ -1057,48 +714,51 @@
             current_fs = $(this).parent();
             next_fs = $(this).parent().next();
             
+            //Next của CHUẨN BỊ
             if (next_fs.attr('name') == "1") {
-                if ($('#project').val() == null) {
-                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn dự án để tiếp tục') }}');
+                if ($('#project_ts').val() == null) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn dự án để tiếp tục và edit dòng 729') }}');
                     return;
-                } else if ($('#modelname').val() == null) {
-                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng điền tên mô hình để tiếp tục') }}');
+                } else if ($('#modelname_ts').val() == null) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng điền tên mô hình để tiếp tục và edit dòng 732') }}');
                     return;
-                } else if ($('#modeltype').val() == null) {
-                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn mô hình học máy để tiếp tục') }}');
+                } else if ($('#modeltype_ts').val() == null) {
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn mô hình học máy để tiếp tục và edit dòng 735') }}');
                     return;
                 } else if ($('#dataname').val() == null) {
-                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn dữ liệu để tiếp tục') }}');
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng chọn dữ liệu để tiếp tục và edit dòng 738') }}');
                     return;
                 }else {
                     var form_data = new FormData();
                     form_data.append("data_id", $('#dataname').val());
 
                     $.ajax({
-                        url: '/select_data', // point to server-side URL
+                        url: '/select_data_ts', // point to server-side URL
                         dataType: 'json', // what to expect back from server
                         cache: false,
                         contentType: false,
                         processData: false,
                         data: form_data,
-                        type: 'post',
+                        type: 'POST',
+                        
                         success: function(response) {
+                        
+                            showSuccess('{{ _('Title') }}', '{{ _('Thêm thành công và edit dòng 753') }}');
                             console.log(response);
                             if (response.success == true)
                             {
                                 $("#targetcol option").remove();
                                 $("#removecol option").remove();
-                                $("#relatefeatures option").remove();
                                 $("#bincom_option option").remove();
                                 
                                 feature_list = response.columns_name;
+                                console.log(feature_list)
                                 for (loop=0; loop < feature_list.length; loop++) {
 
                                     $("#targetcol").get(0).options.add(new Option(feature_list[loop]));
 
                                     if (loop != 0) {
                                         $("#removecol").get(0).options.add(new Option(feature_list[loop]));
-                                        $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
                                         $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
                                     } else {
                                         target_col = feature_list[loop];
@@ -1107,24 +767,23 @@
                                 }
 
                             } else {
-                                showError('{{ _('ETitle') }}', '{{ _('Không thể chọn dữ liệu') }}');
+                                showError('{{ _('ETitle') }}', '{{ _('Không thể chọn dữ liệu và edit dòng 778') }}');
                             }
                                 
                         },
                         error: function(error) {
-                            showError('{{ _('ETitle') }}', '{{ _('Không thể chọn dữ liệu') }}');
+                            showError('{{ _('ETitle') }}', '{{ _('Không thể chọn dữ liệu và edit dòng 783') }}');
                         }
                     });
                 }
-                
-
+            // NEXT của TIỀN XỬ LÝ
             } else if (next_fs.attr('name') == "2") {
                 var form_data = new FormData();
-                form_data.append("project", $('#project').val());
-                form_data.append("modelname", $('#modelname').val());
-                form_data.append("modeltype", $('#modeltype').val());
+                form_data.append("project_ts", $('#project_ts').val());            //
+                form_data.append("modelname_ts", $('#modelname_ts').val());         //
+                form_data.append("modeltype_ts", $('#modeltype_ts').val());       //
                 form_data.append("data_id", $('#dataname').val());
-                form_data.append("targetcol", $('#targetcol').val());
+                form_data.append("targetcol", $('#targetcol').val());            //
                 form_data.append("removecol", $('#removecol').select2("val"));
                 form_data.append("trainsize", $('#trainsize').val());
                 form_data.append("data_split_stratify", $('#data_split_stratify').is(":checked") ? 1 : 0);
@@ -1148,7 +807,6 @@
                 form_data.append("poldegree", $('#poldegree').val());
                 form_data.append("polthre", $('#polthre').val());
                 form_data.append("trigono", $('#trigono').is(":checked") ? 1 : 0);
-                form_data.append("relatefeatures", $('#relatefeatures').select2('val'));
                 form_data.append("bincom", $('#bincom').is(":checked") ? 1 : 0);
                 form_data.append("bincom_option", $('#bincom_option').select2('val'));
                 form_data.append("subset", $('#subset').is(":checked") ? 1 : 0);
@@ -1166,7 +824,7 @@
                 form_data.append("remove_outliers_pca_per", $('#remove_outliers_pca_per').val());
 
                 $.ajax({
-                    url: '/preprocessing_data', // point to server-side URL
+                    url: '/preprocessing_data_ts', // point to server-side URL
                     dataType: 'json', // what to expect back from server
                     cache: false,
                     contentType: false,
@@ -1177,20 +835,28 @@
                         console.log(response);
                         if (response.success == true)
                         {
-                            showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành tiền xử lý dữ liệu') }}');
+                            showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành tiền xử lý dữ liệu và edit dòng 848') }}');
                             populatePrepocessingDataTable(JSON.parse(response.result));
 
                             $("#singlemodel option").remove();
                             
-                            modeltype = $('#modeltype').val();
+                            modeltype_ts = $('#modeltype_ts').val();
                             modellist = response.classification_models;
 
-                            if (modeltype == 0)
-                                modellist = JSON.parse(response.classification_models);
-                            else if (modeltype == 1)
-                                modellist = JSON.parse(response.regression_models);
-                            else if (modeltype == 2)
+                            if (modeltype_ts == 0)
+                                window.alert("Chưa có chức năng này");
+                            else if (modeltype_ts == 1)
+                                window.alert("Chưa có chức năng này");
+                            else if (modeltype_ts == 2)
                                 modellist = JSON.parse(response.clustering_models);
+                            else if (modeltype_ts == 3)
+                                window.alert("Chưa có chức năng này");
+                            else if (modeltype_ts == 4)
+                                window.alert("Chưa có chức năng này");
+                            else if (modeltype_ts == 5)
+                                window.alert("Chưa có chức năng này");
+                            else if (modeltype_ts == 6)
+                                window.alert("Chưa có chức năng này");
                             modellist = modellist.Name;
                             console.log(modellist);
                             
@@ -1202,17 +868,18 @@
 
                             
                         } else {
-                            showError('{{ _('ETitle') }}', '{{ _('Không thể tiền xử lý dữ liệu') }}');
+                            showError('{{ _('ETitle') }}', '{{ _('Không thể tiền xử lý dữ liệu và edit dòng 873') }}');
                         }
                             
                     },
                     error: function(error) {
-                        showError('{{ _('ETitle') }}', '{{ _('Không thể tiền xử lý dữ liệu') }}');
+                        showError('{{ _('ETitle') }}', '{{ _('Không thể tiền xử lý dữ liệu và edit dòng 878') }}');
                     }
                 });
+            // NEXT của Đào Tạo
             } else if (next_fs.attr('name') == "3") {
                 if (!trained) {
-                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng hoàn thành đào tạo mô hình để tiếp tục') }}');
+                    showError('{{ _('ETitle') }}', '{{ _('Vui lòng hoàn thành đào tạo mô hình để tiếp tục và edit dòng 883') }}');
                     return;
                 }
             } else {
@@ -1253,6 +920,45 @@
             
         });
 
+        // Khi click nút phân tích
+        $(".eda").click(function(e){
+            e.preventDefault();
+
+            var form_data = new FormData();
+            //form_data.append("modeltype_ts", $('#modeltype_ts').val());
+            form_data.append("data_id", $('#dataname').val());
+
+            $.ajax({
+                url: '/eda', // point to server-side URL
+                dataType: 'json', // what to expect back from server
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(response) {
+                    console.log(response);
+                    if (response.success == true)
+                    {
+                        showSuccess('{{ _('Title') }}', '{{ _('Đã phân tích xong và edit dòng 1066') }}');
+                        
+                        $("#eda").attr('src',window.location.protocol + '//' + window.location.host + '/' + response.eda_file_path);
+                        $("#eda").show();   
+                        $('#eda').height($('#eda').contents().height() + 500);
+                    } else {
+                        showError('{{ _('ETitle') }}', '{{ _('Không thể phân tích dữ liệu và edit dòng 1027') }}');
+                    }
+                        
+                },
+                error: function(error) {
+                    showError('{{ _('ETitle') }}', '{{ _('Không thể phân tích dữ liệu và edit dòng 1077') }}');
+                }
+            });
+        });   
+        
+        
+
+
         $(".previous").click(function(){
             if(animating) return false;
             animating = true;
@@ -1287,6 +993,9 @@
                 easing: 'easeInOutBack'
             });
         });
+
+
+
         $("#train").click(function(e){
             e.preventDefault();
             trainingmode = $("#trainingmode").val();
@@ -1305,7 +1014,7 @@
             form_data.append("training_enable_cross_val", $('#training_enable_cross_val').is(":checked") ? 1 : 0);
             form_data.append("bestname", bestname);
             form_data.append("trainingmode", $('#trainingmode').val());
-            form_data.append("modeltype", $('#modeltype').val());
+            form_data.append("modeltype_ts", $('#modeltype_ts').val());
 
             $.ajax({
                 url: '/trainmodel', // point to server-side URL
@@ -1340,7 +1049,7 @@
             var form_data = new FormData();
             form_data.append("compare_enable_cross_val", $('#compare_enable_cross_val').is(":checked") ? 1 : 0);
             form_data.append("sort", $('#sort').val());
-            form_data.append("modeltype", $('#modeltype').val());
+            form_data.append("modeltype_ts", $('#modeltype_ts').val());
 
             $.ajax({
                 url: '/comparemodel', // point to server-side URL
@@ -1376,40 +1085,7 @@
             });
         });
 
-        $(".eda").click(function(e){
-            e.preventDefault();
 
-            var form_data = new FormData();
-            //form_data.append("modeltype", $('#modeltype').val());
-            form_data.append("data_id", $('#dataname').val());
-
-            $.ajax({
-                url: '/eda', // point to server-side URL
-                dataType: 'json', // what to expect back from server
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'post',
-                success: function(response) {
-                    console.log(response);
-                    if (response.success == true)
-                    {
-                        showSuccess('{{ _('Title') }}', '{{ _('Hoàn thành phân tích dữ liệu') }}');
-                        
-                        $("#eda").attr('src',window.location.protocol + '//' + window.location.host + '/' + response.eda_file_path);
-                        $("#eda").show();   
-                        $('#eda').height($('#eda').contents().height() + 500);
-                    } else {
-                        showError('{{ _('ETitle') }}', '{{ _('Không thể phân tích dữ liệu') }}');
-                    }
-                        
-                },
-                error: function(error) {
-                    showError('{{ _('ETitle') }}', '{{ _('Không thể phân tích dữ liệu') }}');
-                }
-            });
-        });
 
 
         $("#polcom" ).change(function() {
@@ -1504,12 +1180,10 @@
             target_col  = optionSelected.val();
 
             $("#removecol option").remove();
-            $("#relatefeatures option").remove();
             $("#bincom_option option").remove();
             for (loop=0; loop < feature_list.length; loop++) {
                 if (target_col != feature_list[loop]) {
                     $("#removecol").get(0).options.add(new Option(feature_list[loop]));
-                    $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
                     $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
                 }
                 
@@ -1523,7 +1197,6 @@
 
         $('#removecol').on('select2:select', function (e) {
             var data = e.params.data;
-            $("#relatefeatures option").remove();
             $("#bincom_option option").remove();
             removecol = $('#removecol').select2("val");
             console.log(removecol)
@@ -1539,7 +1212,6 @@
                         
                     }
                     if (!is_remove) {
-                        $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
                         $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
                     }
                 }
@@ -1549,7 +1221,6 @@
 
         $('#removecol').on('select2:unselect', function (e) {
             var data = e.params.data;
-            $("#relatefeatures option").remove();
             $("#bincom_option option").remove();
             removecol = $('#removecol').select2("val");
             console.log(removecol)
@@ -1565,7 +1236,6 @@
                         
                     }
                     if (!is_remove) {
-                        $("#relatefeatures").get(0).options.add(new Option(feature_list[loop]));
                         $("#bincom_option").get(0).options.add(new Option(feature_list[loop]));
                     }
                 }
@@ -1601,7 +1271,7 @@
         });
 
 
-        $('#modeltype').change(function () {
+        $('#modeltype_ts').change(function () {
             var optionSelected = $(this).find("option:selected");
             modeltypemode  = optionSelected.val();
 
