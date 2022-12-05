@@ -2829,20 +2829,20 @@ def preprocessing_data_ts():
     dataset = db.session.query(Dataset).filter(Dataset.id == data_id).filter(Dataset.datatype == 0).first()
     print("==========================================================================================\n",dataset)
     if dataset:
-        data = pd.read_csv(dataset.path)
+        df = pd.read_csv(dataset.path)
         
-        data[data.columns[0]] = pd.to_datetime(data[data.columns[0]])
+        df[df.columns[0]] = pd.to_datetime(df[df.columns[0]])
 
         # extract month and year from dates**
-        data['Month'] = [i.month for i in data[data.columns[0]]]
-        data['Year'] = [i.year for i in data[data.columns[0]]]
+        df['Month'] = [i.month for i in df[df.columns[0]]]
+        df['Year'] = [i.year for i in df[df.columns[0]]]
 
         # create a sequence of numbers
-        data['Series'] = np.arange(1,len(data)+1)
+        df['Series'] = np.arange(1,len(df)+1)
 
-        data_columns_name = data.columns
-        print("data:",data)
-        print("type data:", type(data))
+        data_columns_name = df.columns
+        print("data:",df)
+        print("type data:", type(df))
         print("data_columns_name:", data_columns_name)
         print("modeltype:",modeltype)
 
@@ -2854,7 +2854,7 @@ def preprocessing_data_ts():
             if modeltype == 0:
                 from pycaret.regression import setup, compare_models, predict_model, pull
                 print("####################### start set up")
-                s = setup(data = data, target = target_column,train_size=trainsize, fold_strategy = 'timeseries', numeric_features = [data.columns[-2], data.columns[-1]], fold = 3, transform_target = True, session_id = 123)
+                setup(data = df, target = target_column,train_size=trainsize, fold_strategy = 'timeseries', numeric_features = [df.columns[-2], df.columns[-1]], fold = 3, transform_target = True, session_id = 123)
                 print("###############end setup")
 
             # elif modeltype == 1:
@@ -2864,15 +2864,15 @@ def preprocessing_data_ts():
             #     from pycaret.clustering import  setup, pull
 
             # setup(data = df, target = target_column, session_id=123)
-            
-            best = compare_models(sort = 'MAE')
-            prediction_holdout = predict_model(best)
-            print(prediction_holdout)
+            # setup(data=df, target=target_column,train_size=trainsize, preprocess=True,
+            # best = compare_models(sort = 'MAE')
+            # prediction_holdout = predict_model(best)
+            # print(prediction_holdout)
 
             result = pull(True)
             if result:
                 result = result.data
-                print("result (edit 2926): ",result)
+                print(result)
 
             is_setup = True
             
@@ -2897,6 +2897,7 @@ def preprocessing_data_ts():
     else:
         return error_handle("Please select modeltype and dataname.")
     #if f.filename.split('.')[1] != 'png':
+
 
 @app.route('/resetpassword.html')
 def resetpassword():

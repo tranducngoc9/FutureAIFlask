@@ -189,7 +189,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group form-group-default">
-                                <label>{{ _('Nhập tên mô hình') }}<  /label>
+                                <label>{{ _('Nhập tên mô hình') }}</label>
                                 <input id="modelname_ts" name="modelname_ts" type="text"
                                     class="form-control" placeholder="{{ _('Nhập tên mô hình') }}" required>
                             </div>
@@ -841,10 +841,11 @@
                             $("#singlemodel option").remove();
                             
                             modeltype_ts = $('#modeltype_ts').val();
-                            modellist = response.classification_models;
+                            modellist = response.regression_models;
 
                             if (modeltype_ts == 0)
-                                window.alert("Chưa có chức năng này");
+                                // window.alert("Đã vào dòng 847");
+                                modellist = JSON.parse(response.regression_models);
                             else if (modeltype_ts == 1)
                                 window.alert("Chưa có chức năng này");
                             else if (modeltype_ts == 2)
